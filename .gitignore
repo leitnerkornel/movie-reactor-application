@@ -5,7 +5,11 @@
 /.pnp
 .pnp.js
 
+# environment variable
 .env
+
+# WebStorm files
+.idea/
 
 # testing
 /coverage
