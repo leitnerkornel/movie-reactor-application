@@ -68,10 +68,10 @@ export default function MovieCard(props) {
         id={`${movie.id}-front`}
         className="card border-secondary mt-1 mb-3 clearfix overflow-hidden "
         style={cardStyle}
-        onClick={setFlipCard}
+
       >
         {actualMovie ? (
-          <div className="card-body">
+          <div className="card-body" onClick={setFlipCard}>
             <div className={"poster-container"}>
               <img
                 style={centerCoverImage}
@@ -102,10 +102,9 @@ export default function MovieCard(props) {
           id={`${movie.id}-back`}
           className="card border-secondary mt-1 mb-3 clearfix overflow-hidden"
           style={cardStyle}
-          onClick={setFlipCard}
         >
           {actualMovie ? (
-            <React.Fragment>
+            <div onClick={setFlipCard}>
               <div className={"backdrop-container"}>
                 <img
                   src={`https://image.tmdb.org/t/p/${imageSizes.backdrop_sizes[0]}${backdrop}`}
@@ -124,7 +123,7 @@ export default function MovieCard(props) {
                 </p>
 
               </div>
-            </React.Fragment>
+            </div>
           ) : (
             <div>Card is loading</div>
           )}
