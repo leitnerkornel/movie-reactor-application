@@ -25,10 +25,9 @@ function App() {
     };
 
     document.title = "Movie Reactor";
-    return (
+    return (<WatchlistProvider>
         <div id="outer-container">
             <Router>
-                <WatchlistProvider>
                     <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"}/>
                     <main id="page-wrap">
                         <ThemeProvider theme={theme}>
@@ -110,9 +109,10 @@ function App() {
                             </div>
                         </ThemeProvider>
                     </main>
-                </WatchlistProvider>
+
             </Router>
-        </div>
+        </div> </WatchlistProvider>
+
     );
 }
 
