@@ -28,8 +28,7 @@ export default function MovieCard(props) {
   const [backdrop, setBackdrop] = useState("");
   const [poster, setPoster] = useState("");
   const [watchlist, setWatchlist] = useContext(WatchlistContext);
-    const [addedToWatchlist, setAddedToWatchlist] = useState(false);
-
+  
   useEffect(() => {
     axios
       .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`)
@@ -49,7 +48,7 @@ export default function MovieCard(props) {
   let linkToMovieDetailPage = (
       <Link
           to={`/movie/${movieId}`} style={buttonStyle}
-      >Details</Link>
+      >{"Details".toUpperCase()}</Link>
   );
 
     let addToWatchlist = (e) => {
@@ -72,11 +71,11 @@ export default function MovieCard(props) {
     <div className="btn-group" role="group" aria-label="Basic example">
         {isTheMovieAdded() ? (
             <button type="button" className="btn btn-secondary" disabled>
-                Watchlisted
+                {"Watchlisted".toUpperCase()}
             </button>
         ) : (
         <button type="button" className="btn btn-secondary" onClick={addToWatchlist}>
-            Add to Watchlist
+            {"Add to Watchlist".toUpperCase()}
         </button>
         )}
 
