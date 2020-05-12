@@ -24,6 +24,7 @@ export default function MovieCard(props) {
 
   const [isLoading, actualMovie] = Get(currentMovieURL, movie);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [addedToWatchlist, setAddedToWatchlist] = useState(false);
 
   const [backdrop, setBackdrop] = useState("");
   const [poster, setPoster] = useState("");
@@ -65,6 +66,13 @@ export default function MovieCard(props) {
     }
   };
 
+    let removeFromWatchlist = (e) => {
+        e.preventDefault();
+        /*let movie = e.target.value;
+        setWatchlist(watchlist.filter((e)=>(e !== movie)));
+        setAddedToWatchlist(false);*/
+    };
+
   let isTheMovieAdded = () => {
     for (let selectedMovie of watchlist) {
       if (selectedMovie.id == movieId) {
@@ -77,7 +85,7 @@ export default function MovieCard(props) {
   let cardButtons = (
     <div className="btn-group" role="group" aria-label="Basic example">
       {isTheMovieAdded() ? (
-        <button type="button" className="btn btn-secondary" disabled>
+        <button type="button" className="btn btn-secondary" onClick={removeFromWatchlist} disabled>
           {"unWatchlist".toUpperCase()}
         </button>
       ) : (
