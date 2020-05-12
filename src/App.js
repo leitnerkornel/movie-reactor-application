@@ -12,14 +12,15 @@ import MainPage from "./components/MainPage";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 function App() {
-  const theme = {
-    background: "none",
-    textAlign: "center",
-    padding: "10px",
-    fontSize: "1.3rem",
-    borderRadius: "15px",
-    fontFamily: " Helvetica, Arial, sans-serif",
-  };
+
+    const theme = {
+        background: "none",
+        textAlign: "center",
+        padding: "10px",
+        fontSize: "1.3rem",
+        borderRadius: "15px",
+        fontFamily: " Helvetica, Arial, sans-serif",
+    };
 
   document.title = "Movie Reactor";
   return (
