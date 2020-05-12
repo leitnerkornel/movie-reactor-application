@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { elastic as BurgerMenu } from "react-burger-menu";
+import { pushRotate as BurgerMenu } from "react-burger-menu";
 import { Link } from "react-router-dom";
 
 export default class Menu extends Component {
@@ -9,7 +9,7 @@ export default class Menu extends Component {
 
   render() {
     return (
-      <BurgerMenu customBurgerIcon={ <img src={window.location.origin + "/reactor-logo.svg"} style={{zIndex: "1"}} /> } isOpen={false}>
+      <BurgerMenu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } customBurgerIcon={ <img src={window.location.origin + "/reactor-logo.svg"} style={{zIndex: "1"}} /> } isOpen={false}>
         <Link id="home" className="menu-item" to="/" style={{ color: "red" }}>
           Top Rated
         </Link>
