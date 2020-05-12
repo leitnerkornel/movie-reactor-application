@@ -4,6 +4,7 @@ import axios from "axios";
 import styled, { ThemeProvider } from "styled-components";
 import Menu from "./components/layout/Menu";
 import SelectionPage from "./components/pages/SelectionPage";
+import MovieDetailPage from "./components/movie_detail_page/MovieDetailPage";
 
 import logo from './logo.svg';
 import './App.css';
@@ -91,6 +92,10 @@ function App() {
                   </div>
                 )}
               />
+                <Route
+                    path="/movie/:id"
+                    children={<MovieDetailPage />}
+                />
             </div>
           </ThemeProvider>
         </main>

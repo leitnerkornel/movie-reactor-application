@@ -15,7 +15,7 @@ const SelectionPage = (props) => {
         style={{ display: "flex", flexFlow: "row wrap" }}
       ></div>
       <div
-        className="col-8 align-self-start"
+        className="col-10 align-self-center"
         style={{ display: "flex", flexFlow: "row wrap" }}
       >
         {data ? (

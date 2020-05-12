@@ -2,6 +2,10 @@ import ReactCardFlip from "react-card-flip";
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import Get from "../hook/FetchGet";
+import {ThemeProvider} from "styled-components";
+import MovieDetailPage from "../movie_detail_page/MovieDetailPage";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import SelectionPage from "./SelectionPage";
 
 const imageSizes = {
   backdrop_sizes: ["w300", "w780", "w1280", "original"],
@@ -35,6 +39,12 @@ export default function MovieCard(props) {
     isFlipped ? setIsFlipped(false) : setIsFlipped(true);
   };
 
+  let linkToMovieDetailPage = (
+      <Link
+          to={`/movie/${movieId}`}
+      >Details</Link>
+  )
+
   let mainCard = (
     <>
       <div
@@ -62,6 +72,9 @@ export default function MovieCard(props) {
           <button type="button" className="btn btn-light" onClick={setFlipCard}>
             Flip
           </button>
+            <button type="button" className="btn btn-light">
+                {linkToMovieDetailPage}
+            </button>
         </div>
       </div>
     </>
