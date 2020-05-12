@@ -71,8 +71,8 @@ export default function MovieCard(props) {
           <div>Card is loading</div>
         )}
         <div className="btn-group" role="group" aria-label="Basic example">
-          <button type="button" className="btn btn-light" onClick={setFlipCard}>
-            Flip
+          <button type="button" className="btn btn-light" onClick={()=>{ alert('added to watchlist'); }}>
+            Add to Watchlist
           </button>
             <button type="button" className="btn btn-light">
                 {linkToMovieDetailPage}
@@ -123,9 +123,9 @@ export default function MovieCard(props) {
                 <button
                     type="button"
                     className="btn btn-light"
-                    onClick={setFlipCard}
+                    onClick={()=>{ alert('added to watchlist'); }}
                 >
-                    Flip
+                    Add to Watchlist
                 </button>
             </div>
         </div>
