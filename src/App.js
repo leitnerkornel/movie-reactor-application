@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import MainPage from "./components/MainPage";
 
-const API_KEY = process.env.REACT_APP_API_KEY;
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <MainPage />
     </div>
   );
 }
