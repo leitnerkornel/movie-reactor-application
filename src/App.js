@@ -5,6 +5,10 @@ import styled, { ThemeProvider } from "styled-components";
 import Menu from "./components/layout/Menu";
 import SelectionPage from "./components/pages/SelectionPage";
 
+import logo from './logo.svg';
+import './App.css';
+import MainPage from "./components/MainPage";
+
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 function App() {
