@@ -5,27 +5,33 @@ import FetchGet from "../hook/FetchGet";
 import MovieCard from "./MovieCard";
 
 const SelectionPage = (props) => {
-    let URL = props.url + "?api_key=" + props.API_KEY;
-    const [isLoading, data] = Get(URL);
+  let URL = props.url + "?api_key=" + props.API_KEY;
+  const [isLoading, data] = Get(URL);
 
-    let layout = (
-        <div className="container">
-            <div className="row">
-                <div
-                    className="col-12 align-self-center"
-                    style={{ display: "flex", flexFlow: "row wrap" }}
-                >
-                    {data ? (
-                    data.results.map((movie, index) => (<MovieCard movie={movie} key={movie.id} API_KEY={props.API_KEY}/>))
-                    ) : (
-                        <div>Loading</div>
-                    )}
-                </div>
+  let layout = (
+    <div className="row">
+      <div
+        className="col-2 align-self-start"
+        style={{ display: "flex", flexFlow: "row wrap" }}
+      ></div>
+      <div
+        className="col-8 align-self-start"
+        style={{ display: "flex", flexFlow: "row wrap" }}
+      >
+        {data ? (
+          data.results.map((movie, index) => (
+            <div className="card-deck m-3">
+              <MovieCard movie={movie} key={movie.id} API_KEY={props.API_KEY} />
             </div>
-        </div>
-    );
+          ))
+        ) : (
+          <div>Loading</div>
+        )}
+      </div>
+    </div>
+  );
 
-    return layout;
-}
+  return layout;
+};
 
-export default SelectionPage
+export default SelectionPage;

@@ -8,7 +8,6 @@ import SelectionPage from "./components/pages/SelectionPage";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 function App() {
-
   const theme = {
     background: "none",
     textAlign: "center",
@@ -20,25 +19,84 @@ function App() {
 
   document.title = "Movie Reactor";
   return (
-        <div id="outer-container">
-          <Router>
-            <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
-            <main id="page-wrap">
-              <ThemeProvider theme={theme}>
-                <Route exact path="/"
-                       render={(props) => (
-
-                             <SelectionPage url={"https://api.themoviedb.org/3/movie/top_rated"} API_KEY={API_KEY} />
-
-                       )} />
-                {/*<Route path="/latest" component={} />*/}
-                {/*<Route path="/popular" component={} />*/}
-                {/*<Route path="/upcoming" component={} />*/}
-              </ThemeProvider>
-            </main>
-          </Router>
-        </div>
+    <div id="outer-container">
+      <Router>
+        <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
+        <main id="page-wrap">
+          <ThemeProvider theme={theme}>
+            <div className="container" style={{ maxWidth: "3000px" }}>
+              <div className="row"></div>
+              <Route
+                exact
+                path="/"
+                render={(props) => (
+                  <div style={cardStyle}>
+                    <SelectionPage
+                      url={"https://api.themoviedb.org/3/movie/top_rated"}
+                      API_KEY={API_KEY}
+                    />
+                  </div>
+                )}
+              />
+              <Route
+                exact
+                path="/top_rated"
+                render={(props) => (
+                  <div style={cardStyle}>
+                    <SelectionPage
+                      url={"https://api.themoviedb.org/3/movie/top_rated"}
+                      API_KEY={API_KEY}
+                    />
+                  </div>
+                )}
+              />
+              <Route
+                exact
+                path="/now_playing"
+                render={(props) => (
+                  <div style={cardStyle}>
+                    <SelectionPage
+                      url={"https://api.themoviedb.org/3/movie/now_playing"}
+                      API_KEY={API_KEY}
+                    />
+                  </div>
+                )}
+              />
+              <Route
+                exact
+                path="/popular"
+                render={(props) => (
+                  <div style={cardStyle}>
+                    <SelectionPage
+                      url={"https://api.themoviedb.org/3/movie/popular"}
+                      API_KEY={API_KEY}
+                    />
+                  </div>
+                )}
+              />
+              <Route
+                exact
+                path="/upcoming"
+                render={(props) => (
+                  <div style={cardStyle}>
+                    <SelectionPage
+                      url={"https://api.themoviedb.org/3/movie/upcoming"}
+                      API_KEY={API_KEY}
+                    />
+                  </div>
+                )}
+              />
+            </div>
+          </ThemeProvider>
+        </main>
+      </Router>
+    </div>
   );
 }
+
+const cardStyle = {
+  display: "flex",
+  flexFlow: "row wrap",
+};
 
 export default App;
