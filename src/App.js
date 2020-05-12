@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 import styled, { ThemeProvider } from "styled-components";
 import Menu from "./components/layout/Menu";
+import SelectionPage from "./components/pages/SelectionPage";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -24,10 +25,15 @@ function App() {
             <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
             <main id="page-wrap">
               <ThemeProvider theme={theme}>
-                <Route exact path="/" component={} />
-                <Route path="/latest" component={} />
-                <Route path="/popular" component={} />
-                <Route path="/upcoming" component={} />
+                <Route exact path="/"
+                       render={(props) => (
+
+                             <SelectionPage url={"https://api.themoviedb.org/3/movie/top_rated"} API_KEY={API_KEY} />
+
+                       )} />
+                {/*<Route path="/latest" component={} />*/}
+                {/*<Route path="/popular" component={} />*/}
+                {/*<Route path="/upcoming" component={} />*/}
               </ThemeProvider>
             </main>
           </Router>
