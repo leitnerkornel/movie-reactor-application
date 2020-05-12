@@ -127,18 +127,12 @@ export default function MovieCard(props) {
           ) : (
             <div>Card is loading</div>
           )}
-          <div></div>
-            <div
-                className="btn-group"
-                role="group"
-                aria-label="Basic example"
-            >
-                <button
-                    type="button"
-                    className="btn btn-light"
-                    onClick={addToWatchlist}
-                >
+            <div className="btn-group" role="group" aria-label="Basic example">
+                <button type="button" className="btn btn-light" onClick={addToWatchlist}>
                     Add to Watchlist
+                </button>
+                <button type="button" className="btn btn-light">
+                    {linkToMovieDetailPage}
                 </button>
             </div>
         </div>
