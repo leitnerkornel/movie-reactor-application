@@ -54,10 +54,23 @@ export default function MovieCard(props) {
 
     let addToWatchlist = (e) => {
         e.preventDefault();
-        if ( !watchlist.includes(movie)){
+        if ( !isTheMovieAdded()){
             setWatchlist([...watchlist, movie]);
         }
+        // if ( !watchlist.includes(movie)){
+        //     setWatchlist([...watchlist, movie]);
+        // }
     };
+
+    let isTheMovieAdded = () => {
+        for (let selectedMovie of watchlist) {
+            if (selectedMovie.id == movieId) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
     let cardButtons = (
     <div className="btn-group" role="group" aria-label="Basic example">
