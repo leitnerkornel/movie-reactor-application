@@ -104,8 +104,8 @@ export default function MovieCard(props) {
           style={cardStyle}
         >
           {actualMovie ? (
-            <div onClick={setFlipCard}>
-              <div className={"backdrop-container"}>
+            <React.Fragment onClick={setFlipCard}>
+              <div className="backdrop-container">
                 <img
                   src={`https://image.tmdb.org/t/p/${imageSizes.backdrop_sizes[0]}${backdrop}`}
                   alt="No backdrop available"
@@ -123,10 +123,11 @@ export default function MovieCard(props) {
                 </p>
 
               </div>
-            </div>
+            </React.Fragment>
           ) : (
             <div>Card is loading</div>
           )}
+          <div></div>
             <div
                 className="btn-group"
                 role="group"
