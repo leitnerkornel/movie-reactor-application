@@ -32,7 +32,7 @@ export default class Menu extends Component {
         <Link
           id="upcoming"
           className="menu-item"
-          to="/popular"
+          to="/upcoming"
           style={{ color: "red" }}
         >
           Upcoming
