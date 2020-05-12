@@ -61,6 +61,13 @@ export default function MovieCard(props) {
         }
     };
 
+    let removeFromWatchlist = (e) => {
+        e.preventDefault();
+        /*let movie = e.target.value;
+        setWatchlist(watchlist.filter((e)=>(e !== movie)));
+        setAddedToWatchlist(false);*/
+    };
+
 
 
 
@@ -87,7 +94,7 @@ export default function MovieCard(props) {
         )}
         <div className="btn-group" role="group" aria-label="Basic example">
             {addedToWatchlist ? <button type="button" className="btn btn-light" onClick={addToWatchlist}>
-                Remove </button> : <button type="button" className="btn btn-light" onClick={addToWatchlist}>
+                Remove </button> : <button type="button" className="btn btn-light" onClick={removeFromWatchlist}>
                 Add to Watchlist </button>}
 
 
@@ -138,7 +145,7 @@ export default function MovieCard(props) {
                 aria-label="Basic example"
             >
                 {addedToWatchlist ? <button type="button" className="btn btn-light" onClick={addToWatchlist}>
-                    Remove </button> : <button type="button" className="btn btn-light" onClick={addToWatchlist}>
+                    Remove </button> : <button type="button" className="btn btn-light" onClick={removeFromWatchlist}>
                     Add to Watchlist </button>}
             </div>
         </div>
