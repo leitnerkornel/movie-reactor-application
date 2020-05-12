@@ -39,8 +39,8 @@ export default function MovieCard(props) {
     isFlipped ? setIsFlipped(false) : setIsFlipped(true);
   };
 
-  let characterLimit = 120;
-  let limitedOverView = actualMovie ? (actualMovie.overview.substring(0, (actualMovie.overview.length > characterLimit ? characterLimit: actualMovie.overview.length)) + "...") : ("nothing");
+  let overviewCharacterLimit = 120;
+  let limitedOverView = actualMovie ? (actualMovie.overview.substring(0, (actualMovie.overview.length > overviewCharacterLimit ? overviewCharacterLimit: actualMovie.overview.length)) + "...") : ("nothing");
 
   let linkToMovieDetailPage = (
       <Link
