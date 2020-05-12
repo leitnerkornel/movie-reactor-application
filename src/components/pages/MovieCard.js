@@ -27,8 +27,8 @@ export default function MovieCard(props) {
 
   const [backdrop, setBackdrop] = useState("");
   const [poster, setPoster] = useState("");
-
-    const [watchlist, setWatchlist] = useContext(WatchlistContext);
+  const [watchlist, setWatchlist] = useContext(WatchlistContext);
+    const [addedToWatchlist, setAddedToWatchlist] = useState(false);
 
   useEffect(() => {
     axios
@@ -54,7 +54,7 @@ export default function MovieCard(props) {
 
     let addToWatchlist = (e) => {
         e.preventDefault();
-        if ( !isTheMovieAdded() && !watchlist.includes(movie)){
+        if (!isTheMovieAdded() && !watchlist.includes(movie)){
             setWatchlist([...watchlist, movie]);
         }
     };
@@ -63,10 +63,9 @@ export default function MovieCard(props) {
         for (let selectedMovie of watchlist) {
             if (selectedMovie.id == movieId) {
                 return true;
-            } else {
-                return false;
             }
         }
+        return false;
     }
 
     let cardButtons = (
