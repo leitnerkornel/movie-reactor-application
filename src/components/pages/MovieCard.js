@@ -54,12 +54,9 @@ export default function MovieCard(props) {
 
     let addToWatchlist = (e) => {
         e.preventDefault();
-        if ( !isTheMovieAdded()){
+        if ( !isTheMovieAdded() && !watchlist.includes(movie)){
             setWatchlist([...watchlist, movie]);
         }
-        // if ( !watchlist.includes(movie)){
-        //     setWatchlist([...watchlist, movie]);
-        // }
     };
 
     let isTheMovieAdded = () => {
