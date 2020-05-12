@@ -53,7 +53,7 @@ export default function MovieCard(props) {
     <>
       <div
         id={`${movie.id}-front`}
-        className="card border-secondary mb-3 clearfix overflow-hidden"
+        className="card border-secondary mt-1 mb-3 clearfix overflow-hidden "
         style={cardStyle}
         onClick={setFlipCard}
       >
@@ -87,7 +87,7 @@ export default function MovieCard(props) {
       <>
         <div
           id={`${movie.id}-back`}
-          className="card border-secondary mb-3 clearfix overflow-hidden"
+          className="card border-secondary mt-1 mb-3 clearfix overflow-hidden"
           style={cardStyle}
           onClick={setFlipCard}
         >
@@ -105,7 +105,7 @@ export default function MovieCard(props) {
                   {actualMovie.title.toUpperCase()}
                 </h5>
                 <p className="card-text overflow-hidden" >
-                  Original title: {actualMovie.original_title}
+                  Original title: {actualMovie.original_title}<p></p>
                     <span>&nbsp;&nbsp;</span>
                   {limitedOverView}
                 </p>
@@ -147,6 +147,8 @@ const centerImage = {
   display: "block",
   marginLeft: "auto",
   marginRight: "auto",
+    minHeight: "200px",
+    textAlign: "center",
 };
 
 const centerCoverImage = {
@@ -162,4 +164,11 @@ const cardStyle = {
     minHeight: "28rem",
     height: "28rem",
     backgroundColor: "#e6b31e",
+    boxShadow: "  0 2.8px 2.2px rgba(200, 200, 200, 0.034),\n" +
+        "  0 6.7px 5.3px rgba(200, 200, 200, 0.048),\n" +
+        "  0 12.5px 10px rgba(200, 200, 200, 0.06),\n" +
+        "  0 22.3px 17.9px rgba(200, 200, 200, 0.072),\n" +
+        "  0 41.8px 33.4px rgba(200, 200, 200, 0.086),\n" +
+        "  0 100px 80px rgba(200, 200, 200, 0.12)",
+    //boxShadow: "10px 10px #e6b31e",
 };
