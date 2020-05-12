@@ -20,7 +20,7 @@ function App() {
     return (
         <div id="outer-container">
             <Router>
-                <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"}/>
+                {/*<Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"}/>*/}
                 <main id="page-wrap">
                     <ThemeProvider theme={theme}>
                         <MovieDetailPage></MovieDetailPage>
