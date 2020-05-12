@@ -37,14 +37,14 @@ export default class Menu extends Component {
         >
           Upcoming
         </Link>
-          <Link
-              id="watchlist"
-              className="menu-item"
-              to="/watchlist"
-              style={{ color: "red" }}
-          >
-              Watchlist
-          </Link>
+        <Link
+          id="watchlist"
+          className="menu-item"
+          to="/watchlist"
+          style={{ color: "red" }}
+        >
+          Watchlist
+        </Link>
       </BurgerMenu>
     );
   }
