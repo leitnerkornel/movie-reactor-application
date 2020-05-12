@@ -104,7 +104,7 @@ export default function MovieCard(props) {
           style={cardStyle}
         >
           {actualMovie ? (
-            <div onClick={setFlipCard}>
+            <div className="card-body" onClick={setFlipCard}>
               <div className="backdrop-container">
                 <img
                   src={`https://image.tmdb.org/t/p/${imageSizes.backdrop_sizes[0]}${backdrop}`}
@@ -112,12 +112,12 @@ export default function MovieCard(props) {
                   style={centerImage}
                 />
               </div>
-              <div className="card-body">
+              <div >
                 <h5 className="card-title" style={{ textAlign: "center" }}>
                   {actualMovie.title.toUpperCase()}
                 </h5>
                 <p className="card-text overflow-hidden" >
-                  Original title: {actualMovie.original_title}<p></p>
+                  {actualMovie.original_title}<p></p>
                     <span>&nbsp;&nbsp;</span>
                   {limitedOverView}
                 </p>
@@ -162,6 +162,9 @@ const centerImage = {
   marginRight: "auto",
     minHeight: "200px",
     textAlign: "center",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-15.5%, -10%) scale(1)",
 };
 
 const centerCoverImage = {
