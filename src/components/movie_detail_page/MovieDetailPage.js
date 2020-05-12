@@ -90,50 +90,127 @@ const MovieDetailPage = () => {
             });
     }, [MOVIE_ID, API_KEY]);
 
-    let content = (
-        <div>
-            This is a Movie Detail Page
-            <div className={"backdrop-container"}>
-                <img
-                    src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.backdrop_sizes[1]}${backdrop}`}
-                    alt="Backdrop"
-                />
-                <div className={"poster-container"}>
-                    <img
-                        src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.poster_sizes[2]}${poster}`}
-                        alt="Poster"
-                    />
-                </div>
-                <div>{title}</div>
-                <div>{originalTitle}</div>
-                <div>{popularity}</div>
-                <div>{voteAvg}</div>
-                <div>{year}</div>
-                <div>{genres}</div>
-                <div>{homepage}</div>
-                <div>{runtime}</div>
-                <div>{budget}</div>
-                <div>{revenue}</div>
-                <div>{originalLanguage}</div>
-                <div>{spokenLanguages}</div>
-                <div>{imdbId}</div>
-                <div>{companies}</div>
-                <div>{youtubeTrailer}</div>
-                <div>{overview}</div>
-
-                <div className="row">
-                    <div className="col">{popularity}</div>
-                    <div className="col">{voteAvg}</div>
-                    <div className="col">{year}</div>
-                </div>
-
-                <LinkIMDB imdbId={imdbId}/>
-                <LinkYouTube youtubeTrailer={youtubeTrailer}/>
+    return (
+        <div className={"media"}>
+            <div className="col-2 align-self-start" style={{
+                display: "flex",
+                flexFlow: "row wrap",
+                backgroundColor: "#e6b31e",
+                height: "1080px",
+                padding: "0"
+            }}>
             </div>
-        </div>
-    );
+            <div className="col-9 align-self-center" style={{
+                display: "flex",
+                flexFlow: "row wrap",
+                padding: "0",
+                backgroundColor: '#343434',
+                height: "1080px"
+            }}>
+                <div className="container-fluid" style={{padding: "0"}}>
+                    <div className="row no-gutters">
+                        <div className="col-md-12" style={{height: "50px", backgroundColor: "#e6b31e", padding: "0"}}>
+                        </div>
+                    </div>
+                    <div className="row no-gutters" style={{padding: "0"}}>
+                        <div className="col-md-6">
+                            <div className="row no-gutters">
+                                <div className="col-md-12"
+                                     style={{height: "250px", width: "100%", backgroundColor: "#e6b31e", padding: "0"}}>
+                                    <div>{title}</div>
+                                </div>
+                            </div>
+                            <div className="row no-gutters">
+                                <div className="col-md-6" style={{
+                                    height: "250px",
+                                    width: "100%",
+                                    backgroundColor: "#e6b31e",
+                                    padding: "0",
+                                    textAlign: "right"
+                                }}>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6" style={{textAlign: "center", backgroundColor: "red", padding: "0"}}>
+                            <div style={{textAlign: "center", padding: "50px"}}>
+                                <img
+                                    src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.backdrop_sizes[1]}${backdrop}`}
+                                    alt="Backdrop" style={{width: "600px"}}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row no-gutters">
+                        <div className="col-md-12">
+                            <div className="row">
+                                <div className="col-md-4">
+                                </div>
+                                <div className="col-md-4">
+                                </div>
+                                <div className="col-md-4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/*<div style={{width: "100%", height: "700px", backgroundColor: "#343434"}}>
+                    <div className={"backdrop-container"}
+                         style={{height: "250px", width: "100%", backgroundColor: '#2e2e2e', textAlign: "right"}}>
+                        <img
+                            src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.backdrop_sizes[1]}${backdrop}`}
+                            alt="Backdrop" style={{padding: "50px", width: "50%"}}
+                        />
+                    </div>
+                    <div style={{ padding: "50px"}}>{title}</div>
 
-    return content;
+                </div>
+                <LinkIMDB imdbId={imdbId}/>,
+                <LinkYouTube youtubeTrailer={youtubeTrailer}/>*/}
+            </div>
+            <div className="col-1 align-self-end" style={{
+                display: "flex",
+                flexFlow: "row wrap",
+                backgroundColor: "#e6b31e",
+                height: "1080px",
+                padding: "0"
+            }}/>
+        </div>
+
+        /*<div>
+            This is a Movie Detail Page
+
+            <div className={"poster-container"}>
+                <img
+                    src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.poster_sizes[2]}${poster}`}
+                    alt="Poster"
+                />
+            </div>
+        </div>,
+            <div>{title}</div>,
+            <div>{originalTitle}</div>,
+            <div>{popularity}</div>,
+            <div>{voteAvg}</div>,
+            <div>{year}</div>,
+            <div>{genres}</div>,
+            <div>{homepage}</div>,
+            <div>{runtime}</div>,
+            <div>{budget}</div>,
+            <div>{revenue}</div>,
+            <div>{originalLanguage}</div>,
+            <div>{spokenLanguages}</div>,
+            <div>{imdbId}</div>,
+            <div>{companies}</div>,
+            <div>{youtubeTrailer}</div>,
+            <div>{overview}</div>,
+
+            <div className="row">
+                <div className="col">{popularity}</div>
+                <div className="col">{voteAvg}</div>
+                <div className="col">{year}</div>
+            </div>,
+
+            */
+    );
 };
 
 MovieDetailPage.propTypes = {};
