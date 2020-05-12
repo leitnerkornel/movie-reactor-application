@@ -74,9 +74,16 @@ export default function MovieCard(props) {
 
     let cardButtons = (
     <div className="btn-group" role="group" aria-label="Basic example">
+        {isTheMovieAdded() ? (
+            <button type="button" className="btn btn-secondary" disabled>
+                Watchlisted
+            </button>
+        ) : (
         <button type="button" className="btn btn-secondary" onClick={addToWatchlist}>
             Add to Watchlist
         </button>
+        )}
+
         <button type="button" className="btn btn-secondary" style={buttonStyle}>
             {linkToMovieDetailPage}
         </button>
