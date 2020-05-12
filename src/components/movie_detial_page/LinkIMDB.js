@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 const LinkIMDB = (props) => {
-    const IMDB_URL = "https://www.imdb.com/title/"
+    const IMDB_URL = "https://www.imdb.com/title/";
 
     return (
         <div className={"imdb-button-container"}>
