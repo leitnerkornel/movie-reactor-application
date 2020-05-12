@@ -15,6 +15,7 @@ const imageSizes = {
 };
 
 export default function MovieCard(props) {
+  let overviewCharacterLimit = 100;
   let movie = props.movie;
   let movieId = movie.id;
   let API_KEY = props.API_KEY;
@@ -40,7 +41,6 @@ export default function MovieCard(props) {
     isFlipped ? setIsFlipped(false) : setIsFlipped(true);
   };
 
-  let overviewCharacterLimit = 100;
   let limitedOverView = actualMovie ? (actualMovie.overview.substring(0, (actualMovie.overview.length > overviewCharacterLimit ? overviewCharacterLimit: actualMovie.overview.length)) + "...") : ("nothing");
 
   let linkToMovieDetailPage = (
@@ -53,20 +53,17 @@ export default function MovieCard(props) {
     <>
       <div
         id={`${movie.id}-front`}
-        className="card border-warning mb-4 clearfix"
-        style={{ width: "18rem", minHeight: "28rem", height: "28rem" }}
+        className="card border-secondary mb-3 clearfix overflow-hidden"
+        style={cardStyle}
         onClick={setFlipCard}
       >
         {actualMovie ? (
           <div className="card-body">
-            <h5 className="card-title" style={{ textAlign: "center" }}>
-              {actualMovie.title.toUpperCase()}
-            </h5>
             <div className={"poster-container"}>
               <img
-                style={centerImage}
-                src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[2]}${poster}`}
-                alt="No poster available"
+                style={centerCoverImage}
+                src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[3]}${poster}`}
+                alt={actualMovie.title.toUpperCase()}
               />
             </div>
           </div>
@@ -90,7 +87,7 @@ export default function MovieCard(props) {
       <>
         <div
           id={`${movie.id}-back`}
-          className="card border-warning mb-4 clearfix overflow-hidden"
+          className="card border-secondary mb-3 clearfix overflow-hidden"
           style={cardStyle}
           onClick={setFlipCard}
         >
@@ -109,7 +106,7 @@ export default function MovieCard(props) {
                 </h5>
                 <p className="card-text overflow-hidden" >
                   Original title: {actualMovie.original_title}
-                  <p></p>
+                    <span>&nbsp;&nbsp;</span>
                   {limitedOverView}
                 </p>
 
@@ -152,8 +149,17 @@ const centerImage = {
   marginRight: "auto",
 };
 
+const centerCoverImage = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%) scale(0.88)",
+    zIndex: "0"
+}
+
 const cardStyle = {
     width: "18rem",
     minHeight: "28rem",
-    height: "28rem"
+    height: "28rem",
+    backgroundColor: "#e6b31e",
 };
