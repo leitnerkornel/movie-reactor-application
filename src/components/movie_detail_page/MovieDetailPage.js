@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import LinkIMDB from "./LinkIMDB";
 import LinkYouTube from "./LinkYouTube";
+import LinkHomePage from "./LinkHomePage";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -168,9 +169,33 @@ const MovieDetailPage = () => {
                                         alt="Poster" style={{height: "250px"}}
                                     />
                                 </div>
+                                <div className="col-md-6">
+                                    <div className="row no-gutters">
+                                        <div className="col-md-12 d-flex justify-content-center mx-auto" style={{
+                                            height: "100px",
+                                            backgroundColor: "blue",
+                                            padding: "16px"
+                                        }}>
+                                            <LinkHomePage homepage={homepage}/>
+                                            <LinkIMDB imdbId={imdbId}/>
+                                            <LinkYouTube youtubeTrailer={youtubeTrailer}/>
+                                        </div>
+                                    </div>
+                                    <div className="row no-gutters">
+                                        <div className="col-md-12"
+                                             style={{height: "75px", backgroundColor: "yellow"}}>2
+                                        </div>
+                                    </div>
+                                    <div className="row no-gutters">
+                                        <div className="col-md-12"
+                                             style={{height: "75px", backgroundColor: "green"}}>3
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="col-md-6" style={{textAlign: "center", backgroundColor: "red", padding: "0"}}>
+                        <div className="col-md-6"
+                             style={{textAlign: "center", backgroundColor: "red", padding: "0"}}>
                             <div style={{textAlign: "center", padding: "50px"}}>
                                 <img
                                     src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.backdrop_sizes[1]}${backdrop}`}
@@ -178,23 +203,23 @@ const MovieDetailPage = () => {
                                 />
                             </div>
                         </div>
-                    </div>
-                    <div className="row no-gutters">
-                        <div className="col-md-12">
-                            <div className="row">
-                                <div className="col-md-4">
-                                </div>
-                                <div className="col-md-4">
-                                </div>
-                                <div className="col-md-4">
+
+                        <div className="row no-gutters">
+                            <div className="col-md-12">
+                                <div className="row">
+                                    <div className="col-md-4">
+                                    </div>
+                                    <div className="col-md-4">
+                                    </div>
+                                    <div className="col-md-4">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <LinkIMDB imdbId={imdbId}/>,
-                <LinkYouTube youtubeTrailer={youtubeTrailer}/>*/}
+
+                </div>
             </div>
             <div className="col-1 align-self-end" style={{
                 display: "flex",
@@ -203,36 +228,11 @@ const MovieDetailPage = () => {
                 height: "1080px",
                 padding: "0"
             }}/>
-        </div>
-
-        /*<div>
-
-        </div>,
-
-            <div>{originalTitle}</div>,
+        </div>)
 
 
-            <div>{homepage}</div>,
+}
 
-            <div>{budget}</div>,
-            <div>{revenue}</div>,
-            <div>{originalLanguage}</div>,
-            <div>{spokenLanguages}</div>,
-            <div>{imdbId}</div>,
-            <div>{companies}</div>,
-            <div>{youtubeTrailer}</div>,
-            <div>{overview}</div>,
-
-            <div className="row">
-                <div className="col">{popularity}</div>
-                <div className="col">{voteAvg}</div>
-                <div className="col">{year}</div>
-            </div>,
-
-            */
-    );
-};
-
-MovieDetailPage.propTypes = {};
+//MovieDetailPage.propTypes = {};*/}
 
 export default MovieDetailPage;

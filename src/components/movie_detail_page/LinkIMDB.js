@@ -8,7 +8,7 @@ const LinkIMDB = (props) => {
     return (
         <div className={"imdb-button-container"}>
             <a href={`${IMDB_URL}${props.imdbId}/`} target="_blank" rel="noopener noreferrer">
-                <img src={"/images/imdb64.png"} alt="IMDB page"/>
+                <img src={"/images/imdb64.png"} alt="IMDB page" style={{margin: "0 12px"}}/>
             </a>
         </div>
     );
