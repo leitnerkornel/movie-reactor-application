@@ -6,6 +6,7 @@ import {ThemeProvider} from "styled-components";
 import MovieDetailPage from "../movie_detail_page/MovieDetailPage";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import SelectionPage from "./SelectionPage";
+import {elastic as BurgerMenu} from "react-burger-menu";
 
 const imageSizes = {
   backdrop_sizes: ["w300", "w780", "w1280", "original"],
@@ -14,6 +15,7 @@ const imageSizes = {
 };
 
 export default function MovieCard(props) {
+  let overviewCharacterLimit = 100;
   let movie = props.movie;
   let movieId = movie.id;
   let API_KEY = props.API_KEY;
@@ -39,6 +41,8 @@ export default function MovieCard(props) {
     isFlipped ? setIsFlipped(false) : setIsFlipped(true);
   };
 
+  let limitedOverView = actualMovie ? (actualMovie.overview.substring(0, (actualMovie.overview.length > overviewCharacterLimit ? overviewCharacterLimit: actualMovie.overview.length)) + "...") : ("nothing");
+
   let linkToMovieDetailPage = (
       <Link
           to={`/movie/${movieId}`}
@@ -49,19 +53,17 @@ export default function MovieCard(props) {
     <>
       <div
         id={`${movie.id}-front`}
-        className="card border-warning mb-5 clearfix"
-        style={{ width: "22rem" }}
+        className="card border-secondary mb-3 clearfix overflow-hidden"
+        style={cardStyle}
+        onClick={setFlipCard}
       >
         {actualMovie ? (
           <div className="card-body">
-            <h5 className="card-title" style={{ textAlign: "center" }}>
-              {actualMovie.title.toUpperCase()}
-            </h5>
             <div className={"poster-container"}>
               <img
-                style={centerImage}
-                src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[2]}${poster}`}
-                alt="No poster available"
+                style={centerCoverImage}
+                src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[3]}${poster}`}
+                alt={actualMovie.title.toUpperCase()}
               />
             </div>
           </div>
@@ -85,8 +87,9 @@ export default function MovieCard(props) {
       <>
         <div
           id={`${movie.id}-back`}
-          className="card border-warning mb-5 clearfix"
-          style={{ width: "22rem" }}
+          className="card border-secondary mb-3 clearfix overflow-hidden"
+          style={cardStyle}
+          onClick={setFlipCard}
         >
           {actualMovie ? (
             <React.Fragment>
@@ -101,30 +104,32 @@ export default function MovieCard(props) {
                 <h5 className="card-title" style={{ textAlign: "center" }}>
                   {actualMovie.title.toUpperCase()}
                 </h5>
-                <p className="card-text">
+                <p className="card-text overflow-hidden" >
                   Original title: {actualMovie.original_title}
-                  <p></p>
-                  {actualMovie.overview}
+                    <span>&nbsp;&nbsp;</span>
+                  {limitedOverView}
                 </p>
-                <div
-                  className="btn-group"
-                  role="group"
-                  aria-label="Basic example"
-                >
-                  <button
-                    type="button"
-                    className="btn btn-light"
-                    onClick={setFlipCard}
-                  >
-                    Flip
-                  </button>
-                </div>
+
               </div>
             </React.Fragment>
           ) : (
             <div>Card is loading</div>
           )}
+            <div
+                className="btn-group"
+                role="group"
+                aria-label="Basic example"
+            >
+                <button
+                    type="button"
+                    className="btn btn-light"
+                    onClick={setFlipCard}
+                >
+                    Flip
+                </button>
+            </div>
         </div>
+
       </>
     ) : (
       <div />
@@ -142,4 +147,19 @@ const centerImage = {
   display: "block",
   marginLeft: "auto",
   marginRight: "auto",
+};
+
+const centerCoverImage = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%) scale(0.88)",
+    zIndex: "0"
+}
+
+const cardStyle = {
+    width: "18rem",
+    minHeight: "28rem",
+    height: "28rem",
+    backgroundColor: "#e6b31e",
 };
