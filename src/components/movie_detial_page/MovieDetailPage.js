@@ -5,7 +5,7 @@ import axios from 'axios';
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 // This will came from outside
-// 495764
+// 495764 // Another ID for test.
 const MOVIE_ID = 111;
 
 const imageSizes = {
@@ -97,6 +97,13 @@ const MovieDetailPage = () => {
                 <div>{companies}</div>
                 <div>{trailer}</div>
                 <div>{overview}</div>
+
+                <div className="row">
+                    <div className="col">{popularity}</div>
+                    <div className="col">{voteAvg}</div>
+                    <div className="col">{year}</div>
+                </div>
+                <button type="button" className="btn btn-primary">Primary</button>
             </div>
         </div>
     );
