@@ -29,7 +29,7 @@ export default function MovieCard(props) {
   const [backdrop, setBackdrop] = useState("");
   const [poster, setPoster] = useState("");
 
-    const [watchlist, setWatchlist] = useContext(WatchlistContext);
+  const [watchlist, setWatchlist] = useContext(WatchlistContext);
 
   useEffect(() => {
     axios
@@ -55,6 +55,7 @@ export default function MovieCard(props) {
 
     let addToWatchlist = (e) => {
         e.preventDefault();
+        console.log("adding in progress");
         if ( !watchlist.includes(movie)){
             setWatchlist([...watchlist, movie]);
             setAddedToWatchlist(true);
