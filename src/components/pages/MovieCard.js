@@ -7,6 +7,7 @@ import MovieDetailPage from "../movie_detail_page/MovieDetailPage";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import SelectionPage from "./SelectionPage";
 import {elastic as BurgerMenu} from "react-burger-menu";
+import {WatchlistContext} from "../context/WatchlistContext";
 
 const imageSizes = {
   backdrop_sizes: ["w300", "w780", "w1280", "original"],
@@ -26,6 +27,8 @@ export default function MovieCard(props) {
 
   const [backdrop, setBackdrop] = useState("");
   const [poster, setPoster] = useState("");
+
+    const [watchlist, setWatchlist] = useContext(WatchlistContext);
 
   useEffect(() => {
     axios
@@ -47,7 +50,15 @@ export default function MovieCard(props) {
       <Link
           to={`/movie/${movieId}`}
       >Details</Link>
-  )
+  );
+
+    let addToWatchlist = (e) => {
+        e.preventDefault();
+        setWatchlist((prevWatchlist) => [...prevWatchlist, {movie}]);
+    };
+
+
+
 
   let mainCard = (
     <>
@@ -71,7 +82,7 @@ export default function MovieCard(props) {
           <div>Card is loading</div>
         )}
         <div className="btn-group" role="group" aria-label="Basic example">
-          <button type="button" className="btn btn-light" onClick={()=>{ alert('added to watchlist'); }}>
+          <button type="button" className="btn btn-light" onClick={addToWatchlist}>
             Add to Watchlist
           </button>
             <button type="button" className="btn btn-light">
@@ -123,7 +134,7 @@ export default function MovieCard(props) {
                 <button
                     type="button"
                     className="btn btn-light"
-                    onClick={()=>{ alert('added to watchlist'); }}
+                    onClick={addToWatchlist}
                 >
                     Add to Watchlist
                 </button>
