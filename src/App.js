@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import axios from "axios";
 import styled, {ThemeProvider} from "styled-components";
 import Menu from "./components/layout/Menu";
-import MovieDetailPage from "./components/movie_detial_page/MovieDetailPage";
+import MovieDetailPage from "./components/movie_detail_page/MovieDetailPage";
 
 function App() {
 

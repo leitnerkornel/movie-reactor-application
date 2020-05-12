@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
+import LinkIMDB from "./LinkIMDB";
+import LinkYouTube from "./LinkYouTube";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 // This will came from outside
 // 495764 // Another ID for test.
-const MOVIE_ID = 111;
+const MOVIE_ID = 495764;
 
 const imageSizes = {
     "backdrop_sizes": ["w300", "w780", "w1280", "original"],
@@ -37,13 +38,13 @@ const MovieDetailPage = () => {
     const [spokenLanguages, setSpokenLanguages] = useState([])
     const [imdbId, setImdbId] = useState('')
     const [companies, setCompanies] = useState([])
-    const [trailer, setTrailer] = useState('')
+    const [youtubeTrailer, setYoutubeTrailer] = useState('')
     const [overview, setOverview] = useState('')
 
     useEffect(() => {
         axios.get(`https://api.themoviedb.org/3/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`).then((res) => {
             console.log(res.data.results[0].key)
-            setTrailer(res.data.results[0].key)
+            setYoutubeTrailer(res.data.results[0].key)
         })
         axios.get(`https://api.themoviedb.org/3/movie/${MOVIE_ID}?api_key=${API_KEY}`).then((res) => {
             console.log(res.data);
@@ -95,7 +96,7 @@ const MovieDetailPage = () => {
                 <div>{spokenLanguages}</div>
                 <div>{imdbId}</div>
                 <div>{companies}</div>
-                <div>{trailer}</div>
+                <div>{youtubeTrailer}</div>
                 <div>{overview}</div>
 
                 <div className="row">
@@ -104,6 +105,9 @@ const MovieDetailPage = () => {
                     <div className="col">{year}</div>
                 </div>
                 <button type="button" className="btn btn-primary">Primary</button>
+
+                <LinkIMDB imdbId={imdbId}/>
+                <LinkYouTube youtubeTrailer={youtubeTrailer}/>
             </div>
         </div>
     );
