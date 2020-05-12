@@ -48,7 +48,7 @@ export default function MovieCard(props) {
 
   let linkToMovieDetailPage = (
       <Link
-          to={`/movie/${movieId}`}
+          to={`/movie/${movieId}`} style={buttonStyle}
       >Details</Link>
   );
 
@@ -59,8 +59,16 @@ export default function MovieCard(props) {
         }
     };
 
-
-
+    let cardButtons = (
+    <div className="btn-group" role="group" aria-label="Basic example">
+        <button type="button" className="btn btn-secondary" onClick={addToWatchlist}>
+            Add to Watchlist
+        </button>
+        <button type="button" className="btn btn-secondary" style={buttonStyle}>
+            {linkToMovieDetailPage}
+        </button>
+    </div>
+    )
 
   let mainCard = (
     <>
@@ -83,14 +91,7 @@ export default function MovieCard(props) {
         ) : (
           <div>Card is loading</div>
         )}
-        <div className="btn-group" role="group" aria-label="Basic example">
-          <button type="button" className="btn btn-light" onClick={addToWatchlist}>
-            Add to Watchlist
-          </button>
-            <button type="button" className="btn btn-light">
-                {linkToMovieDetailPage}
-            </button>
-        </div>
+          {cardButtons}
       </div>
     </>
   );
@@ -108,7 +109,7 @@ export default function MovieCard(props) {
               <div className="backdrop-container">
                 <img
                   src={`https://image.tmdb.org/t/p/${imageSizes.backdrop_sizes[0]}${backdrop}`}
-                  alt="No backdrop available"
+                  alt={`NO PICTURE AVAILABLE FOR ${actualMovie.title.toUpperCase()}`}
                   style={centerImage}
                 />
               </div>
@@ -127,14 +128,7 @@ export default function MovieCard(props) {
           ) : (
             <div>Card is loading</div>
           )}
-            <div className="btn-group" role="group" aria-label="Basic example">
-                <button type="button" className="btn btn-light" onClick={addToWatchlist}>
-                    Add to Watchlist
-                </button>
-                <button type="button" className="btn btn-light">
-                    {linkToMovieDetailPage}
-                </button>
-            </div>
+            {cardButtons}
         </div>
 
       </>
@@ -174,6 +168,7 @@ const cardStyle = {
     minHeight: "28rem",
     height: "28rem",
     backgroundColor: "#e6b31e",
+    borderRadius: "10px",
     boxShadow: "  0 2.8px 2.2px rgba(200, 200, 200, 0.034),\n" +
         "  0 6.7px 5.3px rgba(200, 200, 200, 0.048),\n" +
         "  0 12.5px 10px rgba(200, 200, 200, 0.06),\n" +
@@ -182,3 +177,8 @@ const cardStyle = {
         "  0 100px 80px rgba(200, 200, 200, 0.12)",
     //boxShadow: "10px 10px #e6b31e",
 };
+
+const buttonStyle= {
+    color: "white",
+    textDecoration: "none"
+}
