@@ -42,6 +42,7 @@ const MovieDetailPage = () => {
     const [companies, setCompanies] = useState([]);
     const [youtubeTrailer, setYoutubeTrailer] = useState("");
     const [overview, setOverview] = useState("");
+    const [tagline, setTagline] = useState("");
 
     useEffect(() => {
         axios
@@ -88,6 +89,7 @@ const MovieDetailPage = () => {
                     })
                 );
                 setOverview(res.data.overview);
+                setTagline(res.data.tagline);
             });
     }, [MOVIE_ID, API_KEY]);
 
@@ -120,7 +122,8 @@ const MovieDetailPage = () => {
                                      style={{
                                          height: "250px",
                                          textAlign: "left",
-                                         backgroundColor: "green",
+                                         backgroundColor: "#343434",
+                                         color: "white",
                                          padding: "0",
                                          position: "relative",
                                      }}>
@@ -132,7 +135,7 @@ const MovieDetailPage = () => {
                                     <div
                                         style={{
                                             position: "absolute",
-                                            bottom: "0",
+                                            bottom: "2px",
                                             verticalAlign: "center",
                                             marginLeft: "7%",
                                             height: "40px"
@@ -148,7 +151,7 @@ const MovieDetailPage = () => {
                                     </div>
                                     <div style={{
                                         position: "absolute",
-                                        bottom: "0",
+                                        bottom: "2px",
                                         verticalAlign: "center",
                                         marginLeft: "55%",
                                         height: "40px",
@@ -160,7 +163,7 @@ const MovieDetailPage = () => {
                                 <div className="col-md-6" style={{
                                     height: "250px",
                                     width: "100%",
-                                    backgroundColor: "white",
+                                    backgroundColor: "#2e2e2e",
                                     padding: "0",
                                     textAlign: "center"
                                 }}>
@@ -171,9 +174,9 @@ const MovieDetailPage = () => {
                                 </div>
                                 <div className="col-md-6">
                                     <div className="row no-gutters">
-                                        <div className="col-md-12 d-flex justify-content-center mx-auto" style={{
+                                        <div className="col-md-12 d-flex justify-content-center" style={{
                                             height: "100px",
-                                            backgroundColor: "blue",
+                                            backgroundColor: "#2e2e2e",
                                             padding: "16px"
                                         }}>
                                             <LinkHomePage homepage={homepage}/>
@@ -182,20 +185,21 @@ const MovieDetailPage = () => {
                                         </div>
                                     </div>
                                     <div className="row no-gutters">
-                                        <div className="col-md-12"
-                                             style={{height: "75px", backgroundColor: "yellow"}}>2
+                                        <div className="col-md-12 d-flex justify-content-center"
+                                             style={{height: "50px", backgroundColor: "#2e2e2e"}}>
+                                            <button type="button" className="btn btn-warning" >Add to Watchlist</button>
                                         </div>
                                     </div>
                                     <div className="row no-gutters">
-                                        <div className="col-md-12"
-                                             style={{height: "75px", backgroundColor: "green"}}>3
+                                        <div className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
+                                             style={{height: "100px", backgroundColor: "#2e2e2e"}}><p style={{fontStyle: "italic", color: "white", textAlign: "center"}}>{tagline}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-6"
-                             style={{textAlign: "center", backgroundColor: "red", padding: "0"}}>
+                             style={{textAlign: "center", backgroundColor: "#2e2e2e", padding: "0"}}>
                             <div style={{textAlign: "center", padding: "50px"}}>
                                 <img
                                     src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.backdrop_sizes[1]}${backdrop}`}
