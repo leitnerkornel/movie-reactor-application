@@ -11,7 +11,7 @@ const SelectionPage = (props) => {
   let layout = (
     <div className="row">
       <div
-        className="col-2 align-self-start"
+        className="col-2 align-self-start d-flex align-items-stretch"
         style={{ display: "flex", flexFlow: "row wrap" }}
       ></div>
       <div
@@ -20,7 +20,7 @@ const SelectionPage = (props) => {
       >
         {data ? (
           data.results.map((movie, index) => (
-            <div className="card-deck m-3">
+            <div className="card-deck m-1">
               <MovieCard movie={movie} key={movie.id} API_KEY={props.API_KEY} />
             </div>
           ))

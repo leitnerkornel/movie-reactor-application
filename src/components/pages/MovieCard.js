@@ -39,6 +39,9 @@ export default function MovieCard(props) {
     isFlipped ? setIsFlipped(false) : setIsFlipped(true);
   };
 
+  let characterLimit = 120;
+  let limitedOverView = actualMovie ? (actualMovie.overview.substring(0, (actualMovie.overview.length > characterLimit ? characterLimit: actualMovie.overview.length)) + "...") : ("nothing");
+
   let linkToMovieDetailPage = (
       <Link
           to={`/movie/${movieId}`}
@@ -49,8 +52,9 @@ export default function MovieCard(props) {
     <>
       <div
         id={`${movie.id}-front`}
-        className="card border-warning mb-5 clearfix"
-        style={{ width: "22rem" }}
+        className="card border-warning mb-4 clearfix"
+        style={{ width: "22rem", minHeight: "28rem", height: "28rem" }}
+        onClick={setFlipCard}
       >
         {actualMovie ? (
           <div className="card-body">
@@ -85,8 +89,9 @@ export default function MovieCard(props) {
       <>
         <div
           id={`${movie.id}-back`}
-          className="card border-warning mb-5 clearfix"
-          style={{ width: "22rem" }}
+          className="card border-warning mb-4 clearfix"
+          style={{ width: "22rem", minHeight: "28rem", height: "28rem" }}
+          onClick={setFlipCard}
         >
           {actualMovie ? (
             <React.Fragment>
@@ -101,10 +106,10 @@ export default function MovieCard(props) {
                 <h5 className="card-title" style={{ textAlign: "center" }}>
                   {actualMovie.title.toUpperCase()}
                 </h5>
-                <p className="card-text">
+                <p className="card-text overflow-auto" >
                   Original title: {actualMovie.original_title}
                   <p></p>
-                  {actualMovie.overview}
+                  {limitedOverView}
                 </p>
                 <div
                   className="btn-group"
