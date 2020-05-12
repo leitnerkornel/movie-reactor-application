@@ -116,18 +116,57 @@ const MovieDetailPage = () => {
                         <div className="col-md-6">
                             <div className="row no-gutters">
                                 <div className="col-md-12"
-                                     style={{height: "250px", width: "100%", backgroundColor: "#e6b31e", padding: "0"}}>
-                                    <div>{title}</div>
+                                     style={{
+                                         height: "250px",
+                                         textAlign: "left",
+                                         backgroundColor: "green",
+                                         padding: "0",
+                                         position: "relative",
+                                     }}>
+                                    <h1 style={{
+                                        marginLeft: "7%",
+                                        marginTop: "50px",
+                                        marginRight: "20px"
+                                    }}>{title}<span style={{fontStyle: "italic"}}> ({year})</span></h1>
+                                    <div
+                                        style={{
+                                            position: "absolute",
+                                            bottom: "0",
+                                            verticalAlign: "center",
+                                            marginLeft: "7%",
+                                            height: "40px"
+                                        }}>
+                                        <img style={{width: "32px", marginRight: "5px"}}
+                                             src={"/images/popularity64.png"} alt="Popularity"/><span
+                                        style={{marginRight: "15px"}}>{popularity}</span><img
+                                        style={{width: "32px", marginRight: "5px"}} src={"/images/star64.png"}
+                                        alt="Votes"/><span style={{marginRight: "5px"}}>{voteAvg}</span><img
+                                        style={{width: "32px", marginLeft: "10px", marginRight: "5px"}}
+                                        src={"/images/time64.png"}
+                                        alt="Duration"/><span style={{marginRight: "15px"}}>{runtime} min</span>
+                                    </div>
+                                    <div style={{
+                                        position: "absolute",
+                                        bottom: "0",
+                                        verticalAlign: "center",
+                                        marginLeft: "55%",
+                                        height: "40px",
+                                        fontStyle: "italic",
+                                    }}>{genres.join(", ")}</div>
                                 </div>
                             </div>
                             <div className="row no-gutters">
                                 <div className="col-md-6" style={{
                                     height: "250px",
                                     width: "100%",
-                                    backgroundColor: "#e6b31e",
+                                    backgroundColor: "white",
                                     padding: "0",
-                                    textAlign: "right"
+                                    textAlign: "center"
                                 }}>
+                                    <img
+                                        src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.poster_sizes[2]}${poster}`}
+                                        alt="Poster" style={{height: "250px"}}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -153,17 +192,7 @@ const MovieDetailPage = () => {
                         </div>
                     </div>
                 </div>
-                {/*<div style={{width: "100%", height: "700px", backgroundColor: "#343434"}}>
-                    <div className={"backdrop-container"}
-                         style={{height: "250px", width: "100%", backgroundColor: '#2e2e2e', textAlign: "right"}}>
-                        <img
-                            src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.backdrop_sizes[1]}${backdrop}`}
-                            alt="Backdrop" style={{padding: "50px", width: "50%"}}
-                        />
-                    </div>
-                    <div style={{ padding: "50px"}}>{title}</div>
 
-                </div>
                 <LinkIMDB imdbId={imdbId}/>,
                 <LinkYouTube youtubeTrailer={youtubeTrailer}/>*/}
             </div>
@@ -177,23 +206,14 @@ const MovieDetailPage = () => {
         </div>
 
         /*<div>
-            This is a Movie Detail Page
 
-            <div className={"poster-container"}>
-                <img
-                    src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.poster_sizes[2]}${poster}`}
-                    alt="Poster"
-                />
-            </div>
         </div>,
-            <div>{title}</div>,
+
             <div>{originalTitle}</div>,
-            <div>{popularity}</div>,
-            <div>{voteAvg}</div>,
-            <div>{year}</div>,
-            <div>{genres}</div>,
+
+
             <div>{homepage}</div>,
-            <div>{runtime}</div>,
+
             <div>{budget}</div>,
             <div>{revenue}</div>,
             <div>{originalLanguage}</div>,
