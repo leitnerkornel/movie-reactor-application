@@ -39,7 +39,7 @@ export default function MovieCard(props) {
     isFlipped ? setIsFlipped(false) : setIsFlipped(true);
   };
 
-  let overviewCharacterLimit = 120;
+  let overviewCharacterLimit = 100;
   let limitedOverView = actualMovie ? (actualMovie.overview.substring(0, (actualMovie.overview.length > overviewCharacterLimit ? overviewCharacterLimit: actualMovie.overview.length)) + "...") : ("nothing");
 
   let linkToMovieDetailPage = (
@@ -53,7 +53,7 @@ export default function MovieCard(props) {
       <div
         id={`${movie.id}-front`}
         className="card border-warning mb-4 clearfix"
-        style={{ width: "22rem", minHeight: "28rem", height: "28rem" }}
+        style={{ width: "18rem", minHeight: "28rem", height: "28rem" }}
         onClick={setFlipCard}
       >
         {actualMovie ? (
@@ -89,8 +89,8 @@ export default function MovieCard(props) {
       <>
         <div
           id={`${movie.id}-back`}
-          className="card border-warning mb-4 clearfix"
-          style={{ width: "22rem", minHeight: "28rem", height: "28rem" }}
+          className="card border-warning mb-4 clearfix overflow-hidden"
+          style={{ width: "18rem", minHeight: "28rem", height: "28rem" }}
           onClick={setFlipCard}
         >
           {actualMovie ? (
@@ -106,30 +106,32 @@ export default function MovieCard(props) {
                 <h5 className="card-title" style={{ textAlign: "center" }}>
                   {actualMovie.title.toUpperCase()}
                 </h5>
-                <p className="card-text overflow-auto" >
+                <p className="card-text overflow-hidden" >
                   Original title: {actualMovie.original_title}
                   <p></p>
                   {limitedOverView}
                 </p>
-                <div
-                  className="btn-group"
-                  role="group"
-                  aria-label="Basic example"
-                >
-                  <button
-                    type="button"
-                    className="btn btn-light"
-                    onClick={setFlipCard}
-                  >
-                    Flip
-                  </button>
-                </div>
+
               </div>
             </React.Fragment>
           ) : (
             <div>Card is loading</div>
           )}
+            <div
+                className="btn-group"
+                role="group"
+                aria-label="Basic example"
+            >
+                <button
+                    type="button"
+                    className="btn btn-light"
+                    onClick={setFlipCard}
+                >
+                    Flip
+                </button>
+            </div>
         </div>
+
       </>
     ) : (
       <div />
