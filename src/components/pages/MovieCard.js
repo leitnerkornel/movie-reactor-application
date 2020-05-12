@@ -6,6 +6,7 @@ import {ThemeProvider} from "styled-components";
 import MovieDetailPage from "../movie_detail_page/MovieDetailPage";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import SelectionPage from "./SelectionPage";
+import {elastic as BurgerMenu} from "react-burger-menu";
 
 const imageSizes = {
   backdrop_sizes: ["w300", "w780", "w1280", "original"],
@@ -90,7 +91,7 @@ export default function MovieCard(props) {
         <div
           id={`${movie.id}-back`}
           className="card border-warning mb-4 clearfix overflow-hidden"
-          style={{ width: "18rem", minHeight: "28rem", height: "28rem" }}
+          style={cardStyle}
           onClick={setFlipCard}
         >
           {actualMovie ? (
@@ -149,4 +150,10 @@ const centerImage = {
   display: "block",
   marginLeft: "auto",
   marginRight: "auto",
+};
+
+const cardStyle = {
+    width: "18rem",
+    minHeight: "28rem",
+    height: "28rem"
 };
