@@ -41,8 +41,8 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
-  width: 36px;
-  height: 30px;
+  width: 80px;
+  height: 50px;
   left: 36px;
   top: 36px;
 }

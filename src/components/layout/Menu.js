@@ -9,7 +9,7 @@ export default class Menu extends Component {
 
   render() {
     return (
-      <BurgerMenu isOpen={false}>
+      <BurgerMenu customBurgerIcon={ <img src={window.location.origin + "/reactor-logo.svg"} style={{zIndex: "1"}} /> } isOpen={false}>
         <Link id="home" className="menu-item" to="/" style={{ color: "red" }}>
           Top Rated
         </Link>
