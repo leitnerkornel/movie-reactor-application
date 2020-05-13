@@ -18,7 +18,7 @@ const SelectionPage = (props) => {
             flexFlow: "row wrap",
             backgroundColor: "#e6b31e",
           }}
-        ><b style={pageTitleStyle}>{props.title}</b></div>
+        ><b style={pageTitleStyle}>{props.title.toUpperCase()}</b></div>
         <div
           className="col-10 align-self-end"
           style={{
@@ -52,12 +52,14 @@ const SelectionPage = (props) => {
 export default SelectionPage;
 
 const pageTitleStyle = {
-    position: "absolute",
-    left: "140%",
+    position: "fixed",
+    left: "12%",
+    top: "36px",
     backgroundColor: "#e6b31e",
-    transform: "translate(-50%)",
     zIndex: "1",
     textAlign: "left",
-    width: "200px",
-    fontSize: "1.2em"
+    height: "100%",
+    fontSize: "1.2em",
+    textOrientation: "upright",
+    writingMode: "vertical-rl",
 }
