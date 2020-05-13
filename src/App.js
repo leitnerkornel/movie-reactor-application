@@ -31,7 +31,10 @@ function App() {
           <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
           <main id="page-wrap">
             <ThemeProvider theme={theme}>
-              <div className="container" style={{ maxWidth: "3000px" , padding: "0"}}>
+              <div
+                className="container"
+                style={{ maxWidth: "3000px", padding: "0" }}
+              >
                 <div className="row"></div>
                 <Route
                   exact

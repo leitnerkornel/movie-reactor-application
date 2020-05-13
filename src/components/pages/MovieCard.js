@@ -9,12 +9,6 @@ import SelectionPage from "./SelectionPage";
 import { elastic as BurgerMenu } from "react-burger-menu";
 import { WatchlistContext } from "../context/WatchlistContext";
 
-const imageSizes = {
-  backdrop_sizes: ["w300", "w780", "w1280", "original"],
-  logo_sizes: ["w45", "w92", "w154", "w185", "w300", "w500", "original"],
-  poster_sizes: ["w92", "w154", "w185", "w342", "w500", "w780", "original"],
-};
-
 export default function MovieCard(props) {
   let overviewCharacterLimit = 130;
   let movie = props.movie;
@@ -44,13 +38,10 @@ export default function MovieCard(props) {
     isFlipped ? setIsFlipped(false) : setIsFlipped(true);
   };
 
-  let limitedOverView = actualMovie
-    ? actualMovie.overview.substring(
-        0,
-        actualMovie.overview.length > overviewCharacterLimit
-          ? overviewCharacterLimit
-          : actualMovie.overview.length
-      ) + " ..."
+  let limitedOverview = actualMovie
+    ? actualMovie.overview.length > overviewCharacterLimit
+      ? actualMovie.overview.substring(0, overviewCharacterLimit) + " ..."
+      : actualMovie.overview
     : "nothing";
 
   let linkToMovieDetailPage = (
@@ -66,12 +57,12 @@ export default function MovieCard(props) {
     }
   };
 
-    let removeFromWatchlist = (e) => {
-        e.preventDefault();
-        /*let movie = e.target.value;
-        setWatchlist(watchlist.filter((e)=>(e !== movie)));
-        setAddedToWatchlist(false);*/
-    };
+  let removeFromWatchlist = (e) => {
+    e.preventDefault();
+    /*let movie = e.target.value;
+    setWatchlist(watchlist.filter((e)=>(e !== movie)));
+    setAddedToWatchlist(false);*/
+  };
 
   let isTheMovieAdded = () => {
     for (let selectedMovie of watchlist) {
@@ -85,7 +76,12 @@ export default function MovieCard(props) {
   let cardButtons = (
     <div className="btn-group" role="group" aria-label="Basic example">
       {isTheMovieAdded() ? (
-        <button type="button" className="btn btn-secondary" onClick={removeFromWatchlist} disabled>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={removeFromWatchlist}
+          disabled
+        >
           {"unWatchlist".toUpperCase()}
         </button>
       ) : (
@@ -128,18 +124,40 @@ export default function MovieCard(props) {
     </>
   );
 
-  let ratedAdultLogo = actualMovie && actualMovie.adult ? ( <img
-          style={ratedAdultStyle} src={"/images/adult.png"}
-          alt="Votes" data-toggle="tooltip" title="Rated adult"/>
-  ) : (<React.Fragment />)
+  let ratedAdultLogo =
+    actualMovie && actualMovie.adult ? (
+      <img
+        style={ratedAdultStyle}
+        src={"/images/adult.png"}
+        alt="Votes"
+        data-toggle="tooltip"
+        title="Rated adult"
+      />
+    ) : (
+      <React.Fragment />
+    );
 
   let ratingBackgroundLogo = actualMovie ? (
-      <img
-      style={ratingBackgroundStyle} src={"/images/star64.png"}
-      alt="Votes" data-toggle="tooltip"  />
-      ) : (<div />)
+    <img
+      style={ratingBackgroundStyle}
+      src={"/images/star64.png"}
+      alt="Votes"
+      data-toggle="tooltip"
+    />
+  ) : (
+    <div />
+  );
 
-  let ratingNumber = actualMovie ? (<div style={ratingStyle} title={`User rating: ${actualMovie.vote_average}, based on ${actualMovie.vote_count} votes.`}><b>{`${actualMovie.vote_average}`}</b></div>) : (<div />)
+  let ratingNumber = actualMovie ? (
+    <div
+      style={ratingStyle}
+      title={`User rating: ${actualMovie.vote_average}, based on ${actualMovie.vote_count} votes.`}
+    >
+      <b>{`${actualMovie.vote_average}`}</b>
+    </div>
+  ) : (
+    <div />
+  );
 
   let backCard =
     actualMovie != null ? (
@@ -160,13 +178,16 @@ export default function MovieCard(props) {
               </div>
               <div>
                 <h5 className="card-title" style={{ textAlign: "center" }}>
-                  {`${actualMovie.title.toUpperCase()} (${actualMovie.release_date.slice(0, 4)})`}
+                  {`${actualMovie.title.toUpperCase()} (${actualMovie.release_date.slice(
+                    0,
+                    4
+                  )})`}
                 </h5>
                 <p className="card-text overflow-hidden">
                   {ratingBackgroundLogo}
                   {ratingNumber}
                   {ratedAdultLogo}
-                  {limitedOverView}
+                  {limitedOverview}
                 </p>
               </div>
             </div>
@@ -187,6 +208,12 @@ export default function MovieCard(props) {
     </ReactCardFlip>
   );
 }
+
+const imageSizes = {
+  backdrop_sizes: ["w300", "w780", "w1280", "original"],
+  logo_sizes: ["w45", "w92", "w154", "w185", "w300", "w500", "original"],
+  poster_sizes: ["w92", "w154", "w185", "w342", "w500", "w780", "original"],
+};
 
 const centerImage = {
   display: "block",
@@ -234,8 +261,8 @@ const ratingStyle = {
   left: "15%",
   transform: "translate(-50%, -50%)",
   zIndex: "1",
-  textAlign: "center"
-}
+  textAlign: "center",
+};
 
 const ratingBackgroundStyle = {
   position: "absolute",
@@ -245,7 +272,7 @@ const ratingBackgroundStyle = {
   opacity: ".85",
   zIndex: "1",
   width: "50px",
-}
+};
 
 const ratedAdultStyle = {
   position: "absolute",
@@ -256,4 +283,4 @@ const ratedAdultStyle = {
   zIndex: "1",
   borderRadius: "50%",
   width: "35px",
-}
+};
