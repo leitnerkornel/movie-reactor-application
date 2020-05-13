@@ -9,6 +9,7 @@ import TitleGenreRatingBox from "./TitleGenreRatingBox";
 import Tagline from "./Tagline";
 import SpokenLanguages from "./SpokenLanguages";
 import AddToWatchlistButton from "./AddToWatchlistButton";
+import Overview from "./Overview";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -119,19 +120,8 @@ const MovieDetailPage = () => {
                                                  popularity={popularity}
                                                  voteAvg={voteAvg}
                                                  runtime={runtime}/>
-                            <div className="row no-gutters d-flex">
-                                <div className="col-md-8 d-flex " style={{
-                                    height: "300px",
-                                    width: "100%",
-                                    color: "white",
-                                    backgroundColor: "#2e2e2e",
-                                    textAlign: "justify",
-                                }}>
-                                    <div className="justify-content-center align-self-center"
-                                         style={{marginLeft: "10%", lineHeight: "150%"}}>
-                                        {overview}
-                                    </div>
-                                </div>
+                            <div className="row no-gutters">
+                                <Overview overview={overview}/>
                                 <div className="col-md-4">
                                     <AddToWatchlistButton/>
                                 </div>
