@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #e6b31e;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #e6b31e;
 }
 
 @keyframes App-logo-spin {
@@ -41,8 +41,8 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
-  width: 36px;
-  height: 30px;
+  width: 80px;
+  height: 50px;
   left: 36px;
   top: 36px;
 }
@@ -79,19 +79,19 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  background: #e9c31a;
+  background: #e6b31e;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: #e9c31a;
+  fill: #e6b31e;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: #e9c31a;
+  color: #2e2e2e;
   padding: 0.8em;
 }
 
@@ -102,5 +102,5 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Styling of overlay */
 .bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
+  background: #2e2e2e;
 }
