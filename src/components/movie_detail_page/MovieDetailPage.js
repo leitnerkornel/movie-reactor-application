@@ -8,6 +8,7 @@ import LinksToExternalPagesGroup from "./LinksToExternalPagesGroup";
 import TitleGenreRatingBox from "./TitleGenreRatingBox";
 import Tagline from "./Tagline";
 import SpokenLanguages from "./SpokenLanguages";
+import AddToWatchlistButton from "./AddToWatchlistButton";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -132,12 +133,7 @@ const MovieDetailPage = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-4">
-                                    <div className="col-md-12 d-flex justify-content-center"
-                                         style={{height: "300px", backgroundColor: "#2e2e2e", padding: "80px 0",}}>
-                                        <button type="button" className="btn btn-warning"
-                                                style={{fontWeight: "bold"}}>Add to Watchlist
-                                        </button>
-                                    </div>
+                                    <AddToWatchlistButton/>
                                 </div>
                             </div>
                         </div>
