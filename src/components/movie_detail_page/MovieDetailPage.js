@@ -38,14 +38,6 @@ const MovieDetailPage = () => {
     const [overview, setOverview] = useState("");
     const [tagline, setTagline] = useState("");
 
-    /* Unused states */
-    const [originalTitle, setOriginalTitle] = useState("");
-    const [budget, setBudget] = useState("");
-    const [companies, setCompanies] = useState([]);
-    const [originalLanguage, setOriginalLanguage] = useState("");
-    const [revenue, setRevenue] = useState("");
-
-
     useEffect(() => {
         axios
             .get(
@@ -82,19 +74,8 @@ const MovieDetailPage = () => {
                 setImdbId(res.data["imdb_id"]);
                 setOverview(res.data["overview"]);
                 setTagline(res.data["tagline"]);
-
-                /*Unused calls*/
-                setOriginalTitle(res.data["original_title"]);
-                setBudget(res.data["budget"]);
-                setOriginalLanguage(res.data["original_language"]);
-                setRevenue(res.data["revenue"]);
-                setCompanies(
-                    res.data["production_companies"].map((item) => {
-                        return [item["name"], item["logo_path"]];
-                    })
-                );
             });
-    }, [MOVIE_ID, API_KEY]);
+    }, [MOVIE_ID]);
 
     return (
         <div className={"media"}>
