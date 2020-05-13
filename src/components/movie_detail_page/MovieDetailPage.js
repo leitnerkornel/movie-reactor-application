@@ -79,21 +79,9 @@ const MovieDetailPage = () => {
 
     return (
         <div className={"media"}>
-            <div className="col-2 align-self-start" style={{
-                display: "flex",
-                flexFlow: "row wrap",
-                backgroundColor: "#e6b31e",
-                height: "1500px",
-                padding: "0"
-            }}>
+            <div className="col-2 align-self-start" style={{...mainColumnStyle, ...{backgroundColor: "#e6b31e"}}}>
             </div>
-            <div className="col-9 align-self-center" style={{
-                display: "flex",
-                flexFlow: "row wrap",
-                padding: "0",
-                backgroundColor: '#343434',
-                height: "1500px"
-            }}>
+            <div className="col-9 align-self-center" style={{...mainColumnStyle, ...{backgroundColor: "#343434"}}}>
                 {/* The center container div. There is a grid in it. */}
                 <div className="container-fluid" style={{padding: "0"}}>
                     <FirstRow/>
@@ -174,15 +162,16 @@ const MovieDetailPage = () => {
                     </div>
                 </div>
             </div>
-            <div className="col-1 align-self-end" style={{
-                display: "flex",
-                flexFlow: "row wrap",
-                backgroundColor: "#e6b31e",
-                height: "1500px",
-                padding: "0"
-            }}/>
+            <div className="col-1 align-self-end" style={{...mainColumnStyle, ...{backgroundColor: "#e6b31e"}}}/>
         </div>
     );
+}
+
+const mainColumnStyle = {
+    display: "flex",
+    flexFlow: "row wrap",
+    height: "1500px",
+    padding: "0"
 }
 
 export default MovieDetailPage;
