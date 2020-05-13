@@ -207,19 +207,24 @@ const MovieDetailPage = () => {
 
                                 </div>
                             </div>
-                            <div className="row no-gutters">
-                                <div className="col-md-6" style={{
-                                    height: "250px",
+                            <div className="row no-gutters d-flex">
+                                <div className="col-md-8 d-flex " style={{
+                                    height: "300px",
                                     width: "100%",
+                                    color: "white",
                                     backgroundColor: "#2e2e2e",
-                                    padding: "0",
-                                    textAlign: "center"
+                                    textAlign: "justify",
+                                    /*marginTop: "auto",
+                                    marginBottom: "auto"*/
                                 }}>
+                                    <div className="justify-content-center align-self-center" style={{marginLeft: "10%", lineHeight: "150%"}}>
+                                        <p >{overview}</p>
+                                    </div>
                                 </div>
-                                <div className="col-md-6">
+                                <div className="col-md-4">
                                     <div className="col-md-12 d-flex justify-content-center"
-                                         style={{height: "50px", backgroundColor: "#2e2e2e"}}>
-                                        <button type="button" className="btn btn-warning">Add to Watchlist</button>
+                                         style={{height: "300px", backgroundColor: "#2e2e2e", padding: "80px 0", }}>
+                                        <button type="button" className="btn btn-warning" style={{fontWeight: "bold"}}>Add to Watchlist</button>
                                     </div>
                                 </div>
                             </div>
