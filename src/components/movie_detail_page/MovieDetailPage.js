@@ -3,6 +3,7 @@ import axios from "axios";
 import LinkIMDB from "./LinkIMDB";
 import LinkYouTube from "./LinkYouTube";
 import LinkHomePage from "./LinkHomePage";
+import LinksToExternalPagesGroup from "./LinksToExternalPagesGroup";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -174,25 +175,25 @@ const MovieDetailPage = () => {
                                 </div>
                                 <div className="col-md-6">
                                     <div className="row no-gutters">
-                                        <div className="col-md-12 d-flex justify-content-center" style={{
-                                            height: "100px",
-                                            backgroundColor: "#2e2e2e",
-                                            padding: "16px"
-                                        }}>
-                                            <LinkHomePage homepage={homepage}/>
-                                            <LinkIMDB imdbId={imdbId}/>
-                                            <LinkYouTube youtubeTrailer={youtubeTrailer}/>
-                                        </div>
+                                        <LinksToExternalPagesGroup
+                                            homepage={homepage}
+                                            imdbId={imdbId}
+                                            youtubeTrailer={youtubeTrailer}/>
                                     </div>
                                     <div className="row no-gutters">
-                                        <div className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
-                                             style={{height: "100px", backgroundColor: "#2e2e2e"}}><p style={{fontStyle: "italic", color: "white", textAlign: "center"}}>{tagline}</p>
+                                        <div
+                                            className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
+                                            style={{height: "100px", backgroundColor: "#2e2e2e"}}><p style={{
+                                            fontStyle: "italic",
+                                            color: "white",
+                                            textAlign: "center"
+                                        }}>{tagline}</p>
                                         </div>
                                     </div>
                                     <div className="row no-gutters">
                                         <div className="col-md-12 d-flex justify-content-center"
                                              style={{height: "50px", backgroundColor: "#2e2e2e"}}>
-                                            <button type="button" className="btn btn-warning" >Add to Watchlist</button>
+                                            <button type="button" className="btn btn-warning">Add to Watchlist</button>
                                         </div>
                                     </div>
                                 </div>
