@@ -4,6 +4,7 @@ import LinkIMDB from "./LinkIMDB";
 import LinkYouTube from "./LinkYouTube";
 import LinkHomePage from "./LinkHomePage";
 import LinksToExternalPagesGroup from "./LinksToExternalPagesGroup";
+import CoverPicture from "./CoverPicture";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -111,10 +112,17 @@ const MovieDetailPage = () => {
                 backgroundColor: '#343434',
                 height: "1080px"
             }}>
+                {/* The center container div. There is a grid in it. */}
                 <div className="container-fluid" style={{padding: "0"}}>
                     <div className="row no-gutters">
                         <div className="col-md-12" style={{height: "50px", backgroundColor: "#e6b31e", padding: "0"}}>
+                            {/* Yellow strip on the top. It could be any gray also. */}
                         </div>
+                    </div>
+                    <div className="row no-gutters">
+                        {/*IF IMAGE load takes too much time, too slow, should change the size to 1 or 2. 0 is too small. */}
+                        <CoverPicture size={IMAGE_SIZES.backdrop_sizes[3]}
+                                      backdrop={backdrop}/>
                     </div>
                     <div className="row no-gutters" style={{padding: "0"}}>
                         <div className="col-md-6">
@@ -233,7 +241,7 @@ const MovieDetailPage = () => {
                 height: "1080px",
                 padding: "0"
             }}/>
-        </div>)
+        </div>);
 
 
 }
