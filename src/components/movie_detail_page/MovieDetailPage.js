@@ -23,17 +23,13 @@ const MovieDetailPage = () => {
     };
     let MOVIE_ID = getMovieIdFromUrl();
 
-    const getYearFromDate = (date) => {
-        return date.split("-")[0];
-    };
-
     const [backdrop, setBackdrop] = useState(null);
     const [poster, setPoster] = useState("");
     const [title, setTitle] = useState("");
     const [originalTitle, setOriginalTitle] = useState("");
     const [popularity, setPopularity] = useState("");
     const [voteAvg, setVoteAvg] = useState("");
-    const [year, setYear] = useState("");
+    const [releaseDate, setReleaseDate] = useState("");
     const [genres, setGenres] = useState([]);
     const [homepage, setHomepage] = useState("");
     const [runtime, setRuntime] = useState("");
@@ -70,7 +66,7 @@ const MovieDetailPage = () => {
                 setOriginalTitle(res.data.original_title);
                 setPopularity(res.data.popularity);
                 setVoteAvg(res.data.vote_average);
-                setYear(getYearFromDate(res.data.release_date));
+                setReleaseDate(res.data.release_date);
                 setGenres(
                     res.data.genres.map((item) => {
                         return item.name;
@@ -163,7 +159,7 @@ const MovieDetailPage = () => {
                         <div className="col-md-7" style={{textAlign: "center", padding: "5% 5% 0",}}>
                             <TitleGenreRatingBox backdrop={backdrop}
                                                  title={title}
-                                                 year={year}
+                                                 releaseDate={releaseDate}
                                                  genres={genres}
                                                  popularity={popularity}
                                                  voteAvg={voteAvg}

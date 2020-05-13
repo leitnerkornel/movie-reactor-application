@@ -10,6 +10,16 @@ const TitleGenreRatingBox = (props) => {
         }
     };
 
+    const getYearFromDate = (releaseDate) => {
+        let year = releaseDate.split("-")[0];
+        if (year === "") {
+            return "";
+        } else {
+            return ` (${year})`;
+        }
+    };
+
+    console.log(getYearFromDate(props.releaseDate))
 
     return (
         <div style={{
@@ -28,7 +38,7 @@ const TitleGenreRatingBox = (props) => {
                         marginLeft: "7%",
                         marginTop: "20px",
                         marginRight: "20px",
-                    }}>{props.title}<span style={{fontStyle: "italic"}}> ({props.year})</span></h1>
+                    }}>{props.title}<span style={{fontStyle: "italic"}}>{getYearFromDate(props.releaseDate)}</span></h1>
                 </div>
             </div>
             <div className="row no-gutters">
