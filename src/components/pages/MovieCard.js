@@ -139,7 +139,7 @@ export default function MovieCard(props) {
       alt="Votes" data-toggle="tooltip"  />
       ) : (<div />)
 
-  let ratingNumber = actualMovie ? (<div style={ratingStyle} title={`User rating: ${actualMovie.vote_average}, based on ${actualMovie.vote_count} votes.`}>{`${actualMovie.vote_average}`}</div>) : (<div />)
+  let ratingNumber = actualMovie ? (<div style={ratingStyle} title={`User rating: ${actualMovie.vote_average}, based on ${actualMovie.vote_count} votes.`}><b>{`${actualMovie.vote_average}`}</b></div>) : (<div />)
 
   let backCard =
     actualMovie != null ? (
@@ -244,8 +244,7 @@ const ratingBackgroundStyle = {
   transform: "translate(-50%, -50%)",
   opacity: ".85",
   zIndex: "1",
-  borderRadius: "50%",
-  width: "40px",
+  width: "50px",
 }
 
 const ratedAdultStyle = {
