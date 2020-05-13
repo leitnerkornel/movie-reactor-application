@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import LinkIMDB from "./LinkIMDB";
-import LinkYouTube from "./LinkYouTube";
-import LinkHomePage from "./LinkHomePage";
-import LinksToExternalPagesGroup from "./LinksToExternalPagesGroup";
-import CoverPicture from "./CoverPicture";
-import TopStripOnPage from "./TopStripOnPage";
+
 import FirstRow from "./FirstRow";
+import CoverPicture from "./CoverPicture";
 import PosterPicture from "./PosterPicture";
+import LinksToExternalPagesGroup from "./LinksToExternalPagesGroup";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -29,7 +26,7 @@ const MovieDetailPage = () => {
         return date.split("-")[0];
     };
 
-    const [backdrop, setBackdrop] = useState("");
+    const [backdrop, setBackdrop] = useState(null);
     const [poster, setPoster] = useState("");
     const [title, setTitle] = useState("");
     const [originalTitle, setOriginalTitle] = useState("");
@@ -49,6 +46,8 @@ const MovieDetailPage = () => {
     const [overview, setOverview] = useState("");
     const [tagline, setTagline] = useState("");
 
+
+
     useEffect(() => {
         axios
             .get(
@@ -64,7 +63,6 @@ const MovieDetailPage = () => {
         axios
             .get(`https://api.themoviedb.org/3/movie/${MOVIE_ID}?api_key=${API_KEY}`)
             .then((res) => {
-                console.log(res.data);
                 setBackdrop(res.data.backdrop_path);
                 setPoster(res.data.poster_path);
                 setTitle(res.data.title);
@@ -161,67 +159,64 @@ const MovieDetailPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-7" style={{textAlign: "center", padding: "5% 5% 0"}}>
-                            <div className="row no-gutters">
-                                <div className="col-md-12"
-                                     style={{
-                                         height: "200px",
-                                         textAlign: "left",
-                                         color: "white",
-                                         padding: "0",
-                                         background: "rgba(52,52,52,0.15)",
-                                         backdropFilter: "blur(20px)"
-                                     }}>
-                                    <h1 style={{
-                                        marginLeft: "7%",
-                                        marginTop: "20px",
-                                        marginRight: "20px",
-                                    }}>{title}<span style={{fontStyle: "italic"}}> ({year})</span></h1>
+                        <div className="col-md-7" style={{textAlign: "center", padding: "5% 5% 0", }} >
+                            <div style={{background: backdrop !== null ? "rgba(52,52,52,0.15)" : "rgba(52,52,52)",
+                                backdropFilter: "blur(20px)"}}>
+                                <div className="row no-gutters" >
+                                    <div className="col-md-12"
+                                         style={{
+                                             height: "200px",
+                                             textAlign: "left",
+                                             color: "white",
+                                             padding: "0",
+                                         }}>
+                                        <h1 style={{
+                                            marginLeft: "7%",
+                                            marginTop: "20px",
+                                            marginRight: "20px",
+                                        }}>{title}<span style={{fontStyle: "italic"}}> ({year})</span></h1>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row no-gutters">
-                                <div className="col-md-12" style={{
-                                    textAlign: "left",
-                                    color: "white",
-                                    padding: "0",
-                                    height: "50px",
-                                    background: "rgba(52,52,52,0.15)",
-                                    backdropFilter: "blur(20px)"
-                                }}>
-                                    <div style={{
-                                        marginLeft: "7%",
-                                        marginTop: "10px",
-                                        fontStyle: "italic",
-                                        fontSize: "20px"
-                                    }}>{genres.join(", ")}
+                                <div className="row no-gutters">
+                                    <div className="col-md-12" style={{
+                                        textAlign: "left",
+                                        color: "white",
+                                        padding: "0",
+                                        height: "50px",
+                                    }}>
+                                        <div style={{
+                                            marginLeft: "7%",
+                                            marginTop: "10px",
+                                            fontStyle: "italic",
+                                            fontSize: "20px"
+                                        }}>{genres.join(", ")}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row no-gutters">
+                                    <div className="col-md-12" style={{
+                                        fontSize: "20px",
+                                        fontStyle: "bolder",
+                                        height: "50px",
+                                        width: "100%",
+                                        textAlign: "left",
+                                        color: "white",
+                                        padding: "0",
+                                    }}>
+                                        <div style={{marginTop: "10px"}}>
+                                            <img style={{width: "32px", marginRight: "5px", marginLeft: "7%"}}
+                                                 src={"/images/popularity64.png"} alt="Popularity"/><span
+                                            style={{marginRight: "15px"}}>{popularity}</span><img
+                                            style={{width: "32px", marginRight: "5px"}} src={"/images/star64.png"}
+                                            alt="Votes"/><span style={{marginRight: "5px"}}>{voteAvg}</span><img
+                                            style={{width: "32px", marginLeft: "10px", marginRight: "5px"}}
+                                            src={"/images/time64.png"}
+                                            alt="Duration"/><span style={{marginRight: "15px"}}>{runtime} min</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="row no-gutters">
-                                <div className="col-md-12" style={{
-                                    background: "rgba(52,52,52,0.15)",
-                                    backdropFilter: "blur(20px)",
-                                    fontSize: "20px",
-                                    fontStyle: "bolder",
-                                    height: "50px",
-                                    width: "100%",
-                                    textAlign: "left",
-                                    color: "white",
-                                    padding: "0",
-                                }}>
-                                    <div style={{marginTop: "10px"}}>
-                                        <img style={{width: "32px", marginRight: "5px", marginLeft: "7%"}}
-                                             src={"/images/popularity64.png"} alt="Popularity"/><span
-                                        style={{marginRight: "15px"}}>{popularity}</span><img
-                                        style={{width: "32px", marginRight: "5px"}} src={"/images/star64.png"}
-                                        alt="Votes"/><span style={{marginRight: "5px"}}>{voteAvg}</span><img
-                                        style={{width: "32px", marginLeft: "10px", marginRight: "5px"}}
-                                        src={"/images/time64.png"}
-                                        alt="Duration"/><span style={{marginRight: "15px"}}>{runtime} min</span>
-                                    </div>
 
-                                </div>
-                            </div>
                             <div className="row no-gutters d-flex">
                                 <div className="col-md-8 d-flex " style={{
                                     height: "300px",
