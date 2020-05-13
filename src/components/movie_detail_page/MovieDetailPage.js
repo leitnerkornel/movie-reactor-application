@@ -185,14 +185,14 @@ const MovieDetailPage = () => {
                                         </div>
                                     </div>
                                     <div className="row no-gutters">
-                                        <div className="col-md-12 d-flex justify-content-center"
-                                             style={{height: "50px", backgroundColor: "#2e2e2e"}}>
-                                            <button type="button" className="btn btn-warning" >Add to Watchlist</button>
+                                        <div className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
+                                             style={{height: "100px", backgroundColor: "#2e2e2e"}}><p style={{fontStyle: "italic", color: "white", textAlign: "center"}}>{tagline}</p>
                                         </div>
                                     </div>
                                     <div className="row no-gutters">
-                                        <div className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
-                                             style={{height: "100px", backgroundColor: "#2e2e2e"}}><p style={{fontStyle: "italic", color: "white", textAlign: "center"}}>{tagline}</p>
+                                        <div className="col-md-12 d-flex justify-content-center"
+                                             style={{height: "50px", backgroundColor: "#2e2e2e"}}>
+                                            <button type="button" className="btn btn-warning" >Add to Watchlist</button>
                                         </div>
                                     </div>
                                 </div>
