@@ -6,6 +6,7 @@ import CoverPicture from "./CoverPicture";
 import PosterPicture from "./PosterPicture";
 import LinksToExternalPagesGroup from "./LinksToExternalPagesGroup";
 import TitleGenreRatingBox from "./TitleGenreRatingBox";
+import Tagline from "./Tagline";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -96,15 +97,7 @@ const MovieDetailPage = () => {
                             <PosterPicture imageSize={IMAGE_SIZES.poster_sizes[3]}
                                            poster={poster}/>
                             <div className="row no-gutters">
-                                <div
-                                    className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
-                                    style={{height: "100px", backgroundColor: "#2e2e2e"}}><p style={{
-                                    fontStyle: "italic",
-                                    fontSize: "20px",
-                                    color: "white",
-                                    textAlign: "center"
-                                }}>{tagline}</p>
-                                </div>
+                                <Tagline tagline={tagline}/>
                             </div>
                             <div className="row no-gutters">
                                 <LinksToExternalPagesGroup
