@@ -41,6 +41,7 @@ function App() {
                       <SelectionPage
                         url={"https://api.themoviedb.org/3/movie/top_rated"}
                         API_KEY={API_KEY}
+                        title={"Top rated movies"}
                       />
                     </div>
                   )}
@@ -53,6 +54,7 @@ function App() {
                       <SelectionPage
                         url={"https://api.themoviedb.org/3/movie/top_rated"}
                         API_KEY={API_KEY}
+                        title={"Top rated movies"}
                       />
                     </div>
                   )}
@@ -65,6 +67,7 @@ function App() {
                       <SelectionPage
                         url={"https://api.themoviedb.org/3/movie/now_playing"}
                         API_KEY={API_KEY}
+                        title={"Movies now playing"}
                       />
                     </div>
                   )}
@@ -77,6 +80,7 @@ function App() {
                       <SelectionPage
                         url={"https://api.themoviedb.org/3/movie/popular"}
                         API_KEY={API_KEY}
+                        title={"Popular movies"}
                       />
                     </div>
                   )}
@@ -89,6 +93,7 @@ function App() {
                       <SelectionPage
                         url={"https://api.themoviedb.org/3/movie/upcoming"}
                         API_KEY={API_KEY}
+                        title={"Upcoming movies"}
                       />
                     </div>
                   )}

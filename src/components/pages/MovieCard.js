@@ -16,7 +16,7 @@ const imageSizes = {
 };
 
 export default function MovieCard(props) {
-  let overviewCharacterLimit = 100;
+  let overviewCharacterLimit = 130;
   let movie = props.movie;
   let movieId = movie.id;
   let API_KEY = props.API_KEY;
@@ -50,7 +50,7 @@ export default function MovieCard(props) {
         actualMovie.overview.length > overviewCharacterLimit
           ? overviewCharacterLimit
           : actualMovie.overview.length
-      ) + "..."
+      ) + " ..."
     : "nothing";
 
   let linkToMovieDetailPage = (
@@ -97,7 +97,6 @@ export default function MovieCard(props) {
           {"Add to Watchlist".toUpperCase()}
         </button>
       )}
-
       <button type="button" className="btn btn-secondary" style={buttonStyle}>
         {linkToMovieDetailPage}
       </button>
@@ -129,8 +128,19 @@ export default function MovieCard(props) {
     </>
   );
 
+  let ratedAdultLogo = actualMovie && actualMovie.adult ? ( <img
+          style={ratedAdultStyle} src={"/images/adult.png"}
+          alt="Votes" data-toggle="tooltip" title="Rated adult"/>
+  ) : (<React.Fragment />)
 
-  // release year, whether it's adult, vote average
+  let ratingBackgroundLogo = actualMovie ? (
+      <img
+      style={ratingBackgroundStyle} src={"/images/star64.png"}
+      alt="Votes" data-toggle="tooltip"  />
+      ) : (<div />)
+
+  let ratingNumber = actualMovie ? (<div style={ratingStyle} title={`User rating: ${actualMovie.vote_average}, based on ${actualMovie.vote_count} votes.`}>{`${actualMovie.vote_average}`}</div>) : (<div />)
+
   let backCard =
     actualMovie != null ? (
       <>
@@ -144,20 +154,18 @@ export default function MovieCard(props) {
               <div className="backdrop-container">
                 <img
                   src={`https://image.tmdb.org/t/p/${imageSizes.backdrop_sizes[0]}${backdrop}`}
-                  alt={`NO PICTURE AVAILABLE FOR ${actualMovie.title.toUpperCase()}`}
+                  alt={`  NO PICTURE AVAILABLE FOR ${actualMovie.title.toUpperCase()}`}
                   style={centerImage}
                 />
               </div>
               <div>
                 <h5 className="card-title" style={{ textAlign: "center" }}>
-                  {actualMovie.title.toUpperCase()}
+                  {`${actualMovie.title.toUpperCase()} (${actualMovie.release_date.slice(0, 4)})`}
                 </h5>
                 <p className="card-text overflow-hidden">
-                  {`Released in ${actualMovie.release_date.slice(0, 4)} `}
-                  {actualMovie.adult ? "Adult content" : "Not rated"}
-                  {` votes: ${actualMovie.vote_average}`}
-                  <p></p>
-                  <span>&nbsp;&nbsp;</span>
+                  {ratingBackgroundLogo}
+                  {ratingNumber}
+                  {ratedAdultLogo}
                   {limitedOverView}
                 </p>
               </div>
@@ -204,7 +212,7 @@ const cardStyle = {
   minHeight: "28rem",
   height: "28rem",
   backgroundColor: "#e6b31e",
-  borderRadius: "10px",
+  borderRadius: "8px",
   boxShadow:
     "  0 2.8px 2.2px rgba(200, 200, 200, 0.034),\n" +
     "  0 6.7px 5.3px rgba(200, 200, 200, 0.048),\n" +
@@ -219,3 +227,34 @@ const buttonStyle = {
   color: "white",
   textDecoration: "none",
 };
+
+const ratingStyle = {
+  position: "absolute",
+  top: "43.5%",
+  left: "15%",
+  transform: "translate(-50%, -50%)",
+  zIndex: "1",
+  textAlign: "center"
+}
+
+const ratingBackgroundStyle = {
+  position: "absolute",
+  top: "43%",
+  left: "15%",
+  transform: "translate(-50%, -50%)",
+  opacity: ".85",
+  zIndex: "1",
+  borderRadius: "50%",
+  width: "40px",
+}
+
+const ratedAdultStyle = {
+  position: "absolute",
+  top: "43%",
+  left: "80%",
+  backgroundColor: "#e6b31e",
+  transform: "translate(-50%, -50%)",
+  zIndex: "1",
+  borderRadius: "50%",
+  width: "35px",
+}
