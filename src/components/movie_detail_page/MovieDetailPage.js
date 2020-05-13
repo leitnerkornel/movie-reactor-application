@@ -104,7 +104,7 @@ const MovieDetailPage = () => {
                 display: "flex",
                 flexFlow: "row wrap",
                 backgroundColor: "#e6b31e",
-                height: "1080px",
+                height: "1500px",
                 padding: "0"
             }}>
             </div>
@@ -113,7 +113,7 @@ const MovieDetailPage = () => {
                 flexFlow: "row wrap",
                 padding: "0",
                 backgroundColor: '#343434',
-                height: "1080px"
+                height: "1500px"
             }}>
                 {/* The center container div. There is a grid in it. */}
                 <div className="container-fluid" style={{padding: "0"}}>
@@ -125,7 +125,7 @@ const MovieDetailPage = () => {
                     </div>
                     <div className="row no-gutters" style={{padding: "0"}}>
                         <div className="col-md-5"
-                             style={{textAlign: "center", padding: "0"}}>
+                             style={{textAlign: "center", padding: "5% 5% 0"}}>
                             <PosterPicture imageSize={IMAGE_SIZES.poster_sizes[3]}
                                            poster={poster}/>
                             <div className="row no-gutters">
@@ -133,6 +133,7 @@ const MovieDetailPage = () => {
                                     className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
                                     style={{height: "100px", backgroundColor: "#2e2e2e"}}><p style={{
                                     fontStyle: "italic",
+                                    fontSize: "20px",
                                     color: "white",
                                     textAlign: "center"
                                 }}>{tagline}</p>
@@ -144,32 +145,72 @@ const MovieDetailPage = () => {
                                     imdbId={imdbId}
                                     youtubeTrailer={youtubeTrailer}/>
                             </div>
+                            <div className="row no-gutters">
+                                <div
+                                    className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
+                                    style={{height: "150px", backgroundColor: "#2e2e2e"}}>
+                                    <div style={{
+                                        fontStyle: "italic",
+                                        fontSize: "20px",
+                                        color: "white",
+                                        textAlign: "center"
+                                    }}>
+                                        <p>Spoken language(s):</p>
+                                        <p>{spokenLanguages.join(", ")}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="col-md-7">
+                        <div className="col-md-7" style={{textAlign: "center", padding: "5% 5% 0"}}>
                             <div className="row no-gutters">
                                 <div className="col-md-12"
                                      style={{
-                                         height: "600px",
+                                         height: "200px",
                                          textAlign: "left",
                                          color: "white",
                                          padding: "0",
-                                         position: "relative",
-                                         background: "rgba(52,52,52,0.8)",
+                                         background: "rgba(52,52,52,0.15)",
+                                         backdropFilter: "blur(20px)"
                                      }}>
                                     <h1 style={{
                                         marginLeft: "7%",
-                                        marginTop: "50px",
+                                        marginTop: "20px",
                                         marginRight: "20px",
                                     }}>{title}<span style={{fontStyle: "italic"}}> ({year})</span></h1>
-                                    <div
-                                        style={{
-                                            position: "absolute",
-                                            bottom: "2px",
-                                            verticalAlign: "center",
-                                            marginLeft: "7%",
-                                            height: "40px"
-                                        }}>
-                                        <img style={{width: "32px", marginRight: "5px"}}
+                                </div>
+                            </div>
+                            <div className="row no-gutters">
+                                <div className="col-md-12" style={{
+                                    textAlign: "left",
+                                    color: "white",
+                                    padding: "0",
+                                    height: "50px",
+                                    background: "rgba(52,52,52,0.15)",
+                                    backdropFilter: "blur(20px)"
+                                }}>
+                                    <div style={{
+                                        marginLeft: "7%",
+                                        marginTop: "10px",
+                                        fontStyle: "italic",
+                                        fontSize: "20px"
+                                    }}>{genres.join(", ")}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row no-gutters">
+                                <div className="col-md-12" style={{
+                                    background: "rgba(52,52,52,0.15)",
+                                    backdropFilter: "blur(20px)",
+                                    fontSize: "20px",
+                                    fontStyle: "bolder",
+                                    height: "50px",
+                                    width: "100%",
+                                    textAlign: "left",
+                                    color: "white",
+                                    padding: "0",
+                                }}>
+                                    <div style={{marginTop: "10px"}}>
+                                        <img style={{width: "32px", marginRight: "5px", marginLeft: "7%"}}
                                              src={"/images/popularity64.png"} alt="Popularity"/><span
                                         style={{marginRight: "15px"}}>{popularity}</span><img
                                         style={{width: "32px", marginRight: "5px"}} src={"/images/star64.png"}
@@ -178,62 +219,46 @@ const MovieDetailPage = () => {
                                         src={"/images/time64.png"}
                                         alt="Duration"/><span style={{marginRight: "15px"}}>{runtime} min</span>
                                     </div>
-                                    <div style={{
-                                        position: "absolute",
-                                        bottom: "2px",
-                                        verticalAlign: "center",
-                                        marginLeft: "55%",
-                                        height: "40px",
-                                        fontStyle: "italic",
-                                    }}>{genres.join(", ")}</div>
+
                                 </div>
                             </div>
-                            <div className="row no-gutters">
-                                <div className="col-md-6" style={{
-                                    height: "250px",
+                            <div className="row no-gutters d-flex">
+                                <div className="col-md-8 d-flex " style={{
+                                    height: "300px",
                                     width: "100%",
+                                    color: "white",
                                     backgroundColor: "#2e2e2e",
-                                    padding: "0",
-                                    textAlign: "center"
+                                    textAlign: "justify",
                                 }}>
+                                    <div className="justify-content-center align-self-center"
+                                         style={{marginLeft: "10%", lineHeight: "150%"}}>
+                                        {overview}
+                                    </div>
                                 </div>
-                                <div className="col-md-6">
+                                <div className="col-md-4">
                                     <div className="col-md-12 d-flex justify-content-center"
-                                         style={{height: "50px", backgroundColor: "#2e2e2e"}}>
-                                        <button type="button" className="btn btn-warning">Add to Watchlist</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row no-gutters">
-                            <div className="col-md-12">
-                                <div className="row">
-                                    <div className="col-md-4">
-                                    </div>
-                                    <div className="col-md-4">
-                                    </div>
-                                    <div className="col-md-4">
+                                         style={{height: "300px", backgroundColor: "#2e2e2e", padding: "80px 0",}}>
+                                        <button type="button" className="btn btn-warning"
+                                                style={{fontWeight: "bold"}}>Add to Watchlist
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
             <div className="col-1 align-self-end" style={{
                 display: "flex",
                 flexFlow: "row wrap",
                 backgroundColor: "#e6b31e",
-                height: "1080px",
+                height: "1500px",
                 padding: "0"
             }}/>
-        </div>);
+        </div>
+    );
 
 
 }
-
-//MovieDetailPage.propTypes = {};*/}
 
 export default MovieDetailPage;

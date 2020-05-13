@@ -6,7 +6,8 @@ const PosterPicture = (props) => {
         <div className="row no-gutters">
             <div className="col-md-12" style={{
                 height: "250px",
-                background: "rgba(52,52,52,0.8)",
+                /*background: "rgba(52,52,52, 0.15)",
+                backdropFilter: "blur(20px)",*/
                 padding: "0",
                 textAlign: "center",
                 position: "relative",
@@ -17,7 +18,7 @@ const PosterPicture = (props) => {
                     height: "400px",
                     position: "absolute",
                     top: "-190px",
-                    left: "160px",
+                    left: "90px",
                     zIndex: "1",
                     padding: "10px",
                     backgroundColor: "#343434",
