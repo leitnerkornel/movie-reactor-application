@@ -230,9 +230,9 @@ const centerImage = {
 
 const centerCoverImage = {
   position: "absolute",
-  top: "50%",
+  top: "0%",
   left: "50%",
-  transform: "translate(-50%, -50%) scale(0.88)",
+  transform: "translate(-50%, -7%) scale(0.88)",
   zIndex: "0",
 };
 
