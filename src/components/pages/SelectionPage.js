@@ -9,26 +9,41 @@ const SelectionPage = (props) => {
   const [isLoading, data] = Get(URL);
 
   let layout = (
-    <div className="row">
-      <div
-        className="col-2 align-self-start"
-        style={{ display: "flex", flexFlow: "row wrap" }}
-      ></div>
-      <div
-        className="col-10 align-self-center"
-        style={{ display: "flex", flexFlow: "row wrap" }}
-      >
-        {data ? (
-          data.results.map((movie, index) => (
-            <div className="card-deck m-3">
-              <MovieCard movie={movie} key={movie.id} API_KEY={props.API_KEY} />
-            </div>
-          ))
-        ) : (
-          <div>Loading</div>
-        )}
+    <React.Fragment>
+      <div className="row" style={{ backgroundColor: "#e6b31e" }}>
+        <div
+          className="col-2 align-self-start d-flex align-items-stretch"
+          style={{
+            display: "flex",
+            flexFlow: "row wrap",
+            backgroundColor: "#e6b31e",
+          }}
+        />
+        <div
+          className="col-10 align-self-end"
+          style={{
+            display: "flex",
+            flexFlow: "row wrap",
+            backgroundColor: "#2e2e2e",
+            marginTop: "30px",
+          }}
+        >
+          {data ? (
+            data.results.map((movie, index) => (
+              <div className="card-deck ml-5 mr-3 mt-5">
+                <MovieCard
+                  movie={movie}
+                  key={movie.id}
+                  API_KEY={props.API_KEY}
+                />
+              </div>
+            ))
+          ) : (
+            <div>Loading</div>
+          )}
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 
   return layout;
