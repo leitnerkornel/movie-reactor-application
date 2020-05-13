@@ -7,6 +7,7 @@ import PosterPicture from "./PosterPicture";
 import LinksToExternalPagesGroup from "./LinksToExternalPagesGroup";
 import TitleGenreRatingBox from "./TitleGenreRatingBox";
 import Tagline from "./Tagline";
+import SpokenLanguages from "./SpokenLanguages";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -106,19 +107,7 @@ const MovieDetailPage = () => {
                                     youtubeTrailer={youtubeTrailer}/>
                             </div>
                             <div className="row no-gutters">
-                                <div
-                                    className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
-                                    style={{height: "150px", backgroundColor: "#2e2e2e"}}>
-                                    <div style={{
-                                        fontStyle: "italic",
-                                        fontSize: "20px",
-                                        color: "white",
-                                        textAlign: "center"
-                                    }}>
-                                        <p>Spoken language(s):</p>
-                                        <p>{spokenLanguages.join(", ")}</p>
-                                    </div>
-                                </div>
+                                <SpokenLanguages spokenLanguages={spokenLanguages}/>
                             </div>
                         </div>
                         <div className="col-md-7" style={{textAlign: "center", padding: "5% 5% 0",}}>
