@@ -5,6 +5,7 @@ import LinkYouTube from "./LinkYouTube";
 import LinkHomePage from "./LinkHomePage";
 import LinksToExternalPagesGroup from "./LinksToExternalPagesGroup";
 import CoverPicture from "./CoverPicture";
+import TopStripOnPage from "./TopStripOnPage";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -115,9 +116,7 @@ const MovieDetailPage = () => {
                 {/* The center container div. There is a grid in it. */}
                 <div className="container-fluid" style={{padding: "0"}}>
                     <div className="row no-gutters">
-                        <div className="col-md-12" style={{height: "50px", backgroundColor: "#e6b31e", padding: "0"}}>
-                            {/* Yellow strip on the top. It could be any gray also. */}
-                        </div>
+                        <TopStripOnPage/>
                     </div>
                     <div className="row no-gutters">
                         {/*IF IMAGE load takes too much time, too slow, should change the size to 1 or 2. 0 is too small. */}
