@@ -125,7 +125,7 @@ const MovieDetailPage = () => {
                     </div>
                     <div className="row no-gutters" style={{padding: "0"}}>
                         <div className="col-md-5"
-                             style={{textAlign: "center", padding: "0"}}>
+                             style={{textAlign: "center", padding: "5%"}}>
                             <PosterPicture imageSize={IMAGE_SIZES.poster_sizes[3]}
                                            poster={poster}/>
                             <div className="row no-gutters">
@@ -133,6 +133,7 @@ const MovieDetailPage = () => {
                                     className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
                                     style={{height: "100px", backgroundColor: "#2e2e2e"}}><p style={{
                                     fontStyle: "italic",
+                                    fontSize: "20px",
                                     color: "white",
                                     textAlign: "center"
                                 }}>{tagline}</p>
@@ -145,31 +146,56 @@ const MovieDetailPage = () => {
                                     youtubeTrailer={youtubeTrailer}/>
                             </div>
                         </div>
-                        <div className="col-md-7">
+                        <div className="col-md-7" style={{textAlign: "center", padding: "5%"}}>
                             <div className="row no-gutters">
                                 <div className="col-md-12"
                                      style={{
-                                         height: "600px",
+                                         height: "200px",
                                          textAlign: "left",
                                          color: "white",
                                          padding: "0",
-                                         position: "relative",
-                                         background: "rgba(52,52,52,0.8)",
+                                         background: "rgba(52,52,52,0.15)",
+                                         backdropFilter: "blur(20px)"
                                      }}>
                                     <h1 style={{
                                         marginLeft: "7%",
-                                        marginTop: "50px",
+                                        marginTop: "20px",
                                         marginRight: "20px",
                                     }}>{title}<span style={{fontStyle: "italic"}}> ({year})</span></h1>
-                                    <div
-                                        style={{
-                                            position: "absolute",
-                                            bottom: "2px",
-                                            verticalAlign: "center",
-                                            marginLeft: "7%",
-                                            height: "40px"
-                                        }}>
-                                        <img style={{width: "32px", marginRight: "5px"}}
+                                </div>
+                            </div>
+                            <div className="row no-gutters">
+                                <div className="col-md-12" style={{
+                                    textAlign: "left",
+                                    color: "white",
+                                    padding: "0",
+                                    height: "50px",
+                                    background: "rgba(52,52,52,0.15)",
+                                    backdropFilter: "blur(20px)"
+                                }}>
+                                    <div style={{
+                                        marginLeft: "7%",
+                                        marginTop: "10px",
+                                        fontStyle: "italic",
+                                        fontSize: "20px"
+                                    }}>{genres.join(", ")}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row no-gutters">
+                                <div className="col-md-12" style={{
+                                    background: "rgba(52,52,52,0.15)",
+                                    backdropFilter: "blur(20px)",
+                                    fontSize: "20px",
+                                    fontStyle: "bolder",
+                                    height: "50px",
+                                    width: "100%",
+                                    textAlign: "left",
+                                    color: "white",
+                                    padding: "0",
+                                }}>
+                                    <div style={{marginTop: "10px"}}>
+                                        <img style={{width: "32px", marginRight: "5px", marginLeft: "7%"}}
                                              src={"/images/popularity64.png"} alt="Popularity"/><span
                                         style={{marginRight: "15px"}}>{popularity}</span><img
                                         style={{width: "32px", marginRight: "5px"}} src={"/images/star64.png"}
@@ -178,14 +204,7 @@ const MovieDetailPage = () => {
                                         src={"/images/time64.png"}
                                         alt="Duration"/><span style={{marginRight: "15px"}}>{runtime} min</span>
                                     </div>
-                                    <div style={{
-                                        position: "absolute",
-                                        bottom: "2px",
-                                        verticalAlign: "center",
-                                        marginLeft: "55%",
-                                        height: "40px",
-                                        fontStyle: "italic",
-                                    }}>{genres.join(", ")}</div>
+
                                 </div>
                             </div>
                             <div className="row no-gutters">
@@ -229,11 +248,10 @@ const MovieDetailPage = () => {
                 height: "1080px",
                 padding: "0"
             }}/>
-        </div>);
+        </div>
+    );
 
 
 }
-
-//MovieDetailPage.propTypes = {};*/}
 
 export default MovieDetailPage;

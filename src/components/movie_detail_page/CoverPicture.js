@@ -13,7 +13,7 @@ const CoverPicture = (props) => {
     }
 
     return (
-        <div className="col-md-12" style={{height: "400px", backgroundColor: "#e6b31e", padding: "0"}}>
+        <div className="col-md-12" style={{height: "300px", backgroundColor: "#e6b31e", padding: "0"}}>
             <div style={{textAlign: "center", padding: "2%", backgroundColor: "#343434"}}>
                 <img
                     src={`https://image.tmdb.org/t/p/${props.size}${props.backdrop}`}
