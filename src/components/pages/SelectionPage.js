@@ -18,7 +18,7 @@ const SelectionPage = (props) => {
             flexFlow: "row wrap",
             backgroundColor: "#e6b31e",
           }}
-        />
+        ><b style={pageTitleStyle}>{props.title}</b></div>
         <div
           className="col-10 align-self-end"
           style={{
@@ -50,3 +50,14 @@ const SelectionPage = (props) => {
 };
 
 export default SelectionPage;
+
+const pageTitleStyle = {
+    position: "absolute",
+    left: "140%",
+    backgroundColor: "#e6b31e",
+    transform: "translate(-50%)",
+    zIndex: "1",
+    textAlign: "left",
+    width: "200px",
+    fontSize: "1.2em"
+}
