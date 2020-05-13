@@ -63,6 +63,7 @@ const MovieDetailPage = () => {
         axios
             .get(`https://api.themoviedb.org/3/movie/${MOVIE_ID}?api_key=${API_KEY}`)
             .then((res) => {
+                console.log(res.data)
                 setBackdrop(res.data.backdrop_path);
                 setPoster(res.data.poster_path);
                 setTitle(res.data.title);

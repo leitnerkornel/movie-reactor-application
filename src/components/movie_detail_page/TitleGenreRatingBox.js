@@ -2,6 +2,15 @@ import React from 'react';
 
 const TitleGenreRatingBox = (props) => {
 
+    const validateRuntime = (runtime) => {
+        if (runtime === null || runtime === "0") {
+            return "N/A";
+        } else {
+            return `${runtime} min`
+        }
+    };
+
+
     return (
         <div style={{
             background: props.backdrop !== null ? "rgba(52,52,52,0.15)" : "rgba(52,52,52)",
@@ -56,7 +65,7 @@ const TitleGenreRatingBox = (props) => {
                         alt="Votes"/><span style={{marginRight: "5px"}}>{props.voteAvg}</span><img
                         style={{width: "32px", marginLeft: "10px", marginRight: "5px"}}
                         src={"/images/time64.png"}
-                        alt="Duration"/><span style={{marginRight: "15px"}}>{props.runtime} min</span>
+                        alt="Duration"/><span style={{marginRight: "15px"}}>{validateRuntime(props.runtime)}</span>
                     </div>
                 </div>
             </div>
