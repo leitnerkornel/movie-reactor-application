@@ -210,10 +210,7 @@ const MovieDetailPage = () => {
                         <div className="col-md-6"
                              style={{textAlign: "center", backgroundColor: "#2e2e2e", padding: "0"}}>
                             <div style={{textAlign: "center", padding: "50px"}}>
-                                <img
-                                    src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.backdrop_sizes[1]}${backdrop}`}
-                                    alt="Backdrop" style={{width: "600px"}}
-                                />
+
                             </div>
                         </div>
 
