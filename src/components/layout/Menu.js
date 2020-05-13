@@ -39,52 +39,53 @@ export default class Menu extends Component {
         }
         isOpen={this.state.menuOpen}
         onStateChange={(state) => this.handleStateChange(state)}
+        disableAutoFocus
       >
         <Link
           id="home"
           className="menu-item"
           to="/"
-          style={{ color: "red" }}
+          style={{ color: "#2e2e2e", textDecoration: "none" }}
           onClick={() => this.closeMenu()}
         >
-          Top Rated
+          <div className="menu-button">Top Rated</div>
         </Link>
         <div onClick={() => this.closeMenu()}>
           <Link
             id="now-playing"
             className="menu-item"
             to="/now_playing"
-            style={{ color: "red" }}
+            style={{ color: "red", textDecoration: "none" }}
           >
-            Now playing
+            <div className="menu-button">Now playing</div>
           </Link>
         </div>
         <Link
           id="popular"
           className="menu-item"
           to="/popular"
-          style={{ color: "red" }}
+          style={{ color: "red", textDecoration: "none" }}
           onClick={() => this.closeMenu()}
         >
-          Popular
+          <div className="menu-button">Popular</div>
         </Link>
         <Link
           id="upcoming"
           className="menu-item"
           to="/upcoming"
-          style={{ color: "red" }}
+          style={{ color: "red", textDecoration: "none" }}
           onClick={() => this.closeMenu()}
         >
-          Upcoming
+          <div className="menu-button">Upcoming</div>
         </Link>
         <Link
           id="watchlist"
           className="menu-item"
           to="/watchlist"
-          style={{ color: "red" }}
+          style={{ color: "red", textDecoration: "none" }}
           onClick={() => this.closeMenu()}
         >
-          Watchlist
+          <div className="menu-button">Watchlist</div>
         </Link>
       </BurgerMenu>
     );
