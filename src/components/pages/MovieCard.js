@@ -129,6 +129,9 @@ export default function MovieCard(props) {
     </>
   );
 
+  // let releaseYear = <div>{`Released in ${actualMovie.release_date.slice(0, 4)} `}</div>
+  // let AdultContent = <div>{actualMovie.adult ? "Adult content" : "Not rated"}</div>
+  // let vote = <div>{` votes: ${actualMovie.vote_average}`}</div>
 
   // release year, whether it's adult, vote average
   let backCard =
@@ -153,9 +156,8 @@ export default function MovieCard(props) {
                   {actualMovie.title.toUpperCase()}
                 </h5>
                 <p className="card-text overflow-hidden">
-                  {`Released in ${actualMovie.release_date.slice(0, 4)} `}
-                  {actualMovie.adult ? "Adult content" : "Not rated"}
-                  {` votes: ${actualMovie.vote_average}`}
+
+
                   <p></p>
                   <span>&nbsp;&nbsp;</span>
                   {limitedOverView}
