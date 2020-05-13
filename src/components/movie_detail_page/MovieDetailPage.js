@@ -5,6 +5,9 @@ import LinkYouTube from "./LinkYouTube";
 import LinkHomePage from "./LinkHomePage";
 import LinksToExternalPagesGroup from "./LinksToExternalPagesGroup";
 import CoverPicture from "./CoverPicture";
+import TopStripOnPage from "./TopStripOnPage";
+import FirstRow from "./FirstRow";
+import PosterPicture from "./PosterPicture";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -114,32 +117,49 @@ const MovieDetailPage = () => {
             }}>
                 {/* The center container div. There is a grid in it. */}
                 <div className="container-fluid" style={{padding: "0"}}>
-                    <div className="row no-gutters">
-                        <div className="col-md-12" style={{height: "50px", backgroundColor: "#e6b31e", padding: "0"}}>
-                            {/* Yellow strip on the top. It could be any gray also. */}
-                        </div>
-                    </div>
+                    <FirstRow/>
                     <div className="row no-gutters">
                         {/*IF IMAGE load takes too much time, too slow, should change the size to 1 or 2. 0 is too small. */}
                         <CoverPicture size={IMAGE_SIZES.backdrop_sizes[3]}
                                       backdrop={backdrop}/>
                     </div>
                     <div className="row no-gutters" style={{padding: "0"}}>
-                        <div className="col-md-6">
+                        <div className="col-md-5"
+                             style={{textAlign: "center", padding: "0"}}>
+                            <PosterPicture imageSize={IMAGE_SIZES.poster_sizes[3]}
+                                           poster={poster}/>
+                            <div className="row no-gutters">
+                                <div
+                                    className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
+                                    style={{height: "100px", backgroundColor: "#2e2e2e"}}><p style={{
+                                    fontStyle: "italic",
+                                    color: "white",
+                                    textAlign: "center"
+                                }}>{tagline}</p>
+                                </div>
+                            </div>
+                            <div className="row no-gutters">
+                                <LinksToExternalPagesGroup
+                                    homepage={homepage}
+                                    imdbId={imdbId}
+                                    youtubeTrailer={youtubeTrailer}/>
+                            </div>
+                        </div>
+                        <div className="col-md-7">
                             <div className="row no-gutters">
                                 <div className="col-md-12"
                                      style={{
-                                         height: "250px",
+                                         height: "600px",
                                          textAlign: "left",
-                                         backgroundColor: "#343434",
                                          color: "white",
                                          padding: "0",
                                          position: "relative",
+                                         background: "rgba(52,52,52,0.8)",
                                      }}>
                                     <h1 style={{
                                         marginLeft: "7%",
                                         marginTop: "50px",
-                                        marginRight: "20px"
+                                        marginRight: "20px",
                                     }}>{title}<span style={{fontStyle: "italic"}}> ({year})</span></h1>
                                     <div
                                         style={{
@@ -176,44 +196,15 @@ const MovieDetailPage = () => {
                                     padding: "0",
                                     textAlign: "center"
                                 }}>
-                                    <img
-                                        src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.poster_sizes[2]}${poster}`}
-                                        alt="Poster" style={{height: "250px"}}
-                                    />
                                 </div>
                                 <div className="col-md-6">
-                                    <div className="row no-gutters">
-                                        <LinksToExternalPagesGroup
-                                            homepage={homepage}
-                                            imdbId={imdbId}
-                                            youtubeTrailer={youtubeTrailer}/>
-                                    </div>
-                                    <div className="row no-gutters">
-                                        <div
-                                            className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
-                                            style={{height: "100px", backgroundColor: "#2e2e2e"}}><p style={{
-                                            fontStyle: "italic",
-                                            color: "white",
-                                            textAlign: "center"
-                                        }}>{tagline}</p>
-                                        </div>
-                                    </div>
-                                    <div className="row no-gutters">
-                                        <div className="col-md-12 d-flex justify-content-center"
-                                             style={{height: "50px", backgroundColor: "#2e2e2e"}}>
-                                            <button type="button" className="btn btn-warning">Add to Watchlist</button>
-                                        </div>
+                                    <div className="col-md-12 d-flex justify-content-center"
+                                         style={{height: "50px", backgroundColor: "#2e2e2e"}}>
+                                        <button type="button" className="btn btn-warning">Add to Watchlist</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-6"
-                             style={{textAlign: "center", backgroundColor: "#2e2e2e", padding: "0"}}>
-                            <div style={{textAlign: "center", padding: "50px"}}>
-
-                            </div>
-                        </div>
-
                         <div className="row no-gutters">
                             <div className="col-md-12">
                                 <div className="row">
