@@ -5,7 +5,7 @@ const CoverPicture = (props) => {
     if (props.backdrop === null) {
         /* IF NO Backdrop picture, return empty div with lower height. */
         return (
-            <div className="col-md-12" style={{height: "20px", backgroundColor: "#e6b31e", padding: "0"}}>
+            <div className="col-md-12" style={{height: "125px", backgroundColor: "#2e2e2e", padding: "0"}}>
                 <div style={{textAlign: "center", padding: "2%", backgroundColor: "#343434"}}>
                 </div>
             </div>
