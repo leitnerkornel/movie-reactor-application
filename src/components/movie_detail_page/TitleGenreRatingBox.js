@@ -19,7 +19,12 @@ const TitleGenreRatingBox = (props) => {
         }
     };
 
-    console.log(getYearFromDate(props.releaseDate))
+    const validateAvgVotes = (voteValue) => {
+        if (voteValue === 0 || voteValue === null) {
+            return "N/A";
+        }
+        return voteValue;
+    }
 
     return (
         <div style={{
@@ -72,7 +77,7 @@ const TitleGenreRatingBox = (props) => {
                              src={"/images/popularity64.png"} alt="Popularity"/><span
                         style={{marginRight: "15px"}}>{props.popularity}</span><img
                         style={{width: "32px", marginRight: "5px"}} src={"/images/star64.png"}
-                        alt="Votes"/><span style={{marginRight: "5px"}}>{props.voteAvg}</span><img
+                        alt="Votes"/><span style={{marginRight: "5px"}}>{validateAvgVotes(props.voteAvg)}</span><img
                         style={{width: "32px", marginLeft: "10px", marginRight: "5px"}}
                         src={"/images/time64.png"}
                         alt="Duration"/><span style={{marginRight: "15px"}}>{validateRuntime(props.runtime)}</span>
