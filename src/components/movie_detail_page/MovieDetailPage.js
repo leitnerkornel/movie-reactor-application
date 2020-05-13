@@ -90,13 +90,12 @@ const MovieDetailPage = () => {
                 <div className="container-fluid" style={{padding: "0"}}>
                     <FirstRow/>
                     <div className="row no-gutters">
-                        {/*IF IMAGE load takes too much time, too slow, should change the size to 1 or 2. 0 is too small. */}
                         <CoverPicture size={IMAGE_SIZES.backdrop_sizes[3]}
                                       backdrop={backdrop}/>
                     </div>
                     <div className="row no-gutters" style={{padding: "0"}}>
                         <div className="col-md-5"
-                             style={{textAlign: "center", padding: "5% 5% 0"}}>
+                             style={containerStyle}>
                             <PosterPicture imageSize={IMAGE_SIZES.poster_sizes[3]}
                                            poster={poster}/>
                             <div className="row no-gutters">
@@ -112,7 +111,7 @@ const MovieDetailPage = () => {
                                 <SpokenLanguages spokenLanguages={spokenLanguages}/>
                             </div>
                         </div>
-                        <div className="col-md-7" style={{textAlign: "center", padding: "5% 5% 0",}}>
+                        <div className="col-md-7" style={containerStyle}>
                             <TitleGenreRatingBox backdrop={backdrop}
                                                  title={title}
                                                  releaseDate={releaseDate}
@@ -140,6 +139,10 @@ const mainColumnStyle = {
     flexFlow: "row wrap",
     height: "1500px",
     padding: "0"
+}
+
+const containerStyle = {
+    textAlign: "center", padding: "5% 5% 0"
 }
 
 export default MovieDetailPage;
