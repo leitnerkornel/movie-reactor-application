@@ -26,22 +26,24 @@ const MovieDetailPage = () => {
     const [backdrop, setBackdrop] = useState(null);
     const [poster, setPoster] = useState("");
     const [title, setTitle] = useState("");
-    const [originalTitle, setOriginalTitle] = useState("");
     const [popularity, setPopularity] = useState("");
     const [voteAvg, setVoteAvg] = useState("");
     const [releaseDate, setReleaseDate] = useState("");
     const [genres, setGenres] = useState([]);
     const [homepage, setHomepage] = useState("");
     const [runtime, setRuntime] = useState("");
-    const [budget, setBudget] = useState("");
-    const [revenue, setRevenue] = useState("");
-    const [originalLanguage, setOriginalLanguage] = useState("");
     const [spokenLanguages, setSpokenLanguages] = useState([]);
     const [imdbId, setImdbId] = useState("");
-    const [companies, setCompanies] = useState([]);
     const [youtubeTrailer, setYoutubeTrailer] = useState("");
     const [overview, setOverview] = useState("");
     const [tagline, setTagline] = useState("");
+
+    /* Unused states */
+    const [originalTitle, setOriginalTitle] = useState("");
+    const [budget, setBudget] = useState("");
+    const [companies, setCompanies] = useState([]);
+    const [originalLanguage, setOriginalLanguage] = useState("");
+    const [revenue, setRevenue] = useState("");
 
 
     useEffect(() => {
@@ -59,37 +61,38 @@ const MovieDetailPage = () => {
         axios
             .get(`https://api.themoviedb.org/3/movie/${MOVIE_ID}?api_key=${API_KEY}`)
             .then((res) => {
-                console.log(res.data)
-                setBackdrop(res.data.backdrop_path);
-                setPoster(res.data.poster_path);
-                setTitle(res.data.title);
-                setOriginalTitle(res.data.original_title);
-                setPopularity(res.data.popularity);
-                setVoteAvg(res.data.vote_average);
-                setReleaseDate(res.data.release_date);
+                setBackdrop(res.data["backdrop_path"]);
+                setPoster(res.data["poster_path"]);
+                setTitle(res.data["title"]);
+                setPopularity(res.data["popularity"]);
+                setVoteAvg(res.data["vote_average"]);
+                setReleaseDate(res.data["release_date"]);
                 setGenres(
-                    res.data.genres.map((item) => {
-                        return item.name;
+                    res.data["genres"].map((item) => {
+                        return item["name"];
                     })
                 );
-                setHomepage(res.data.homepage);
-                setRuntime(res.data.runtime);
-                setBudget(res.data.budget);
-                setRevenue(res.data.revenue);
-                setOriginalLanguage(res.data.original_language);
+                setHomepage(res.data["homepage"]);
+                setRuntime(res.data["runtime"]);
                 setSpokenLanguages(
-                    res.data.spoken_languages.map((item) => {
-                        return item.name;
+                    res.data["spoken_languages"].map((item) => {
+                        return item["name"];
                     })
                 );
-                setImdbId(res.data.imdb_id);
+                setImdbId(res.data["imdb_id"]);
+                setOverview(res.data["overview"]);
+                setTagline(res.data["tagline"]);
+
+                /*Unused calls*/
+                setOriginalTitle(res.data["original_title"]);
+                setBudget(res.data["budget"]);
+                setOriginalLanguage(res.data["original_language"]);
+                setRevenue(res.data["revenue"]);
                 setCompanies(
-                    res.data.production_companies.map((item) => {
-                        return [item.name, item.logo_path];
+                    res.data["production_companies"].map((item) => {
+                        return [item["name"], item["logo_path"]];
                     })
                 );
-                setOverview(res.data.overview);
-                setTagline(res.data.tagline);
             });
     }, [MOVIE_ID, API_KEY]);
 
@@ -199,8 +202,6 @@ const MovieDetailPage = () => {
             }}/>
         </div>
     );
-
-
 }
 
 export default MovieDetailPage;
