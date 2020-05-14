@@ -1,6 +1,6 @@
 import React, { useState, createContext } from "react";
 
-export const WatchlistContext = createContext();
+export const WatchlistContext = createContext([]);
 
 export const WatchlistProvider = (props) => {
     const [watchlist, setWatchlist] = useState([

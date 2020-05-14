@@ -14,8 +14,8 @@ const Watchlist = (props) => {
                 ...{backgroundColor: "#e6b31e", minHeight: height, height: "100%", }}}>
                 <b style={pageTitleStyle}>{props.title.toUpperCase()}</b>
             </div>
-            <div className="col-10 align-self-center" style={{...mainColumnStyle, ...{backgroundColor: "#343434"}, width: width,  maxWidth: width, minHeight: height}}>
-                 {watchlist ? (
+            <div className="col-10 align-self-center" style={{...mainColumnStyle, ...{backgroundColor: "#343434"}, width: width, maxWidth: window.innerWidth, minHeight: height}}>
+                 {watchlist.length !== 0 ? (
                      watchlist.map((movie, index) => (
                          <div className="card-deck ml-5 mr-3 mt-5">
                              <MovieCard
@@ -26,7 +26,27 @@ const Watchlist = (props) => {
                          </div>
                      ))
                  ) : (
-                     <h1 style={{position: "fixed", top: "50%", left: "50%"}}>No movies are watchlisted</h1>
+                     <div className="card-deck ml-5 mr-3 mt-5">
+                         <div
+                             className="card border-secondary mt-1 mb-3 clearfix overflow-hidden"
+                             style={cardStyle}
+                         >
+                                 <div className="card-body">
+                                     <div className="backdrop-container">
+                                         {/*<img*/}
+                                         {/*    // src={`https://image.tmdb.org/t/p/${imageSizes.backdrop_sizes[0]}${backdrop}`}*/}
+                                         {/*    // alt={`  NO PICTURE AVAILABLE FOR ${actualMovie.title.toUpperCase()}`}*/}
+                                         {/*    style={centerImage}*/}
+                                         {/*/>*/}
+                                     </div>
+                                     <div>
+                                         <h5 className="card-title" style={{ textAlign: "center" }}>
+                                             {`YOU HAVEN'T WATCHLISTED ANYTHING YET`}
+                                         </h5>
+                                     </div>
+                                 </div>
+                         </div>
+                     </div>
                  )}
             </div>
         </div>
@@ -103,8 +123,39 @@ const pageTitleStyle = {
 const mainColumnStyle = {
     display: "flex",
     flexFlow: "row wrap",
-    padding: "10"
+    padding: "10",
+    transition: "opacity 1s ease-in",
+    transitionDuration: "0.3s",
+transitionTimingFunction: "ease",
 }
+
+const cardStyle = {
+    width: "18rem",
+    minHeight: "28rem",
+    height: "28rem",
+    backgroundColor: "#e6b31e",
+    borderRadius: "8px",
+    textAlign: "justify",
+    boxShadow:
+        "  0 2.8px 2.2px rgba(200, 200, 200, 0.034),\n" +
+        "  0 6.7px 5.3px rgba(200, 200, 200, 0.048),\n" +
+        "  0 12.5px 10px rgba(200, 200, 200, 0.06),\n" +
+        "  0 22.3px 17.9px rgba(200, 200, 200, 0.072),\n" +
+        "  0 41.8px 33.4px rgba(200, 200, 200, 0.086),\n" +
+        "  0 100px 80px rgba(200, 200, 200, 0.12)",
+    //boxShadow: "10px 10px #e6b31e",
+};
+
+const centerImage = {
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    minHeight: "200px",
+    textAlign: "center",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-15.5%, -10%) scale(1)",
+};
 
 //     let layout = (
 //         <div className="row">
