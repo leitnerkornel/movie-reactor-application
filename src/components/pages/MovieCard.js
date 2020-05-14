@@ -2,15 +2,11 @@ import ReactCardFlip from "react-card-flip";
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import Get from "../hook/FetchGet";
-import { ThemeProvider } from "styled-components";
-import MovieDetailPage from "../movie_detail_page/MovieDetailPage";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import SelectionPage from "./SelectionPage";
-import { elastic as BurgerMenu } from "react-burger-menu";
+import { Link } from "react-router-dom";
 import { WatchlistContext } from "../context/WatchlistContext";
 
 export default function MovieCard(props) {
-  let overviewCharacterLimit = 130;
+
   let movie = props.movie;
   let movieId = movie.id;
   let API_KEY = props.API_KEY;
@@ -18,7 +14,6 @@ export default function MovieCard(props) {
 
   const [isLoading, actualMovie] = Get(currentMovieURL, movie);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [addedToWatchlist, setAddedToWatchlist] = useState(false);
 
   const [backdrop, setBackdrop] = useState("");
   const [poster, setPoster] = useState("");
@@ -38,11 +33,28 @@ export default function MovieCard(props) {
     isFlipped ? setIsFlipped(false) : setIsFlipped(true);
   };
 
-  let limitedOverview = actualMovie
-    ? actualMovie.overview.length > overviewCharacterLimit
-      ? actualMovie.overview.substring(0, overviewCharacterLimit) + " ..."
-      : actualMovie.overview
-    : "nothing";
+  let limitString = (inputString, titleString) => {
+    let overviewCharacterLimit = 180 - titleString.length*2;
+    let outputString = "No overview available.";
+    if (inputString.length > overviewCharacterLimit) {
+      let actualCharacter = inputString.charAt(overviewCharacterLimit);
+      for (let i=0; i< inputString.length-overviewCharacterLimit; i++) {
+        if (inputString.charAt(overviewCharacterLimit+i) == " ") {
+          return inputString.substring(0, overviewCharacterLimit + i) + " ...";
+        }
+      }
+
+    } else {
+      outputString = inputString;
+    }
+
+    return outputString;
+  }
+
+  let limitedOverview =
+  actualMovie
+  ? limitString(actualMovie.overview, actualMovie.title)
+      : "Loading / Not available";
 
   let linkToMovieDetailPage = (
     <Link to={`/movie/${movieId}`} style={buttonStyle}>
@@ -63,9 +75,6 @@ export default function MovieCard(props) {
       (selectedMovie) => selectedMovie.id !== movieId
     );
     setWatchlist(filteredArray);
-    /*let movie = e.target.value;
-    setWatchlist(watchlist.filter((e)=>(e !== movie)));
-    setAddedToWatchlist(false);*/
   };
 
   let isTheMovieAdded = () => {
@@ -111,10 +120,6 @@ export default function MovieCard(props) {
         {"Details".toUpperCase()}
         </button>
       </Link>
-
-      {/*<button type="button" className="btn btn-secondary" style={buttonStyle}>*/}
-      {/*  {linkToMovieDetailPage}*/}
-      {/*</button>*/}
     </div>
   );
 
