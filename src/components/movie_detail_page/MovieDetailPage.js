@@ -27,6 +27,7 @@ const MovieDetailPage = () => {
     };
     let MOVIE_ID = getMovieIdFromUrl();
 
+    const [movieObject, setMovieObject] = useState({})
     const [backdrop, setBackdrop] = useState(null);
     const [poster, setPoster] = useState("");
     const [title, setTitle] = useState("");
@@ -43,6 +44,7 @@ const MovieDetailPage = () => {
     const [tagline, setTagline] = useState("");
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         axios
             .get(
                 `https://api.themoviedb.org/3/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`
@@ -57,6 +59,7 @@ const MovieDetailPage = () => {
         axios
             .get(`https://api.themoviedb.org/3/movie/${MOVIE_ID}?api_key=${API_KEY}`)
             .then((res) => {
+                setMovieObject(res.data);
                 setBackdrop(res.data["backdrop_path"]);
                 setPoster(res.data["poster_path"]);
                 setTitle(res.data["title"]);
@@ -122,7 +125,7 @@ const MovieDetailPage = () => {
                             <div className="row no-gutters">
                                 <Overview overview={overview}/>
                                 <div className="col-md-4">
-                                    <AddToWatchlistButton/>
+                                    <AddToWatchlistButton movieObject={movieObject}/>
                                 </div>
                             </div>
                         </div>
