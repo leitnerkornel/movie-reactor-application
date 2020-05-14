@@ -109,7 +109,7 @@ function App() {
                     <div style={cardStyle}>
                       <Watchlist
                           API_KEY={API_KEY}
-                          title={"Watchlist"}
+                          title={"Your Watchlist"}
                       />
                     </div>
                   )}

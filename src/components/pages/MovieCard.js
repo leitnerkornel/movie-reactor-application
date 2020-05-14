@@ -82,7 +82,11 @@ export default function MovieCard(props) {
           type="button"
           className="btn btn-secondary"
           onClick={removeFromWatchlist}
-          // disabled
+          style={{
+            opacity: "0.7",
+            transition: ".7s",
+            transitionTimingFunction: "ease",
+          }}
         >
           {"unWatchlist".toUpperCase()}
         </button>
@@ -91,6 +95,11 @@ export default function MovieCard(props) {
           type="button"
           className="btn btn-secondary"
           onClick={addToWatchlist}
+          style={{
+            opacity: "1",
+            transition: ".7s",
+            transitionTimingFunction: "ease",
+          }}
         >
           {"Add to Watchlist".toUpperCase()}
         </button>
