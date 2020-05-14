@@ -10,6 +10,7 @@ const Tagline = (props) => {
 }
 
 const divStyle = {
+    padding: "10px",
     height: "100px", backgroundColor: "#2e2e2e"
 }
 
