@@ -59,8 +59,10 @@ export default function MovieCard(props) {
 
   let removeFromWatchlist = (e) => {
     e.preventDefault();
-    let filteredArray = watchlist.filter(selectedMovie => selectedMovie.id !== movieId)
-    setWatchlist(filteredArray)
+    let filteredArray = watchlist.filter(
+      (selectedMovie) => selectedMovie.id !== movieId
+    );
+    setWatchlist(filteredArray);
     /*let movie = e.target.value;
     setWatchlist(watchlist.filter((e)=>(e !== movie)));
     setAddedToWatchlist(false);*/
@@ -82,7 +84,11 @@ export default function MovieCard(props) {
           type="button"
           className="btn btn-secondary"
           onClick={removeFromWatchlist}
-          // disabled
+          style={{
+            opacity: "0.7",
+            transition: ".7s",
+            transitionTimingFunction: "ease",
+          }}
         >
           {"unWatchlist".toUpperCase()}
         </button>
@@ -91,13 +97,24 @@ export default function MovieCard(props) {
           type="button"
           className="btn btn-secondary"
           onClick={addToWatchlist}
+          style={{
+            opacity: "1",
+            transition: ".7s",
+            transitionTimingFunction: "ease",
+          }}
         >
-          {"Add to Watchlist".toUpperCase()}
+          {"Watchlist it!".toUpperCase()}
         </button>
       )}
-      <button type="button" className="btn btn-secondary" style={buttonStyle}>
-        {linkToMovieDetailPage}
-      </button>
+      <Link to={`/movie/${movieId}`} style={buttonStyle}>
+        <button type="button" className="btn btn-secondary" style={{...buttonStyle, borderRadius: "0px", width: "130px"}}>
+        {"Details".toUpperCase()}
+        </button>
+      </Link>
+
+      {/*<button type="button" className="btn btn-secondary" style={buttonStyle}>*/}
+      {/*  {linkToMovieDetailPage}*/}
+      {/*</button>*/}
     </div>
   );
 
@@ -110,9 +127,11 @@ export default function MovieCard(props) {
       >
         {actualMovie ? (
           <div className="card-body" onClick={setFlipCard}>
-            <div className={"poster-container"}
-                 data-toggle="tooltip"
-                 title={actualMovie.title}>
+            <div
+              className={"poster-container"}
+              data-toggle="tooltip"
+              title={actualMovie.title}
+            >
               <img
                 style={centerCoverImage}
                 src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[3]}${poster}`}
