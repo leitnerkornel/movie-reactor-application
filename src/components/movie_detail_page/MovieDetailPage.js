@@ -44,6 +44,7 @@ const MovieDetailPage = () => {
     const [tagline, setTagline] = useState("");
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         axios
             .get(
                 `https://api.themoviedb.org/3/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`
