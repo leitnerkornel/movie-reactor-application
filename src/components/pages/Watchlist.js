@@ -1,12 +1,21 @@
-import React, { useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {WatchlistContext} from "../context/WatchlistContext";
 import MovieCard from "./MovieCard";
 
 const Watchlist = (props) => {
-    var width = window.innerWidth;
+    // var width = window.innerWidth;
+    var width = document.body.clientWidth;
     var height = window.innerHeight;
+
     let URL = props.url + "?api_key=" + props.API_KEY;
     const [watchlist, setWatchlist] = useContext(WatchlistContext);
+
+    let resizeWindow = () => {
+        width = document.body.clientWidth;
+    }
+    window.addEventListener('resize', resizeWindow);
+
+
     let layout = (
         <div className="row media">
             <div className="col-2 align-self-start" style={{
@@ -14,7 +23,10 @@ const Watchlist = (props) => {
                 ...{backgroundColor: "#e6b31e", minHeight: height, height: "100%", }}}>
                 <b style={pageTitleStyle}>{props.title.toUpperCase()}</b>
             </div>
-            <div className="col-10 align-self-center" style={{...mainColumnStyle, ...{backgroundColor: "#343434"}, width: width, maxWidth: window.innerWidth, minHeight: height}}>
+            <div className="col-10 align-self-center" style={{...mainColumnStyle, ...{backgroundColor: "#343434"},
+                width: width,
+                // maxWidth: window.innerWidth,
+                minHeight: height}}>
                  {watchlist.length !== 0 ? (
                      watchlist.map((movie, index) => (
                          <div className="card-deck ml-5 mr-3 mt-5">
