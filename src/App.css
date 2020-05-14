@@ -107,7 +107,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .menu-button:hover {
   /*padding-left: 30px;*/
-  padding-left: 90px;
+  padding-left: 80px;
   /*background-color: #343434;*/
   background-color: #a07d14;
   color: white;
@@ -119,12 +119,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
   /*filter: blur(1px);*/
 
   /*line-height: 3.85em;*/
-  /*height: 3.85em;*/
-  /*font-size: 1.3em;*/
+  height: 3.85em;
+  font-size: 1.3em;
 
-  /*transform: translate(-20%, -5%);*/
-  /*transform: translate(0%, -18%);*/
-  /*transform: rotate(0.3deg) scale(1.01);*/
+  transform: translate(-20%, -5%);
+  transform: translate(0%, -18%);
+  transform: rotate(2deg) scale(1.01);
 
   /*Norbi's gradient*/
   /*background-image: linear-gradient(45deg, rgb(255, 0, 0), rgb(255, 115, 0), rgb(255, 251, 0), rgb(72, 255, 0), rgb(0, 255, 213), rgb(0, 43, 255), rgb(122, 0, 255), rgb(255, 0, 200), rgb(255, 0, 0));*/
