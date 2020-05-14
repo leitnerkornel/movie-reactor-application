@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {useState, useEffect, useCallback, useContext} from "react";
 import Get from "../hook/FetchGet";
 import axios from "axios";
 import FetchGet from "../hook/FetchGet";
 import MovieCard from "./MovieCard";
+import {WatchlistContext} from "../context/WatchlistContext";
 
 const SelectionPage = (props) => {
   let URL = props.url + "?api_key=" + props.API_KEY;

@@ -25,11 +25,11 @@ function App() {
 
   document.title = "Movie Reactor";
   return (
-    <div id="outer-container">
-      <Router>
-        <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
-        <WatchlistProvider>
-          <main id="page-wrap">
+    <div id="outer-container" style={{height: "100%"}}>
+      <Router style={{height: "100%"}}>
+        <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"} style={{height: "100%"}} />
+        <WatchlistProvider style={{height: "100%"}}>
+          <main id="page-wrap" style={{height: "100%", overflow: "auto"}}>
             <ThemeProvider theme={theme}>
               <div
                 className="container-fluid"
