@@ -32,7 +32,7 @@ function App() {
           <main id="page-wrap">
             <ThemeProvider theme={theme}>
               <div
-                className="container"
+                className="container-fluid"
                 style={{ maxWidth: "3000px", padding: "0" }}
               >
                 <div className="row"></div>
