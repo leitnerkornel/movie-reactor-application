@@ -108,7 +108,9 @@ export default function MovieCard(props) {
       >
         {actualMovie ? (
           <div className="card-body" onClick={setFlipCard}>
-            <div className={"poster-container"}>
+            <div className={"poster-container"}
+                 data-toggle="tooltip"
+                 title={actualMovie.title}>
               <img
                 style={centerCoverImage}
                 src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[3]}${poster}`}
@@ -228,9 +230,9 @@ const centerImage = {
 
 const centerCoverImage = {
   position: "absolute",
-  top: "50%",
+  top: "0%",
   left: "50%",
-  transform: "translate(-50%, -50%) scale(0.88)",
+  transform: "translate(-50%, -7%) scale(0.88)",
   zIndex: "0",
 };
 
@@ -240,6 +242,7 @@ const cardStyle = {
   height: "28rem",
   backgroundColor: "#e6b31e",
   borderRadius: "8px",
+  textAlign: "justify",
   boxShadow:
     "  0 2.8px 2.2px rgba(200, 200, 200, 0.034),\n" +
     "  0 6.7px 5.3px rgba(200, 200, 200, 0.048),\n" +
