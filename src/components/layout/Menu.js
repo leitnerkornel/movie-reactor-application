@@ -20,6 +20,7 @@ export default class Menu extends Component {
 
   closeMenu() {
     this.setState({ menuOpen: false });
+    // window.scrollTo(0, 0)
   }
 
   toggleMenu() {
