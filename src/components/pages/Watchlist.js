@@ -3,18 +3,20 @@ import {WatchlistContext} from "../context/WatchlistContext";
 import MovieCard from "./MovieCard";
 
 const Watchlist = (props) => {
-    // var width = window.innerWidth;
-    var width = document.body.clientWidth;
-    var height = window.innerHeight;
+    const [width, setWidth] = React.useState(window.innerWidth);
+    const [height, setHeight] = React.useState(window.innerHeight);
 
-    let URL = props.url + "?api_key=" + props.API_KEY;
     const [watchlist, setWatchlist] = useContext(WatchlistContext);
 
-    let resizeWindow = () => {
-        width = document.body.clientWidth;
-    }
-    window.addEventListener('resize', resizeWindow);
+    const updateWidthAndHeight = () => {
+        setWidth(window.innerWidth);
+        setHeight(window.innerHeight);
+    };
 
+    useEffect(() => {
+        window.addEventListener("resize", updateWidthAndHeight);
+        return () => window.removeEventListener("resize", updateWidthAndHeight);
+    });
 
     let layout = (
         <div className="row media">
@@ -23,10 +25,7 @@ const Watchlist = (props) => {
                 ...{backgroundColor: "#e6b31e", minHeight: height, height: "100%", }}}>
                 <b style={pageTitleStyle}>{props.title.toUpperCase()}</b>
             </div>
-            <div className="col-10 align-self-center" style={{...mainColumnStyle, ...{backgroundColor: "#343434"},
-                width: width,
-                // maxWidth: window.innerWidth,
-                minHeight: height}}>
+            <div className="col-10 align-self-center" style={{...mainColumnStyle, ...{backgroundColor: "#343434"}, width: width, minHeight: height}}>
                  {watchlist.length !== 0 ? (
                      watchlist.map((movie, index) => (
                          <div className="card-deck ml-5 mr-3 mt-5">
@@ -45,16 +44,21 @@ const Watchlist = (props) => {
                          >
                                  <div className="card-body">
                                      <div className="backdrop-container">
-                                         {/*<img*/}
-                                         {/*    // src={`https://image.tmdb.org/t/p/${imageSizes.backdrop_sizes[0]}${backdrop}`}*/}
-                                         {/*    // alt={`  NO PICTURE AVAILABLE FOR ${actualMovie.title.toUpperCase()}`}*/}
-                                         {/*    style={centerImage}*/}
-                                         {/*/>*/}
+                                         <img
+                                             src={window.location.origin + "/no_image.png"}
+                                             alt={"No picture available"}
+                                             height="42"
+                                             style={centerImage}
+                                         />
                                      </div>
                                      <div>
                                          <h5 className="card-title" style={{ textAlign: "center" }}>
                                              {`YOU HAVEN'T WATCHLISTED ANYTHING YET`}
                                          </h5>
+                                         <p className="card-text overflow-hidden">
+                                             If you would like to add a movie to your Watchlist, please select one from the
+                                             lists that are available through the menu or choose one from the details page.
+                                         </p>
                                      </div>
                                  </div>
                          </div>
@@ -62,58 +66,7 @@ const Watchlist = (props) => {
                  )}
             </div>
         </div>
-
         )
-
-    // let layout = (
-    //     <React.Fragment>
-    //         <div className="row" style={{ backgroundColor: "#e6b31e", height: "100%", display: "cover", objectFit: "cover" }}>
-    //             <div
-    //                 className="col-2 align-self-start d-flex align-items-stretch"
-    //                 style={{
-    //                     // minHeight: height,
-    //                     // minWidth: width,
-    //                     display: "flex",
-    //                     // flexFlow: "row wrap",
-    //                     backgroundColor: "#e6b31e",
-    //                     zIndex: "1"
-    //                 }}
-    //             >
-    //                 <b style={pageTitleStyle}>{props.title.toUpperCase()}</b>
-    //             </div>
-    //             <div
-    //                 className="col-10 align-self-end"
-    //                 style={{
-    //                     display: "fixed",
-    //                     // flexFlow: "row wrap",
-    //                     backgroundColor: "#2e2e2e",
-    //                     marginTop: "30px",
-    //                     height: height-30,
-    //                     top: "50%",
-    //                     left: "50%",
-    //                     transform: "translate (100%, 100%)",
-    //                     zIndex: "0",
-    //                     gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-    //                 }}
-    //             >
-    //                 {watchlist ? (
-    //                     watchlist.map((movie, index) => (
-    //                         <div className="card-deck ml-5 mr-3 mt-5">
-    //                             <MovieCard
-    //                                 movie={movie}
-    //                                 key={movie.id}
-    //                                 API_KEY={props.API_KEY}
-    //                             />
-    //                         </div>
-    //                     ))
-    //                 ) : (
-    //                     <h1 style={{position: "fixed", top: "50%", left: "50%"}}>No movies are watchlisted</h1>
-    //                 )}
-    //             </div>
-    //         </div>
-    //     </React.Fragment>
-    // );
-
     return layout;
 };
 
@@ -162,33 +115,9 @@ const centerImage = {
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
-    minHeight: "200px",
+    minHeight: "180px",
     textAlign: "center",
     top: "50%",
     left: "50%",
-    transform: "translate(-15.5%, -10%) scale(1)",
+    transform: "translate(0%, -5%) scale(1)",
 };
-
-//     let layout = (
-//         <div className="row">
-//             <div
-//                 className="col-2 align-self-start"
-//                 style={{display: "flex", flexFlow: "row wrap"}}
-//             ></div>
-//             <div
-//                 className="col-10 align-self-center"
-//                 style={{display: "flex", flexFlow: "row wrap"}}
-//             >
-//                 {watchlist.map(movie => (
-//                     <MovieCard movie={movie} key={movie.id} API_KEY={props.API_KEY}/>
-//                 ))}
-//             </div>
-//         </div>
-//     );
-//
-//     return layout;
-//
-//
-// };
-//
-// export default Watchlist;
