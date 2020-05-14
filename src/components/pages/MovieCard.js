@@ -103,12 +103,18 @@ export default function MovieCard(props) {
             transitionTimingFunction: "ease",
           }}
         >
-          {"Add to Watchlist".toUpperCase()}
+          {"Watchlist it!".toUpperCase()}
         </button>
       )}
-      <button type="button" className="btn btn-secondary" style={buttonStyle}>
-        {linkToMovieDetailPage}
-      </button>
+      <Link to={`/movie/${movieId}`} style={buttonStyle}>
+        <button type="button" className="btn btn-secondary" style={{...buttonStyle, borderRadius: "0px", width: "130px"}}>
+        {"Details".toUpperCase()}
+        </button>
+      </Link>
+
+      {/*<button type="button" className="btn btn-secondary" style={buttonStyle}>*/}
+      {/*  {linkToMovieDetailPage}*/}
+      {/*</button>*/}
     </div>
   );
 
