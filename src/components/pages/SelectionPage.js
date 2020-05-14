@@ -60,7 +60,7 @@ const pageTitleStyle = {
   backgroundColor: "#e6b31e",
   zIndex: "1",
   textAlign: "left",
-  height: "100%",
+  height: "90%",
   fontSize: "1.2em",
   textOrientation: "upright",
   writingMode: "vertical-rl",

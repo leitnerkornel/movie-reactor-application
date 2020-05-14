@@ -59,6 +59,8 @@ export default function MovieCard(props) {
 
   let removeFromWatchlist = (e) => {
     e.preventDefault();
+    let filteredArray = watchlist.filter(selectedMovie => selectedMovie.id !== movieId)
+    setWatchlist(filteredArray)
     /*let movie = e.target.value;
     setWatchlist(watchlist.filter((e)=>(e !== movie)));
     setAddedToWatchlist(false);*/
@@ -80,7 +82,7 @@ export default function MovieCard(props) {
           type="button"
           className="btn btn-secondary"
           onClick={removeFromWatchlist}
-          disabled
+          // disabled
         >
           {"unWatchlist".toUpperCase()}
         </button>
