@@ -140,7 +140,7 @@ export default function MovieCard(props) {
               <img
                 style={centerCoverImage}
                 src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[3]}${poster}`}
-                alt={actualMovie.title.toUpperCase()}
+                alt={`WE ARE SORRY, THERE IS NO POSTER IMAGE FOR THE MOVIE TITLED '${actualMovie.title.toUpperCase()}'`}
               />
             </div>
           </div>
