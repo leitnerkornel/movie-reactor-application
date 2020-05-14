@@ -74,7 +74,7 @@ export default Watchlist;
 
 const pageTitleStyle = {
     position: "fixed",
-    left: "120px",
+    left: "12%",
     top: "36px",
     backgroundColor: "#e6b31e",
     zIndex: "1",
