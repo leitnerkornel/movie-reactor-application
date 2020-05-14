@@ -108,14 +108,15 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .menu-button:hover {
   /*padding-left: 30px;*/
   padding-left: 90px;
-  background-color: #343434;
+  /*background-color: #343434;*/
+  background-color: #a07d14;
   color: white;
   /*color: #e6b31e;*/
   transition-duration: 0.5s;
   transition-timing-function: ease;
-  opacity: 0.5;
-  border: solid #2e2e2e;
-  filter: blur(1px);
+  /*opacity: 0.5;*/
+  /*border: solid #2e2e2e;*/
+  /*filter: blur(1px);*/
 
   /*line-height: 3.85em;*/
   /*height: 3.85em;*/
@@ -133,11 +134,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .menu-button {
-  /*background-color: for dark theme #2e2e2e;*/
+  /*background-color: #2e2e2e;*/
+  /*background-color: #a07d14;*/
+  /*color: #e6b31e;*/
+
   background-color:#e6b31e;
-  /*color: #e6b31e; for dark theme */
   color: #343434;
-  width: 120%;
+
+  width: 130%;
   border: none;
   text-transform: uppercase;
   font-weight: bolder;
