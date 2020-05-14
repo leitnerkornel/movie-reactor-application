@@ -107,10 +107,7 @@ function App() {
                   path="/watchlist"
                   render={(props) => (
                     <div style={cardStyle}>
-                      <Watchlist
-                          API_KEY={API_KEY}
-                          title={"Your Watchlist"}
-                      />
+                      <Watchlist API_KEY={API_KEY} title={"Your Watchlist"} />
                     </div>
                   )}
                 />

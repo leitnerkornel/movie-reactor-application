@@ -59,8 +59,10 @@ export default function MovieCard(props) {
 
   let removeFromWatchlist = (e) => {
     e.preventDefault();
-    let filteredArray = watchlist.filter(selectedMovie => selectedMovie.id !== movieId)
-    setWatchlist(filteredArray)
+    let filteredArray = watchlist.filter(
+      (selectedMovie) => selectedMovie.id !== movieId
+    );
+    setWatchlist(filteredArray);
     /*let movie = e.target.value;
     setWatchlist(watchlist.filter((e)=>(e !== movie)));
     setAddedToWatchlist(false);*/
@@ -119,9 +121,11 @@ export default function MovieCard(props) {
       >
         {actualMovie ? (
           <div className="card-body" onClick={setFlipCard}>
-            <div className={"poster-container"}
-                 data-toggle="tooltip"
-                 title={actualMovie.title}>
+            <div
+              className={"poster-container"}
+              data-toggle="tooltip"
+              title={actualMovie.title}
+            >
               <img
                 style={centerCoverImage}
                 src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[3]}${poster}`}
