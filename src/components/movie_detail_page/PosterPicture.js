@@ -2,9 +2,7 @@ import React from 'react';
 
 const PosterPicture = (props) => {
 
-    console.log(props.poster)
-
-    let imageSource = "";
+    let imageSource;
 
     if (props.poster === null) {
         imageSource = "/images/no_poster.png";
