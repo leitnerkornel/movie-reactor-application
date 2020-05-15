@@ -165,7 +165,7 @@ export default function MovieCard(props) {
       <React.Fragment />
     );
 
-  let ratingBackgroundLogo = actualMovie ? (
+  let ratingBackgroundLogo = actualMovie && actualMovie.vote_average !== 0 ? (
     <img
       style={ratingBackgroundStyle}
       src={"/images/star64.png"}
@@ -176,7 +176,7 @@ export default function MovieCard(props) {
     <div />
   );
 
-  let ratingNumber = actualMovie ? (
+  let ratingNumber = actualMovie && actualMovie.vote_average !== 0 ? (
     <div
       style={ratingStyle}
       title={`User rating: ${actualMovie.vote_average}, based on ${actualMovie.vote_count} votes.`}
