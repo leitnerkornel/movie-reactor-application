@@ -114,7 +114,7 @@ function App() {
                 />
                   <Route
                       exact
-                      path="/cinema"
+                      path="/reserve/:id"
                       render={(props) => (
                           <div style={cardStyle}>
                               <SeatLayout API_KEY={API_KEY} />

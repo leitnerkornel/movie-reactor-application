@@ -99,7 +99,8 @@ export default function MovieCard(props) {
             transitionTimingFunction: "ease",
           }}
         >
-          {"unWatchlist".toUpperCase()}
+          {/*{"unWatchlist".toUpperCase()}*/}
+          {"unlist".toUpperCase()}
         </button>
       ) : (
         <button
@@ -112,12 +113,19 @@ export default function MovieCard(props) {
             transitionTimingFunction: "ease",
           }}
         >
-          {"Watchlist it!".toUpperCase()}
+          {/*{"Watchlist it!".toUpperCase()}*/}
+          {"list".toUpperCase()}
         </button>
       )}
       <Link to={`/movie/${movieId}`} style={buttonStyle}>
         <button type="button" className="btn btn-secondary" style={{...buttonStyle, borderRadius: "0px", width: "130px"}}>
         {"Details".toUpperCase()}
+        </button>
+      </Link>
+      {/* TODO: Delete upon completion!!! */}
+      <Link to={`/reserve/${movieId}`} style={buttonStyle}>
+        <button type="button" className="btn btn-secondary" style={{...buttonStyle, borderRadius: "0px", width: "130px"}}>
+          {"Seat".toUpperCase()}
         </button>
       </Link>
     </div>
