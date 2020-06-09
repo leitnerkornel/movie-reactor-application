@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #e6b31e;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #e6b31e;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +35,122 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Burger Menu */
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 80px;
+  height: 50px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #c5ba26;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: #a90000;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #343434;
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #e6b31e;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #e6b31e;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #2e2e2e;
+  padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: #2e2e2e;
+}
+
+.menu-button:hover {
+  /*padding-left: 30px;*/
+  padding-left: 80px;
+  /*background-color: #343434;*/
+  background-color: #a07d14;
+  color: white;
+  /*color: #e6b31e;*/
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+  /*opacity: 0.5;*/
+  /*border: solid #2e2e2e;*/
+  /*filter: blur(1px);*/
+
+  /*line-height: 3.85em;*/
+  height: 3.85em;
+  font-size: 1.3em;
+
+  transform: translate(-20%, -5%);
+  transform: translate(0%, -18%);
+  transform: rotate(2deg) scale(1.01);
+
+  /*Norbi's gradient*/
+  /*background-image: linear-gradient(45deg, rgb(255, 0, 0), rgb(255, 115, 0), rgb(255, 251, 0), rgb(72, 255, 0), rgb(0, 255, 213), rgb(0, 43, 255), rgb(122, 0, 255), rgb(255, 0, 200), rgb(255, 0, 0));*/
+  /*background: linear-gradient(45deg, rgb(255, 0, 0), rgb(255, 115, 0), rgb(255, 251, 0), rgb(72, 255, 0), rgb(0, 255, 213), rgb(0, 43, 255), rgb(122, 0, 255), rgb(255, 0, 200), rgb(255, 0, 0)) 0% 0% / 400%;*/
+  /*animation: 20s linear 0s infinite normal none running eSMUZc;*/
+  /*transition: opacity 0.3s ease-in-out 0s;*/
+}
+
+.menu-button {
+  /*background-color: #2e2e2e;*/
+  /*background-color: #a07d14;*/
+  /*color: #e6b31e;*/
+
+  background-color:#e6b31e;
+  color: #343434;
+
+  width: 130%;
+  border: none;
+  text-transform: uppercase;
+  font-weight: bolder;
+  text-align: left;
+  margin: auto;
+  padding-left: 20px;
+  height: 5em;
+  line-height: 5em;
+  text-decoration: none;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
