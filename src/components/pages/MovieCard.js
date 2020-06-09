@@ -5,12 +5,14 @@ import Get from "../hook/FetchGet";
 import {Link} from "react-router-dom";
 import {WatchlistContext} from "../context/WatchlistContext";
 
+import {limitString} from "../../Utils";
+import {API_URL_MOVIE, API_KEY, IMAGE_SIZES} from "../../Constans";
+
 export default function MovieCard(props) {
 
   let movie = props.movie;
   let movieId = movie.id;
-  let API_KEY = props.API_KEY;
-  let currentMovieURL = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`;
+  let currentMovieURL = `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`;
 
   const [isLoading, actualMovie] = Get(currentMovieURL, movie);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -21,7 +23,7 @@ export default function MovieCard(props) {
 
   useEffect(() => {
     axios
-        .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`)
+        .get(currentMovieURL)
         .then((res) => {
           setBackdrop(res.data['backdrop_path']);
           setPoster(res.data['poster_path']);
@@ -33,32 +35,10 @@ export default function MovieCard(props) {
     isFlipped ? setIsFlipped(false) : setIsFlipped(true);
   };
 
-  let limitString = (inputString, titleString) => {
-    let overviewCharacterLimit = 180 - titleString.length * 2;
-    let outputString = "No overview available.";
-    if (inputString.length > overviewCharacterLimit) {
-      for (let i = 0; i < inputString.length - overviewCharacterLimit; i++) {
-        if (inputString.charAt(overviewCharacterLimit + i) === " ") {
-          return inputString.substring(0, overviewCharacterLimit + i) + " ...";
-        }
-      }
-    } else {
-      outputString = inputString;
-    }
-
-    return outputString;
-  }
-
   let limitedOverview =
       actualMovie
           ? limitString(actualMovie.overview, actualMovie.title)
           : "Loading / Not available";
-
-  let linkToMovieDetailPage = (
-      <Link to={`/movie/${movieId}`} style={buttonStyle}>
-        {"Details".toUpperCase()}
-      </Link>
-  );
 
   let addToWatchlist = (e) => {
     e.preventDefault();
@@ -77,7 +57,7 @@ export default function MovieCard(props) {
 
   let isTheMovieAdded = () => {
     for (let selectedMovie of watchlist) {
-      if (selectedMovie.id == movieId) {
+      if (selectedMovie.id === movieId) {
         return true;
       }
     }
@@ -138,7 +118,7 @@ export default function MovieCard(props) {
                 >
                   <img
                       style={centerCoverImage}
-                      src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[3]}${poster}`}
+                      src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.poster_sizes[3]}${poster}`}
                       alt={`WE ARE SORRY, THERE IS NO POSTER FOR THE MOVIE TITLED '${actualMovie.title.toUpperCase()}'`}
                   />
                 </div>
@@ -198,7 +178,7 @@ export default function MovieCard(props) {
                   <div className="card-body" onClick={setFlipCard}>
                     <div className="backdrop-container">
                       <img
-                          src={`https://image.tmdb.org/t/p/${imageSizes.backdrop_sizes[0]}${backdrop}`}
+                          src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.backdrop_sizes[0]}${backdrop}`}
                           alt={`  NO POSTER AVAILABLE FOR ${actualMovie.title.toUpperCase()}`}
                           style={centerImage}
                       />
@@ -235,12 +215,6 @@ export default function MovieCard(props) {
       </ReactCardFlip>
   );
 }
-
-const imageSizes = {
-  backdrop_sizes: ["w300", "w780", "w1280", "original"],
-  logo_sizes: ["w45", "w92", "w154", "w185", "w300", "w500", "original"],
-  poster_sizes: ["w92", "w154", "w185", "w342", "w500", "w780", "original"],
-};
 
 const centerImage = {
   display: "block",
