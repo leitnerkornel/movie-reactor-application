@@ -37,13 +37,11 @@ export default function MovieCard(props) {
     let overviewCharacterLimit = 180 - titleString.length * 2;
     let outputString = "No overview available.";
     if (inputString.length > overviewCharacterLimit) {
-      let actualCharacter = inputString.charAt(overviewCharacterLimit);
       for (let i = 0; i < inputString.length - overviewCharacterLimit; i++) {
-        if (inputString.charAt(overviewCharacterLimit + i) == " ") {
+        if (inputString.charAt(overviewCharacterLimit + i) === " ") {
           return inputString.substring(0, overviewCharacterLimit + i) + " ...";
         }
       }
-
     } else {
       outputString = inputString;
     }
