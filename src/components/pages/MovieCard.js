@@ -23,8 +23,8 @@ export default function MovieCard(props) {
     axios
         .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`)
         .then((res) => {
-          setBackdrop(res.data.backdrop_path);
-          setPoster(res.data.poster_path);
+          setBackdrop(res.data['backdrop_path']);
+          setPoster(res.data['poster_path']);
         });
   });
 
@@ -154,7 +154,7 @@ export default function MovieCard(props) {
   );
 
   let ratedAdultLogo =
-      actualMovie && actualMovie.adult ? (
+      actualMovie && actualMovie['adult'] ? (
           <img
               style={ratedAdultStyle}
               src={"/images/adult.png"}
@@ -166,7 +166,7 @@ export default function MovieCard(props) {
           <React.Fragment/>
       );
 
-  let ratingBackgroundLogo = actualMovie && actualMovie.vote_average !== 0 ? (
+  let ratingBackgroundLogo = actualMovie && actualMovie['vote_average'] !== 0 ? (
       <img
           style={ratingBackgroundStyle}
           src={"/images/star64.png"}
@@ -177,12 +177,12 @@ export default function MovieCard(props) {
       <div/>
   );
 
-  let ratingNumber = actualMovie && actualMovie.vote_average !== 0 ? (
+  let ratingNumber = actualMovie && actualMovie['vote_average'] !== 0 ? (
       <div
           style={ratingStyle}
-          title={`User rating: ${actualMovie.vote_average}, based on ${actualMovie.vote_count} votes.`}
+          title={`User rating: ${actualMovie['vote_average']}, based on ${actualMovie['vote_count']} votes.`}
       >
-        <b>{`${actualMovie.vote_average}`}</b>
+        <b>{`${actualMovie['vote_average']}`}</b>
       </div>
   ) : (
       <div/>
@@ -207,7 +207,7 @@ export default function MovieCard(props) {
                     </div>
                     <div>
                       <h5 className="card-title" style={{textAlign: "center"}}>
-                        {`${actualMovie.title.toUpperCase()} (${actualMovie.release_date.slice(
+                        {`${actualMovie.title.toUpperCase()} (${actualMovie['release_date'].slice(
                             0,
                             4
                         )})`}
@@ -277,7 +277,6 @@ const cardStyle = {
       "  0 22.3px 17.9px rgba(200, 200, 200, 0.072),\n" +
       "  0 41.8px 33.4px rgba(200, 200, 200, 0.086),\n" +
       "  0 100px 80px rgba(200, 200, 200, 0.12)",
-  //boxShadow: "10px 10px #e6b31e",
 };
 
 const buttonStyle = {
