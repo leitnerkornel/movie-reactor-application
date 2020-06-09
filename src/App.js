@@ -10,14 +10,7 @@ import "./App.css";
 import Watchlist from "./components/pages/Watchlist";
 
 function App() {
-  const theme = {
-    background: "none",
-    textAlign: "center",
-    padding: "10px",
-    fontSize: "1.3rem",
-    borderRadius: "15px",
-    fontFamily: " Helvetica, Arial, sans-serif",
-  };
+
 
   document.title = "Movie Reactor";
   return (
@@ -34,7 +27,7 @@ function App() {
                   <Route
                       exact
                       path="/"
-                      render={(props) => (
+                      render={() => (
                           <div style={cardStyle}>
                             <SelectionPage
                                 selection={"top_rated"}
@@ -46,7 +39,7 @@ function App() {
                   <Route
                       exact
                       path="/top_rated"
-                      render={(props) => (
+                      render={() => (
                           <div style={cardStyle}>
                             <SelectionPage
                                 selection={"top_rated"}
@@ -58,7 +51,7 @@ function App() {
                   <Route
                       exact
                       path="/now_playing"
-                      render={(props) => (
+                      render={() => (
                           <div style={cardStyle}>
                             <SelectionPage
                                 selection={"now_playing"}
@@ -70,7 +63,7 @@ function App() {
                   <Route
                       exact
                       path="/popular"
-                      render={(props) => (
+                      render={() => (
                           <div style={cardStyle}>
                             <SelectionPage
                                 selection={"popular"}
@@ -82,7 +75,7 @@ function App() {
                   <Route
                       exact
                       path="/upcoming"
-                      render={(props) => (
+                      render={() => (
                           <div style={cardStyle}>
                             <SelectionPage
                                 selection={"upcoming"}
@@ -95,7 +88,7 @@ function App() {
                   <Route
                       exact
                       path="/watchlist"
-                      render={(props) => (
+                      render={() => (
                           <div style={cardStyle}>
                             <Watchlist title={"Your Watchlist"}/>
                           </div>
@@ -109,6 +102,15 @@ function App() {
       </div>
   );
 }
+
+const theme = {
+  background: "none",
+  textAlign: "center",
+  padding: "10px",
+  fontSize: "1.3rem",
+  borderRadius: "15px",
+  fontFamily: " Helvetica, Arial, sans-serif",
+};
 
 const cardStyle = {
   display: "flex",
