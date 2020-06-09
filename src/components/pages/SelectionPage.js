@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import Get from "../hook/FetchGet";
 import MovieCard from "./MovieCard";
+import {API_URL_MOVIE, API_KEY} from "../../Constants";
 
 const SelectionPage = (props) => {
-  let URL = props.url + "?api_key=" + props.API_KEY;
-  const [isLoading, data] = Get(URL);
+  let url = `${API_URL_MOVIE}${props.selection}?api_key=${API_KEY}`;
 
+  const [isLoading, data] = Get(url);
   const [barStyle, setBarStyle] = useState(36);
-
   const [scrollY, setScrollY] = React.useState(window.pageYOffset);
 
   const getScrollY = () => {
@@ -59,8 +59,6 @@ const SelectionPage = (props) => {
                     <div key={movie.id} className="card-deck ml-5 mr-3 mt-5">
                       <MovieCard
                           movie={movie}
-                          key={movie.id}
-                          API_KEY={props.API_KEY}
                       />
                     </div>
                 ))
