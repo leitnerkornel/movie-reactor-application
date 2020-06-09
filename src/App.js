@@ -10,6 +10,7 @@ import { WatchlistProvider } from "./components/context/WatchlistContext";
 import logo from "./logo.svg";
 import "./App.css";
 import Watchlist from "./components/pages/Watchlist";
+import SeatLayout from "./components/pages/SeatLayout";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -111,6 +112,15 @@ function App() {
                     </div>
                   )}
                 />
+                  <Route
+                      exact
+                      path="/cinema"
+                      render={(props) => (
+                          <div style={cardStyle}>
+                              <SeatLayout API_KEY={API_KEY} />
+                          </div>
+                      )}
+                  />
               </div>
             </ThemeProvider>
           </main>
