@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import {WatchlistContext} from "../context/WatchlistContext";
 
 import {limitString} from "../../Utils";
-import {API_URL_MOVIE, API_KEY, IMAGE_SIZES} from "../../Constans";
+import {API_URL_MOVIE, API_URL_PICTURE, API_KEY, IMAGE_SIZES} from "../../Constants";
 
 export default function MovieCard(props) {
 
@@ -118,7 +118,7 @@ export default function MovieCard(props) {
                 >
                   <img
                       style={centerCoverImage}
-                      src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.poster_sizes[3]}${poster}`}
+                      src={`${API_URL_PICTURE}${IMAGE_SIZES.poster_sizes[3]}${poster}`}
                       alt={`WE ARE SORRY, THERE IS NO POSTER FOR THE MOVIE TITLED '${actualMovie.title.toUpperCase()}'`}
                   />
                 </div>
@@ -178,7 +178,7 @@ export default function MovieCard(props) {
                   <div className="card-body" onClick={setFlipCard}>
                     <div className="backdrop-container">
                       <img
-                          src={`https://image.tmdb.org/t/p/${IMAGE_SIZES.backdrop_sizes[0]}${backdrop}`}
+                          src={`${API_URL_PICTURE}${IMAGE_SIZES.backdrop_sizes[0]}${backdrop}`}
                           alt={`  NO POSTER AVAILABLE FOR ${actualMovie.title.toUpperCase()}`}
                           style={centerImage}
                       />
