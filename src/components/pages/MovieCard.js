@@ -2,15 +2,11 @@ import ReactCardFlip from "react-card-flip";
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import Get from "../hook/FetchGet";
-import { ThemeProvider } from "styled-components";
-import MovieDetailPage from "../movie_detail_page/MovieDetailPage";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import SelectionPage from "./SelectionPage";
-import { elastic as BurgerMenu } from "react-burger-menu";
+import { Link } from "react-router-dom";
 import { WatchlistContext } from "../context/WatchlistContext";
 
 export default function MovieCard(props) {
-  let overviewCharacterLimit = 130;
+
   let movie = props.movie;
   let movieId = movie.id;
   let API_KEY = props.API_KEY;
@@ -18,7 +14,6 @@ export default function MovieCard(props) {
 
   const [isLoading, actualMovie] = Get(currentMovieURL, movie);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [addedToWatchlist, setAddedToWatchlist] = useState(false);
 
   const [backdrop, setBackdrop] = useState("");
   const [poster, setPoster] = useState("");
@@ -38,11 +33,28 @@ export default function MovieCard(props) {
     isFlipped ? setIsFlipped(false) : setIsFlipped(true);
   };
 
-  let limitedOverview = actualMovie
-    ? actualMovie.overview.length > overviewCharacterLimit
-      ? actualMovie.overview.substring(0, overviewCharacterLimit) + " ..."
-      : actualMovie.overview
-    : "nothing";
+  let limitString = (inputString, titleString) => {
+    let overviewCharacterLimit = 180 - titleString.length*2;
+    let outputString = "No overview available.";
+    if (inputString.length > overviewCharacterLimit) {
+      let actualCharacter = inputString.charAt(overviewCharacterLimit);
+      for (let i=0; i< inputString.length-overviewCharacterLimit; i++) {
+        if (inputString.charAt(overviewCharacterLimit+i) == " ") {
+          return inputString.substring(0, overviewCharacterLimit + i) + " ...";
+        }
+      }
+
+    } else {
+      outputString = inputString;
+    }
+
+    return outputString;
+  }
+
+  let limitedOverview =
+  actualMovie
+  ? limitString(actualMovie.overview, actualMovie.title)
+      : "Loading / Not available";
 
   let linkToMovieDetailPage = (
     <Link to={`/movie/${movieId}`} style={buttonStyle}>
@@ -59,9 +71,10 @@ export default function MovieCard(props) {
 
   let removeFromWatchlist = (e) => {
     e.preventDefault();
-    /*let movie = e.target.value;
-    setWatchlist(watchlist.filter((e)=>(e !== movie)));
-    setAddedToWatchlist(false);*/
+    let filteredArray = watchlist.filter(
+      (selectedMovie) => selectedMovie.id !== movieId
+    );
+    setWatchlist(filteredArray);
   };
 
   let isTheMovieAdded = () => {
@@ -80,7 +93,11 @@ export default function MovieCard(props) {
           type="button"
           className="btn btn-secondary"
           onClick={removeFromWatchlist}
-          disabled
+          style={{
+            opacity: "0.7",
+            transition: ".7s",
+            transitionTimingFunction: "ease",
+          }}
         >
           {"unWatchlist".toUpperCase()}
         </button>
@@ -89,13 +106,20 @@ export default function MovieCard(props) {
           type="button"
           className="btn btn-secondary"
           onClick={addToWatchlist}
+          style={{
+            opacity: "1",
+            transition: ".7s",
+            transitionTimingFunction: "ease",
+          }}
         >
-          {"Add to Watchlist".toUpperCase()}
+          {"Watchlist it!".toUpperCase()}
         </button>
       )}
-      <button type="button" className="btn btn-secondary" style={buttonStyle}>
-        {linkToMovieDetailPage}
-      </button>
+      <Link to={`/movie/${movieId}`} style={buttonStyle}>
+        <button type="button" className="btn btn-secondary" style={{...buttonStyle, borderRadius: "0px", width: "130px"}}>
+        {"Details".toUpperCase()}
+        </button>
+      </Link>
     </div>
   );
 
@@ -108,13 +132,15 @@ export default function MovieCard(props) {
       >
         {actualMovie ? (
           <div className="card-body" onClick={setFlipCard}>
-            <div className={"poster-container"}
-                 data-toggle="tooltip"
-                 title={actualMovie.title}>
+            <div
+              className={"poster-container"}
+              data-toggle="tooltip"
+              title={actualMovie.title}
+            >
               <img
                 style={centerCoverImage}
                 src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[3]}${poster}`}
-                alt={actualMovie.title.toUpperCase()}
+                alt={`WE ARE SORRY, THERE IS NO POSTER IMAGE FOR THE MOVIE TITLED '${actualMovie.title.toUpperCase()}'`}
               />
             </div>
           </div>
@@ -139,7 +165,7 @@ export default function MovieCard(props) {
       <React.Fragment />
     );
 
-  let ratingBackgroundLogo = actualMovie ? (
+  let ratingBackgroundLogo = actualMovie && actualMovie.vote_average !== 0 ? (
     <img
       style={ratingBackgroundStyle}
       src={"/images/star64.png"}
@@ -150,7 +176,7 @@ export default function MovieCard(props) {
     <div />
   );
 
-  let ratingNumber = actualMovie ? (
+  let ratingNumber = actualMovie && actualMovie.vote_average !== 0 ? (
     <div
       style={ratingStyle}
       title={`User rating: ${actualMovie.vote_average}, based on ${actualMovie.vote_count} votes.`}

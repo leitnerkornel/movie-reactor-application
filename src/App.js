@@ -32,7 +32,7 @@ function App() {
           <main id="page-wrap">
             <ThemeProvider theme={theme}>
               <div
-                className="container"
+                className="container-fluid"
                 style={{ maxWidth: "3000px", padding: "0" }}
               >
                 <div className="row"></div>
@@ -107,7 +107,7 @@ function App() {
                   path="/watchlist"
                   render={(props) => (
                     <div style={cardStyle}>
-                      <Watchlist API_KEY={API_KEY} />
+                      <Watchlist API_KEY={API_KEY} title={"Your Watchlist"} />
                     </div>
                   )}
                 />

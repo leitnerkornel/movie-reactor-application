@@ -3,7 +3,7 @@ import React from 'react';
 const TitleGenreRatingBox = (props) => {
 
     const validateRuntime = (runtime) => {
-        if (runtime === null || runtime === "0") {
+        if (runtime === null || runtime === 0) {
             return "N/A";
         } else {
             return `${runtime} min`
