@@ -139,7 +139,7 @@ export default function MovieCard(props) {
                   <img
                       style={centerCoverImage}
                       src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[3]}${poster}`}
-                      alt={`WE ARE SORRY, THERE IS NO POSTER IMAGE FOR THE MOVIE TITLED '${actualMovie.title.toUpperCase()}'`}
+                      alt={`WE ARE SORRY, THERE IS NO POSTER FOR THE MOVIE TITLED '${actualMovie.title.toUpperCase()}'`}
                   />
                 </div>
               </div>
@@ -199,7 +199,7 @@ export default function MovieCard(props) {
                     <div className="backdrop-container">
                       <img
                           src={`https://image.tmdb.org/t/p/${imageSizes.backdrop_sizes[0]}${backdrop}`}
-                          alt={`  NO PICTURE AVAILABLE FOR ${actualMovie.title.toUpperCase()}`}
+                          alt={`  NO POSTER AVAILABLE FOR ${actualMovie.title.toUpperCase()}`}
                           style={centerImage}
                       />
                     </div>
