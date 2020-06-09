@@ -27,7 +27,7 @@ const MovieDetailPage = () => {
     let urlFragments = window.location.href.split("/");
     return urlFragments[urlFragments.length - 1];
   };
-  let MOVIE_ID = getMovieIdFromUrl();
+  let movieId = getMovieIdFromUrl();
 
   const [unavailable, setUnavailable] = useState(true);
   const [loaded, setLoaded] = useState(false);
@@ -52,7 +52,7 @@ const MovieDetailPage = () => {
     window.scrollTo(0, 0)
     axios
         .get(
-            `https://api.themoviedb.org/3/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`
+            `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`
         )
         .then((res) => {
           if (res.data.results.length === 0) {
@@ -62,7 +62,7 @@ const MovieDetailPage = () => {
           }
         });
     axios
-        .get(`https://api.themoviedb.org/3/movie/${MOVIE_ID}?api_key=${API_KEY}`)
+        .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`)
         .then((res) => {
           setMovieObject(res.data);
           setBackdrop(res.data["backdrop_path"]);
@@ -95,11 +95,11 @@ const MovieDetailPage = () => {
             setLoaded(true);
           }
         });
-  }, [MOVIE_ID]);
+  }, [movieId]);
 
   if (unavailable && loaded) {
     return (
-        <InvalidIdScreen wrongId={MOVIE_ID}/>
+        <InvalidIdScreen wrongId={movieId}/>
     );
   } else if (unavailable && !loaded) {
     return (
