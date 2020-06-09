@@ -1,9 +1,9 @@
 import ReactCardFlip from "react-card-flip";
-import React, { useState, useContext, useEffect } from "react";
+import React, {useState, useContext, useEffect} from "react";
 import axios from "axios";
 import Get from "../hook/FetchGet";
-import { Link } from "react-router-dom";
-import { WatchlistContext } from "../context/WatchlistContext";
+import {Link} from "react-router-dom";
+import {WatchlistContext} from "../context/WatchlistContext";
 
 export default function MovieCard(props) {
 
@@ -21,11 +21,11 @@ export default function MovieCard(props) {
 
   useEffect(() => {
     axios
-      .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`)
-      .then((res) => {
-        setBackdrop(res.data.backdrop_path);
-        setPoster(res.data.poster_path);
-      });
+        .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`)
+        .then((res) => {
+          setBackdrop(res.data.backdrop_path);
+          setPoster(res.data.poster_path);
+        });
   });
 
   let setFlipCard = (e) => {
@@ -34,12 +34,12 @@ export default function MovieCard(props) {
   };
 
   let limitString = (inputString, titleString) => {
-    let overviewCharacterLimit = 180 - titleString.length*2;
+    let overviewCharacterLimit = 180 - titleString.length * 2;
     let outputString = "No overview available.";
     if (inputString.length > overviewCharacterLimit) {
       let actualCharacter = inputString.charAt(overviewCharacterLimit);
-      for (let i=0; i< inputString.length-overviewCharacterLimit; i++) {
-        if (inputString.charAt(overviewCharacterLimit+i) == " ") {
+      for (let i = 0; i < inputString.length - overviewCharacterLimit; i++) {
+        if (inputString.charAt(overviewCharacterLimit + i) == " ") {
           return inputString.substring(0, overviewCharacterLimit + i) + " ...";
         }
       }
@@ -52,14 +52,14 @@ export default function MovieCard(props) {
   }
 
   let limitedOverview =
-  actualMovie
-  ? limitString(actualMovie.overview, actualMovie.title)
-      : "Loading / Not available";
+      actualMovie
+          ? limitString(actualMovie.overview, actualMovie.title)
+          : "Loading / Not available";
 
   let linkToMovieDetailPage = (
-    <Link to={`/movie/${movieId}`} style={buttonStyle}>
-      {"Details".toUpperCase()}
-    </Link>
+      <Link to={`/movie/${movieId}`} style={buttonStyle}>
+        {"Details".toUpperCase()}
+      </Link>
   );
 
   let addToWatchlist = (e) => {
@@ -72,7 +72,7 @@ export default function MovieCard(props) {
   let removeFromWatchlist = (e) => {
     e.preventDefault();
     let filteredArray = watchlist.filter(
-      (selectedMovie) => selectedMovie.id !== movieId
+        (selectedMovie) => selectedMovie.id !== movieId
     );
     setWatchlist(filteredArray);
   };
@@ -87,153 +87,154 @@ export default function MovieCard(props) {
   };
 
   let cardButtons = (
-    <div className="btn-group" role="group" aria-label="Basic example">
-      {isTheMovieAdded() ? (
-        <button
-          type="button"
-          className="btn btn-secondary"
-          onClick={removeFromWatchlist}
-          style={{
-            opacity: "0.7",
-            transition: ".7s",
-            transitionTimingFunction: "ease",
-          }}
-        >
-          {"unWatchlist".toUpperCase()}
-        </button>
-      ) : (
-        <button
-          type="button"
-          className="btn btn-secondary"
-          onClick={addToWatchlist}
-          style={{
-            opacity: "1",
-            transition: ".7s",
-            transitionTimingFunction: "ease",
-          }}
-        >
-          {"Watchlist it!".toUpperCase()}
-        </button>
-      )}
-      <Link to={`/movie/${movieId}`} style={buttonStyle}>
-        <button type="button" className="btn btn-secondary" style={{...buttonStyle, borderRadius: "0px", width: "130px"}}>
-        {"Details".toUpperCase()}
-        </button>
-      </Link>
-    </div>
+      <div className="btn-group" role="group" aria-label="Basic example">
+        {isTheMovieAdded() ? (
+            <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={removeFromWatchlist}
+                style={{
+                  opacity: "0.7",
+                  transition: ".7s",
+                  transitionTimingFunction: "ease",
+                }}
+            >
+              {"unWatchlist".toUpperCase()}
+            </button>
+        ) : (
+            <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={addToWatchlist}
+                style={{
+                  opacity: "1",
+                  transition: ".7s",
+                  transitionTimingFunction: "ease",
+                }}
+            >
+              {"Watchlist it!".toUpperCase()}
+            </button>
+        )}
+        <Link to={`/movie/${movieId}`} style={buttonStyle}>
+          <button type="button" className="btn btn-secondary"
+                  style={{...buttonStyle, borderRadius: "0px", width: "130px"}}>
+            {"Details".toUpperCase()}
+          </button>
+        </Link>
+      </div>
   );
 
   let mainCard = (
-    <>
-      <div
-        id={`${movie.id}-front`}
-        className="card border-secondary mt-1 mb-3 clearfix overflow-hidden "
-        style={cardStyle}
-      >
-        {actualMovie ? (
-          <div className="card-body" onClick={setFlipCard}>
-            <div
-              className={"poster-container"}
-              data-toggle="tooltip"
-              title={actualMovie.title}
-            >
-              <img
-                style={centerCoverImage}
-                src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[3]}${poster}`}
-                alt={`WE ARE SORRY, THERE IS NO POSTER IMAGE FOR THE MOVIE TITLED '${actualMovie.title.toUpperCase()}'`}
-              />
-            </div>
-          </div>
-        ) : (
-          <div>Card is loading</div>
-        )}
-        {cardButtons}
-      </div>
-    </>
-  );
-
-  let ratedAdultLogo =
-    actualMovie && actualMovie.adult ? (
-      <img
-        style={ratedAdultStyle}
-        src={"/images/adult.png"}
-        alt="Votes"
-        data-toggle="tooltip"
-        title="Rated adult"
-      />
-    ) : (
-      <React.Fragment />
-    );
-
-  let ratingBackgroundLogo = actualMovie && actualMovie.vote_average !== 0 ? (
-    <img
-      style={ratingBackgroundStyle}
-      src={"/images/star64.png"}
-      alt="Votes"
-      data-toggle="tooltip"
-    />
-  ) : (
-    <div />
-  );
-
-  let ratingNumber = actualMovie && actualMovie.vote_average !== 0 ? (
-    <div
-      style={ratingStyle}
-      title={`User rating: ${actualMovie.vote_average}, based on ${actualMovie.vote_count} votes.`}
-    >
-      <b>{`${actualMovie.vote_average}`}</b>
-    </div>
-  ) : (
-    <div />
-  );
-
-  let backCard =
-    actualMovie != null ? (
       <>
         <div
-          id={`${movie.id}-back`}
-          className="card border-secondary mt-1 mb-3 clearfix overflow-hidden"
-          style={cardStyle}
+            id={`${movie.id}-front`}
+            className="card border-secondary mt-1 mb-3 clearfix overflow-hidden "
+            style={cardStyle}
         >
           {actualMovie ? (
-            <div className="card-body" onClick={setFlipCard}>
-              <div className="backdrop-container">
-                <img
-                  src={`https://image.tmdb.org/t/p/${imageSizes.backdrop_sizes[0]}${backdrop}`}
-                  alt={`  NO PICTURE AVAILABLE FOR ${actualMovie.title.toUpperCase()}`}
-                  style={centerImage}
-                />
+              <div className="card-body" onClick={setFlipCard}>
+                <div
+                    className={"poster-container"}
+                    data-toggle="tooltip"
+                    title={actualMovie.title}
+                >
+                  <img
+                      style={centerCoverImage}
+                      src={`https://image.tmdb.org/t/p/${imageSizes.poster_sizes[3]}${poster}`}
+                      alt={`WE ARE SORRY, THERE IS NO POSTER IMAGE FOR THE MOVIE TITLED '${actualMovie.title.toUpperCase()}'`}
+                  />
+                </div>
               </div>
-              <div>
-                <h5 className="card-title" style={{ textAlign: "center" }}>
-                  {`${actualMovie.title.toUpperCase()} (${actualMovie.release_date.slice(
-                    0,
-                    4
-                  )})`}
-                </h5>
-                <p className="card-text overflow-hidden">
-                  {ratingBackgroundLogo}
-                  {ratingNumber}
-                  {ratedAdultLogo}
-                  {limitedOverview}
-                </p>
-              </div>
-            </div>
           ) : (
-            <div>Card is loading</div>
+              <div>Card is loading</div>
           )}
           {cardButtons}
         </div>
       </>
-    ) : (
-      <div />
-    );
+  );
+
+  let ratedAdultLogo =
+      actualMovie && actualMovie.adult ? (
+          <img
+              style={ratedAdultStyle}
+              src={"/images/adult.png"}
+              alt="Votes"
+              data-toggle="tooltip"
+              title="Rated adult"
+          />
+      ) : (
+          <React.Fragment/>
+      );
+
+  let ratingBackgroundLogo = actualMovie && actualMovie.vote_average !== 0 ? (
+      <img
+          style={ratingBackgroundStyle}
+          src={"/images/star64.png"}
+          alt="Votes"
+          data-toggle="tooltip"
+      />
+  ) : (
+      <div/>
+  );
+
+  let ratingNumber = actualMovie && actualMovie.vote_average !== 0 ? (
+      <div
+          style={ratingStyle}
+          title={`User rating: ${actualMovie.vote_average}, based on ${actualMovie.vote_count} votes.`}
+      >
+        <b>{`${actualMovie.vote_average}`}</b>
+      </div>
+  ) : (
+      <div/>
+  );
+
+  let backCard =
+      actualMovie != null ? (
+          <>
+            <div
+                id={`${movie.id}-back`}
+                className="card border-secondary mt-1 mb-3 clearfix overflow-hidden"
+                style={cardStyle}
+            >
+              {actualMovie ? (
+                  <div className="card-body" onClick={setFlipCard}>
+                    <div className="backdrop-container">
+                      <img
+                          src={`https://image.tmdb.org/t/p/${imageSizes.backdrop_sizes[0]}${backdrop}`}
+                          alt={`  NO PICTURE AVAILABLE FOR ${actualMovie.title.toUpperCase()}`}
+                          style={centerImage}
+                      />
+                    </div>
+                    <div>
+                      <h5 className="card-title" style={{textAlign: "center"}}>
+                        {`${actualMovie.title.toUpperCase()} (${actualMovie.release_date.slice(
+                            0,
+                            4
+                        )})`}
+                      </h5>
+                      <span className="card-text overflow-hidden">
+                        {ratingBackgroundLogo}
+                        {ratingNumber}
+                        {ratedAdultLogo}
+                        {limitedOverview}
+                      </span>
+                    </div>
+                  </div>
+              ) : (
+                  <div>Card is loading</div>
+              )}
+              {cardButtons}
+            </div>
+          </>
+      ) : (
+          <div/>
+      );
 
   return (
-    <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-      <div>{mainCard}</div>
-      <div>{backCard}</div>
-    </ReactCardFlip>
+      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+        <div>{mainCard}</div>
+        <div>{backCard}</div>
+      </ReactCardFlip>
   );
 }
 
@@ -270,12 +271,12 @@ const cardStyle = {
   borderRadius: "8px",
   textAlign: "justify",
   boxShadow:
-    "  0 2.8px 2.2px rgba(200, 200, 200, 0.034),\n" +
-    "  0 6.7px 5.3px rgba(200, 200, 200, 0.048),\n" +
-    "  0 12.5px 10px rgba(200, 200, 200, 0.06),\n" +
-    "  0 22.3px 17.9px rgba(200, 200, 200, 0.072),\n" +
-    "  0 41.8px 33.4px rgba(200, 200, 200, 0.086),\n" +
-    "  0 100px 80px rgba(200, 200, 200, 0.12)",
+      "  0 2.8px 2.2px rgba(200, 200, 200, 0.034),\n" +
+      "  0 6.7px 5.3px rgba(200, 200, 200, 0.048),\n" +
+      "  0 12.5px 10px rgba(200, 200, 200, 0.06),\n" +
+      "  0 22.3px 17.9px rgba(200, 200, 200, 0.072),\n" +
+      "  0 41.8px 33.4px rgba(200, 200, 200, 0.086),\n" +
+      "  0 100px 80px rgba(200, 200, 200, 0.12)",
   //boxShadow: "10px 10px #e6b31e",
 };
 
