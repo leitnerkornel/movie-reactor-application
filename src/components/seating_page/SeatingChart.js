@@ -4,12 +4,41 @@ import {API_URL_MOVIE, API_URL_PICTURE, API_KEY, IMAGE_SIZES} from "../../Consta
 import {getMovieIdFromUrl} from "../../Utils";
 import SeatingPicture from "../seating_page/SeatingPicture";
 import FirstRow from "../movie_detail_page/FirstRow";
+import TheaterSeat from "./TheaterSeat";
 
 const SeatingChart = (props) => {
 
+    let rows = [];
+    for (let i = 0; i < props.rows; i++) {
+        rows.push(
+            <TheaterSeat key={`seat-${i}`}/>
+            )
+    }
+    let columns = [];
+    for (let i = 0; i < props.columns; i++) {
+        columns.push(
+            <div key={`column-${i}`}>
+                {rows}
+                <p/>
+            </div>
+    );
+    }
+
+
     return (
-        <div>{props.rows}</div>
+        <div style={mainCardStyle} key="seating-chart" className="card-deck m-auto">
+            {columns}
+        </div>
     )
 }
 
 export default SeatingChart;
+
+const mainCardStyle = {
+    position: "absolute",
+    top: "58%",
+    left: "50%",
+    transform: "translate(-50%)",
+    zIndex: "0",
+    flex: "wrap"
+}
