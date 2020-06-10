@@ -9,6 +9,7 @@ import SchedulePage from "./components/pages/schedule_page/SchedulePage";
 
 import {WatchlistProvider} from "./components/context/WatchlistContext";
 import Watchlist from "./components/pages/Watchlist";
+import SeatLayout from "./components/pages/SeatLayout";
 
 import "./App.css";
 
@@ -98,6 +99,7 @@ function App() {
                           </div>
                       )}
                   />
+                    <Route path="/reserve/:id" children={<SeatLayout/>} />
                 </div>
               </ThemeProvider>
             </main>
