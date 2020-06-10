@@ -1,0 +1,33 @@
+.cover-container-column {
+    height: 250px;
+    text-align: center;
+    background-color: #2e2e2e;
+    padding: 0;
+}
+
+.cover-container {
+    display: flex;
+    background-color: #343434;
+    width: 75%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: row;
+    flex-wrap: inherit;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.cover-item {
+    height: 90%;
+    width: 150px;
+    background-color: #2e2e2e;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+}
+
+.cover-img-top {
+    height: 100%;
+    width: 100%;
+}
