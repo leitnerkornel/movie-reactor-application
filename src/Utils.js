@@ -18,3 +18,15 @@ export const limitString = (inputString, titleString) => {
 
   return outputString;
 }
+
+export const checkStatus = (response) => {
+  if (response.ok) {
+    return Promise.resolve(response);
+  } else {
+    return Promise.reject(new Error(response.statusText));
+  }
+}
+
+export const parseJSON = (response) => {
+  return response.json();
+}
