@@ -87,6 +87,15 @@ export default class Menu extends Component {
         >
           <div className="menu-button">Watchlist</div>
         </Link>
+        <Link
+            id="cinema"
+            className="menu-item"
+            to="#"
+            style={{ color: "red", textDecoration: "none" }}
+            onClick={() => this.closeMenu()}
+        >
+          <div className="menu-button">Cinema</div>
+        </Link>
       </BurgerMenu>
     );
   }
