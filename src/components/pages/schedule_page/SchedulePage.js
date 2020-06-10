@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-import FirstRow from "../../movie_detail_page/FirstRow";
+import HorizontalLine from "../../movie_detail_page/FirstRow";
 import Tagline from "../../movie_detail_page/Tagline";
 import LinksToExternalPagesGroup from "../../movie_detail_page/LinksToExternalPagesGroup";
 import SpokenLanguages from "../../movie_detail_page/SpokenLanguages";
@@ -59,7 +59,7 @@ const SchedulePage = () => {
             <div className="col-9 align-self-center" style={{...mainColumnStyle, ...{backgroundColor: "#343434"}}}>
               {/* The center container div. There is a grid in it. */}
               <div className="container-fluid" style={{padding: "0"}}>
-                <FirstRow/>
+                <HorizontalLine/>
                 {/*Container for cover pictures*/}
                 <div className="row no-gutters" style={{backgroundColor: "green"}}>
                   <div className="col-md-12 cover-container-column">
@@ -72,6 +72,7 @@ const SchedulePage = () => {
                     </div>
                   </div>
                 </div>
+                <HorizontalLine/>
                 <div className="row no-gutters" style={{padding: "0"}}>
                   <div className="col-md-5"
                        style={containerStyle}>
