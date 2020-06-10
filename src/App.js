@@ -95,15 +95,7 @@ function App() {
                           </div>
                       )}
                   />
-                    <Route
-                        exact
-                        path="/reserve/:id"
-                        render={(props) => (
-                            <div style={cardStyle}>
-                                <SeatLayout />
-                            </div>
-                        )}
-                    />
+                    <Route path="/reserve/:id" children={<SeatLayout/>} />
                 </div>
               </ThemeProvider>
             </main>
