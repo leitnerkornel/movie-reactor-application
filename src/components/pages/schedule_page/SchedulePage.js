@@ -1,11 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
 import HorizontalLine from "../../movie_detail_page/FirstRow";
-import Tagline from "../../movie_detail_page/Tagline";
-import LinksToExternalPagesGroup from "../../movie_detail_page/LinksToExternalPagesGroup";
-import SpokenLanguages from "../../movie_detail_page/SpokenLanguages";
-import TitleGenreRatingBox from "../../movie_detail_page/TitleGenreRatingBox";
-import Overview from "../../movie_detail_page/Overview";
 
 import {checkStatus, parseJSON} from "../../../Utils";
 import {API_KEY, API_SCHEDULE_URL, API_URL_MOVIE, API_URL_PICTURE, IMAGE_SIZES} from "../../../Constants";
@@ -72,38 +67,13 @@ const SchedulePage = () => {
                     </div>
                   </div>
                 </div>
+                {/*Can remove or change color if it isn't fit into the look*/}
                 <HorizontalLine/>
                 <div className="row no-gutters" style={{padding: "0"}}>
-                  <div className="col-md-5"
-                       style={containerStyle}>
-                    <img src={"/images/not_available64.png"} alt=""/>
-                    <div className="row no-gutters">
-                      <Tagline tagline={"tagline"}/>
-                    </div>
-                    <div className="row no-gutters">
-                      <LinksToExternalPagesGroup
-                          homepage={"homepage"}
-                          imdbId={"666666"}
-                          youtubeTrailer={"no-trailer"}/>
-                    </div>
-                    <div className="row no-gutters">
-                      <SpokenLanguages spokenLanguages={["spokenLanguages"]}/>
-                    </div>
-                  </div>
-                  <div className="col-md-7" style={containerStyle}>
-                    <TitleGenreRatingBox backdrop={"backdrop"}
-                                         title={"title"}
-                                         releaseDate={"releaseDate"}
-                                         genres={["genres"]}
-                                         popularity={"popularity"}
-                                         voteAvg={"voteAvg"}
-                                         runtime={"runtime"}/>
-                    <div className="row no-gutters">
-                      <Overview overview={"overview"}/>
-                      <div className="col-md-4">
-                        <div>WatchList button</div>
-                      </div>
-                    </div>
+                  <div className="col-md-12 schedule-container-column">
+                       <div className="schedule-container">
+
+                       </div>
                   </div>
                 </div>
               </div>
@@ -119,10 +89,6 @@ const mainColumnStyle = {
   flexFlow: "row wrap",
   height: "1500px",
   padding: "0"
-}
-
-const containerStyle = {
-  textAlign: "center", padding: "5% 5% 0"
 }
 
 export default SchedulePage;
