@@ -1,3 +1,5 @@
+import {DAYS} from "./Constants";
+
 export const getMovieIdFromUrl = () => {
   let urlFragments = window.location.href.split("/");
   return urlFragments[urlFragments.length - 1];
@@ -30,3 +32,8 @@ export const checkStatus = (response) => {
 export const parseJSON = (response) => {
   return response.json();
 }
+
+export const getDayNameFromDate = (date) => {
+  const dateObject = new Date(date);
+  return DAYS[dateObject.getDay()];
+};
