@@ -11,7 +11,7 @@ const SpokenLanguages = (props) => {
           className="col-md-12 d-flex justify-content-center align-content-center flex-wrap"
           style={columnStyle}>
         <div style={divStyle}>
-          <p>Spoken language(s):</p>
+          <p style={{opacity: "0.8", filter: "blur(0.3px)", fontSize: "80%"}}>Spoken language(s):</p>
           <p>{enumerateLanguages(props.spokenLanguages)}</p>
         </div>
       </div>

@@ -1,3 +1,9 @@
+export const API_SCHEDULE_URL = "http://localhost:8080/schedule";
+export const API_SHOW_URL = "http://localhost:8080/show/";
+export const API_SEAT_ROOM_URL = "http://localhost:8080/seat/room/";
+export const API_RESERVED_SEATS_URL = "http://localhost:8080/reserved-seats/show/";
+export const API_ROOM_URL = "http://localhost:8080/room/";
+
 export const API_URL_MOVIE = "https://api.themoviedb.org/3/movie/"
 
 export const API_URL_PICTURE = "https://image.tmdb.org/t/p/"

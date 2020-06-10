@@ -2,13 +2,16 @@ import React from "react";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import {ThemeProvider} from "styled-components";
 import Menu from "./components/layout/Menu";
+
 import SelectionPage from "./components/pages/SelectionPage";
 import MovieDetailPage from "./components/movie_detail_page/MovieDetailPage";
-import {WatchlistProvider} from "./components/context/WatchlistContext";
+import SchedulePage from "./components/pages/schedule_page/SchedulePage";
 
-import "./App.css";
+import {WatchlistProvider} from "./components/context/WatchlistContext";
 import Watchlist from "./components/pages/Watchlist";
 import SeatLayout from "./components/pages/SeatLayout";
+
+import "./App.css";
 
 function App() {
 
@@ -86,6 +89,7 @@ function App() {
                       )}
                   />
                   <Route path="/movie/:id" children={<MovieDetailPage/>}/>
+                  <Route path="/schedule" children={<SchedulePage/>}/>
                   <Route
                       exact
                       path="/watchlist"
