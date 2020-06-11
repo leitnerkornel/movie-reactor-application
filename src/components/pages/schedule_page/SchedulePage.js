@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import HorizontalLine from "../../movie_detail_page/FirstRow";
 
-import {checkStatus, getDayNameFromDate, parseJSON} from "../../../Utils";
+import {checkStatus, formatTime, getDayNameFromDate, parseJSON} from "../../../Utils";
 import {API_KEY, API_SCHEDULE_URL, API_URL_MOVIE, API_URL_PICTURE, IMAGE_SIZES} from "../../../Constants";
 
 import axios from "axios";
@@ -60,14 +60,13 @@ const SchedulePage = () => {
         const foundedShows = shows.find(show => {
           return show["movie"]["id"] === movieId && show["startingDate"] === startingDate;
         })
-
+        // If there is one movie on the same day in two different time - Here we can process it! Map through them instead of display one item.
         if (foundedShows) {
           console.log(foundedShows);
-          return foundedShows["startingTime"];
+          return formatTime(foundedShows["startingTime"]);
         }
 
-        return "Not found"
-
+        return "";
       };
 
       const schedule = () => {
