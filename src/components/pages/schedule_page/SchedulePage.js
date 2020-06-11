@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from "react-router-dom";
 
 import HorizontalLine from "../../movie_detail_page/FirstRow";
 
@@ -63,10 +64,16 @@ const SchedulePage = () => {
         // If there is one movie on the same day in two different time - Here we can process it! Map through them instead of display one item.
         if (foundedShows) {
           console.log(foundedShows);
-          return formatTime(foundedShows["startingTime"]);
+          return (
+              <div className="schedule-item schedule-show-item">
+                <Link to={`/reserve/${foundedShows["id"]}`}>
+                  <div className="schedule-starting-time">
+                    {formatTime(foundedShows["startingTime"])}
+                  </div>
+                </Link></div>);
         }
 
-        return "";
+        return <div className="schedule-item schedule-show-item"/>;
       };
 
       const schedule = () => {
@@ -82,7 +89,7 @@ const SchedulePage = () => {
             if (j === 0) {
               movieRow.push(<div className="schedule-item schedule-movie-title">{movieIds[i]}</div>);
             } else {
-              movieRow.push(<div className="schedule-item schedule-show-item">{findShows(shows, movieIds[i], startingDates[j - 1])}</div>);
+              movieRow.push(findShows(shows, movieIds[i], startingDates[j - 1]));
             }
           }
           rows.push(<div className="schedule-row-item schedule-movie-row">{movieRow}</div>);
