@@ -51,3 +51,7 @@ export const getYearFromDate = (releaseDate) => {
     return ` (${year})`;
   }
 };
+
+export const formatDateWithDecimals = (date) => {
+  return date.split("-").join(".");
+};
