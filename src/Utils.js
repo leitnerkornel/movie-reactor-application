@@ -42,3 +42,12 @@ export const formatTime = (time) => {
   let timeParts = time.split(":");
   return `${timeParts[0]}:${timeParts[1]}`;
 };
+
+export const getYearFromDate = (releaseDate) => {
+  let year = releaseDate.split("-")[0];
+  if (year === "") {
+    return "";
+  } else {
+    return ` (${year})`;
+  }
+};
