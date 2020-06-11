@@ -5,25 +5,14 @@ import {getMovieIdFromUrl} from "../../Utils";
 import SeatingPicture from "../seating_page/SeatingPicture";
 import FirstRow from "../movie_detail_page/FirstRow";
 import TheaterSeat from "./TheaterSeat";
+import SeatsRow from "./SeatsRow";
 
 const SeatingChart = (props) => {
 
-    let rows = [];
-    for (let i = 0; i < props.rows; i++) {
-        rows.push(
-            <TheaterSeat key={`seat-${i}`}/>
-            )
-    }
     let columns = [];
     for (let i = 0; i < props.columns; i++) {
-        columns.push(
-            <div key={`column-${i}`}>
-                {rows}
-                <p/>
-            </div>
-    );
+        columns.push(<SeatsRow column={i} rows={props.rows}/>);
     }
-
 
     return (
         <div style={mainCardStyle} key="seating-chart" className="card-deck m-auto">

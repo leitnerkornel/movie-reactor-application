@@ -3,10 +3,8 @@ import React from "react";
 const TheaterSeat = (props) => {
 
     return (
-        <div
-            // className="card" style={{color: "Background"}}
-        >
-            <i className="fa fa-square-o" aria-hidden="true" style={seatStyle}/>
+        <div>
+            <i className="seat fa fa-square-o" aria-hidden="true" data-row={props.row+1} data-column={props.column+1} style={seatStyle}/>
             <p/>
         </div>
     )
