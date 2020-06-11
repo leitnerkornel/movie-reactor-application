@@ -9,10 +9,13 @@ import ShowTime from "../seating_page/ShowTime";
 import ShowDate from "../seating_page/ShowDate";
 import Theater from "../seating_page/Theater";
 import RuntimeElement from "../seating_page/RuntimeElement";
+import ScreenLine from "../seating_page/ScreenLine";
+import Legends from "../seating_page/Legends";
 
 const SeatLayout = (props) => {
     let screeningId = getMovieIdFromUrl();
     let movieUrl = "";
+
 
     const [movieId, setMovieId] = useState(null);
     const [startingTime, setStartingTime] = useState(null);
@@ -127,7 +130,9 @@ const SeatLayout = (props) => {
                         <ShowTime time={startingTime}/>
                         <ShowDate date={startingDate}/>
                         <RuntimeElement runtime={runtime}/>
-                        <SeatingChart rows={numberOfRows} seats={seatsPerNumberOfRows} />
+                        <ScreenLine />
+                        <SeatingChart rows={numberOfRows} columns={seatsPerNumberOfRows} screeningId={screeningId} />
+                        <Legends/>
                     </div>
                     <h1>{title}</h1>
                 </div>
@@ -148,14 +153,11 @@ const mainColumnStyle = {
 
 const titleStyle = {
     position: "absolute",
+    fontSize: "3em",
     top: "30%",
-    left: "50%",
+    left: "53%",
     transform: "translate(-50%, -7%)",
     zIndex: "1",
     color: "white",
 }
-
-
-
-
 

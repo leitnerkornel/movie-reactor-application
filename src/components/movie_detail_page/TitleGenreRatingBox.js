@@ -1,4 +1,5 @@
 import React from 'react';
+import {getYearFromDate} from "../../Utils";
 
 const TitleGenreRatingBox = (props) => {
 
@@ -7,15 +8,6 @@ const TitleGenreRatingBox = (props) => {
             return "N/A";
         } else {
             return `${runtime} min`
-        }
-    };
-
-    const getYearFromDate = (releaseDate) => {
-        let year = releaseDate.split("-")[0];
-        if (year === "") {
-            return "";
-        } else {
-            return ` (${year})`;
         }
     };
 

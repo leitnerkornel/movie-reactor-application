@@ -15,3 +15,5 @@ export const IMAGE_SIZES = {
   logo_sizes: ["w45", "w92", "w154", "w185", "w300", "w500", "original"],
   poster_sizes: ["w92", "w154", "w185", "w342", "w500", "w780", "original"],
 };
+
+export const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
