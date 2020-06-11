@@ -21,8 +21,8 @@ const TheaterSeat = (props) => {
             <i className="theater-seat fa fa-square-o" aria-hidden="true"
                data-row={row}
                data-column={column}
-               data-toggle="tooltip"
-               title={`Seat ${column} in row ${row}`}
+               // data-toggle="tooltip"
+               // title={`Seat ${column} in row ${row}`}
                style={seatStyle}
                 onClick={addReserveSeatListener}
             />
