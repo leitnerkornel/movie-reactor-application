@@ -1,3 +1,5 @@
+import {DAYS} from "./Constants";
+
 export const getMovieIdFromUrl = () => {
   let urlFragments = window.location.href.split("/");
   return urlFragments[urlFragments.length - 1];
@@ -30,3 +32,26 @@ export const checkStatus = (response) => {
 export const parseJSON = (response) => {
   return response.json();
 }
+
+export const getDayNameFromDate = (date) => {
+  const dateObject = new Date(date);
+  return DAYS[dateObject.getDay()];
+};
+
+export const formatTime = (time) => {
+  let timeParts = time.split(":");
+  return `${timeParts[0]}:${timeParts[1]}`;
+};
+
+export const getYearFromDate = (releaseDate) => {
+  let year = releaseDate.split("-")[0];
+  if (year === "") {
+    return "";
+  } else {
+    return ` (${year})`;
+  }
+};
+
+export const formatDateWithDecimals = (date) => {
+  return date.split("-").join(".");
+};

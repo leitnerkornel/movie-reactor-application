@@ -38,9 +38,45 @@
 }
 
 .schedule-container {
+    display: flex;
+    flex-direction: column;
     background-color: green;
     height: 100%;
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    justify-content: center;
+
+}
+
+.schedule-row-item {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+.schedule-item {
+    height: 20px;
+    width: 100px;
+}
+
+.schedule-first-row {
+
+}
+
+.schedule-movie-row {
+
+}
+
+.schedule-show-item {
+
+}
+
+.schedule-movie-title {
+    text-align: left;
+    width: 300px;
+}
+
+.schedule-starting-time {
+
 }

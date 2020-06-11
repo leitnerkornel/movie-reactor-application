@@ -1,8 +1,16 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from "react-router-dom";
 
 import HorizontalLine from "../../movie_detail_page/FirstRow";
 
-import {checkStatus, parseJSON} from "../../../Utils";
+import {
+  checkStatus,
+  formatDateWithDecimals,
+  formatTime,
+  getDayNameFromDate,
+  getYearFromDate,
+  parseJSON
+} from "../../../Utils";
 import {API_KEY, API_SCHEDULE_URL, API_URL_MOVIE, API_URL_PICTURE, IMAGE_SIZES} from "../../../Constants";
 
 import axios from "axios";
@@ -16,13 +24,8 @@ const SchedulePage = () => {
       const [startingTimes, setStartingTimes] = useState([]);
       const [playedMovies, setPlayedMovies] = useState([])
 
-      console.log(movieIds);
-      console.log(shows);
-      console.log(startingDates);
-      console.log(startingTimes);
-      console.log(playedMovies);
-
       useEffect(() => {
+        window.scrollTo(0, 0);
         axios
             .get(API_SCHEDULE_URL)
             .then((res) => {
@@ -47,6 +50,76 @@ const SchedulePage = () => {
             })
       }, [movieIds]);
 
+      const scheduleFirstRow = () => {
+        let firstRow = [];
+        for (let i = 0; i < startingDates.length + 1; i++) {
+          if (i === 0) {
+            firstRow.push(<div className="schedule-movie-title"></div>);
+          } else {
+            firstRow.push(<div>
+              <div className="schedule-item">{getDayNameFromDate(startingDates[i - 1])}</div>
+              <div className="schedule-item">{formatDateWithDecimals(startingDates[i - 1])}</div>
+            </div>)
+          }
+        }
+
+        return (<div className="schedule-row-item schedule-first-row">{firstRow}</div>);
+
+      };
+
+      const findShows = (shows, movieId, startingDate) => {
+        const foundedShows = shows.find(show => {
+          return show["movie"]["id"] === movieId && show["startingDate"] === startingDate;
+        })
+        // If there is one movie on the same day in two different time - Here we can process it! Map through them instead of display one item.
+        if (foundedShows) {
+          console.log(foundedShows);
+          return (
+              <div className="schedule-item schedule-show-item">
+                <Link to={`/reserve/${foundedShows["id"]}`}>
+                  <div className="schedule-starting-time">
+                    {formatTime(foundedShows["startingTime"])}
+                  </div>
+                </Link></div>);
+        }
+
+        return <div className="schedule-item schedule-show-item"/>;
+      };
+
+      const findMovieDetails = (playedMovies, movieId) => {
+        const foundedMovie = playedMovies.find(movie => {
+          return movie["id"] === movieId;
+        });
+
+        if (foundedMovie) {
+          return `${foundedMovie["title"]} ${getYearFromDate(foundedMovie["release_date"])} (${foundedMovie["runtime"]} min)`;
+        }
+
+        return "Not found";
+      };
+
+      const schedule = () => {
+        let rows = [];
+
+        rows.push(scheduleFirstRow());
+
+        for (let i = 0; i < movieIds.length; i++) {
+          let movieRow = []
+
+          for (let j = 0; j < startingDates.length + 1; j++) {
+            if (j === 0) {
+              movieRow.push(<div
+                  className="schedule-item schedule-movie-title">{findMovieDetails(playedMovies, movieIds[i])}</div>);
+            } else {
+              movieRow.push(findShows(shows, movieIds[i], startingDates[j - 1]));
+            }
+          }
+          rows.push(<div className="schedule-row-item schedule-movie-row">{movieRow}</div>);
+        }
+
+        return rows;
+      }
+
       return (
           <div className={"media"}>
             <div className="col-2 align-self-start" style={{...mainColumnStyle, ...{backgroundColor: "#e6b31e"}}}>
@@ -61,7 +134,11 @@ const SchedulePage = () => {
                     <div className="cover-container">
                       {playedMovies.map((movie) => (
                           <div className="cover-item">
-                            <img className="cover-img-top" src={`${API_URL_PICTURE}${IMAGE_SIZES["poster_sizes"][2]}${movie["poster_path"]}`} alt=""/>
+                            <Link to={`/movie/${movie["id"]}`}>
+                              <img className="cover-img-top"
+                                   src={`${API_URL_PICTURE}${IMAGE_SIZES["poster_sizes"][2]}${movie["poster_path"]}`}
+                                   alt=""/>
+                            </Link>
                           </div>
                       ))}
                     </div>
@@ -71,9 +148,9 @@ const SchedulePage = () => {
                 <HorizontalLine/>
                 <div className="row no-gutters" style={{padding: "0"}}>
                   <div className="col-md-12 schedule-container-column">
-                       <div className="schedule-container">
-
-                       </div>
+                    <div className="schedule-container">
+                      {schedule()}
+                    </div>
                   </div>
                 </div>
               </div>
