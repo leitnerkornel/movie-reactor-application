@@ -7,7 +7,7 @@ const TheaterSeat = (props) => {
 
     return (
         <div>
-            <i className="seat fa fa-square-o" aria-hidden="true"
+            <i className="theater-seat fa fa-square-o" aria-hidden="true"
                data-row={row}
                data-column={column}
                data-toggle="tooltip"
