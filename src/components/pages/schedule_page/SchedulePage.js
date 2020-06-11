@@ -54,11 +54,11 @@ const SchedulePage = () => {
         let firstRow = [];
         for (let i = 0; i < startingDates.length + 1; i++) {
           if (i === 0) {
-            firstRow.push(<div className="schedule-movie-title"></div>);
+            firstRow.push(<div className="schedule-movie-detail"/>);
           } else {
-            firstRow.push(<div>
-              <div className="schedule-item">{getDayNameFromDate(startingDates[i - 1])}</div>
-              <div className="schedule-item">{formatDateWithDecimals(startingDates[i - 1])}</div>
+            firstRow.push(<div className="schedule-item schedule-date-item">
+              <div className="schedule-day">{getDayNameFromDate(startingDates[i - 1])}</div>
+              <div className="schedule-date">{formatDateWithDecimals(startingDates[i - 1])}</div>
             </div>)
           }
         }
@@ -90,12 +90,14 @@ const SchedulePage = () => {
         const foundedMovie = playedMovies.find(movie => {
           return movie["id"] === movieId;
         });
-
         if (foundedMovie) {
-          return `${foundedMovie["title"]} ${getYearFromDate(foundedMovie["release_date"])} (${foundedMovie["runtime"]} min)`;
+          return (
+              <div className="schedule-item schedule-movie-detail">
+                <div className="schedule-movie-title">{foundedMovie["title"]}</div>
+                <div className="schedule-movie-year">{`${getYearFromDate(foundedMovie["release_date"])}`}<span className="schedule-movie-runtime">{"   "}{`${foundedMovie["runtime"]} min`}</span></div>
+              </div>);
         }
-
-        return "Not found";
+        return <div/>;
       };
 
       const schedule = () => {
@@ -108,8 +110,7 @@ const SchedulePage = () => {
 
           for (let j = 0; j < startingDates.length + 1; j++) {
             if (j === 0) {
-              movieRow.push(<div
-                  className="schedule-item schedule-movie-title">{findMovieDetails(playedMovies, movieIds[i])}</div>);
+              movieRow.push(findMovieDetails(playedMovies, movieIds[i]));
             } else {
               movieRow.push(findShows(shows, movieIds[i], startingDates[j - 1]));
             }
@@ -164,7 +165,7 @@ const SchedulePage = () => {
 const mainColumnStyle = {
   display: "flex",
   flexFlow: "row wrap",
-  height: "1500px",
+  height: "1200px",
   padding: "0"
 }
 
