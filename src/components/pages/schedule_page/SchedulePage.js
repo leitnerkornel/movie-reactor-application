@@ -77,7 +77,6 @@ const SchedulePage = () => {
       };
 
       const schedule = () => {
-        /*console.log(getDayNameFromDate(startingDates[2]));*/
         let rows = [];
 
         rows.push(scheduleFirstRow());
@@ -112,8 +111,11 @@ const SchedulePage = () => {
                     <div className="cover-container">
                       {playedMovies.map((movie) => (
                           <div className="cover-item">
-                            <img className="cover-img-top"
-                                 src={`${API_URL_PICTURE}${IMAGE_SIZES["poster_sizes"][2]}${movie["poster_path"]}`} alt=""/>
+                            <Link to={`/movie/${movie["id"]}`}>
+                              <img className="cover-img-top"
+                                   src={`${API_URL_PICTURE}${IMAGE_SIZES["poster_sizes"][2]}${movie["poster_path"]}`}
+                                   alt=""/>
+                            </Link>
                           </div>
                       ))}
                     </div>
