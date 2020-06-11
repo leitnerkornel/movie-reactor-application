@@ -86,6 +86,18 @@ const SchedulePage = () => {
         return <div className="schedule-item schedule-show-item"/>;
       };
 
+      const findMovieDetails = (playedMovies, movieId) => {
+        const foundedMovie = playedMovies.find(movie => {
+          return movie["id"] === movieId;
+        });
+
+        if (foundedMovie) {
+          return `${foundedMovie["title"]} ${getYearFromDate(foundedMovie["release_date"])} (${foundedMovie["runtime"]} min)`;
+        }
+
+        return "Not found";
+      };
+
       const schedule = () => {
         let rows = [];
 
@@ -96,7 +108,8 @@ const SchedulePage = () => {
 
           for (let j = 0; j < startingDates.length + 1; j++) {
             if (j === 0) {
-              movieRow.push(<div className="schedule-item schedule-movie-title">{movieIds[i]}</div>);
+              movieRow.push(<div
+                  className="schedule-item schedule-movie-title">{findMovieDetails(playedMovies, movieIds[i])}</div>);
             } else {
               movieRow.push(findShows(shows, movieIds[i], startingDates[j - 1]));
             }
