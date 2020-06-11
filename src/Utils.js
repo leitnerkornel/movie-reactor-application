@@ -37,3 +37,8 @@ export const getDayNameFromDate = (date) => {
   const dateObject = new Date(date);
   return DAYS[dateObject.getDay()];
 };
+
+export const formatTime = (time) => {
+  let timeParts = time.split(":");
+  return `${timeParts[0]}:${timeParts[1]}`;
+};
