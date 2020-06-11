@@ -127,7 +127,7 @@ const SeatLayout = (props) => {
                         <ShowTime time={startingTime}/>
                         <ShowDate date={startingDate}/>
                         <RuntimeElement runtime={runtime}/>
-                        <SeatingChart rows={numberOfRows} columns={seatsPerNumberOfRows} />
+                        <SeatingChart rows={numberOfRows} columns={seatsPerNumberOfRows} screeningId={screeningId} />
                     </div>
                     <h1>{title}</h1>
                 </div>
