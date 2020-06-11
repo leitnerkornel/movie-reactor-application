@@ -8,25 +8,19 @@ import TheaterSeat from "./TheaterSeat";
 
 const SeatingChart = (props) => {
 
-    let rows = [];
-    for (let i = 0; i < props.rows; i++) {
-        rows.push(
-            <TheaterSeat key={`seat-${i}`}/>
-            )
-    }
-    let columns = [];
+    let columns = [[]];
     for (let i = 0; i < props.columns; i++) {
-        columns.push(
-            <div key={`column-${i}`}>
-                {rows}
-                <p/>
-            </div>
-    );
+            let row = []
+            for (let j=0; j <props.rows; j++) {
+                row.push(<TheaterSeat key={`row-${i}-seat-${j}`} row={j} column={i}/>)
+            }
+        columns.push(<>{row} <p/></>)
     }
-
 
     return (
-        <div style={mainCardStyle} key="seating-chart" className="card-deck m-auto">
+        <div style={mainCardStyle}
+             key="seating-chart"
+             className="card-deck m-auto">
             {columns}
         </div>
     )
