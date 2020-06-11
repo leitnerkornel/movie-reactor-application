@@ -12,7 +12,7 @@ const SeatingChart = (props) => {
     let occupiedSeatString = "fa-square";
 
     let [occupiedSeats, setOccupiedSeats] = useState(null);
-    let occupiedSeatsMap = new Map();
+    let occupiedSeatsMap = new Map(); // key: row; value: column
 
     let columns = [[]];
     for (let i = 0; i < props.columns; i++) {
@@ -48,31 +48,38 @@ const SeatingChart = (props) => {
                     occupiedSeatsMap.set(currentKey, currentValue);
                 }
             }
-            // // console.log("map")
-            // console.log(occupiedSeatsMap);
-            // // console.log(occupiedSeats[0]);
         }
     }
 
     getOccupiedSeats();
 
 
+    // key: row; value: column
     const setSeatOccupied = () => {
         let seats = document.querySelectorAll(".theater-seat");
         if (occupiedSeatsMap.size > 0) {
-            console.log(occupiedSeatsMap)
-            // seats.forEach((seat) => {
-            //     let seatRow = seat.getAttribute("data-row"); // convert to number!!!
-            //     let seatColumn = seat.getAttribute("data-column"); // convert to number!!!
+            seats.forEach((seat) => {
+                // console.log(seat)
+                let seatRow = seat.getAttribute("data-row").toString(); // convert to number!!!
+                let seatColumn = seat.getAttribute("data-column").toString(); // convert to number!!!
 
+                // console.log(occupiedSeatsMap)
 
-                // occupiedSeats[0].forEach((currentOccupied) => {
-                //     console.log(currentOccupied);
-                //     currentOccupied.forEach((actualFilled) => {
-                //         console.log(actualFilled.seat);
-                //     })
-                // })
-            // })
+                if (occupiedSeatsMap.get(seatRow) !== undefined) {
+                    let currentRowSeatsTaken = occupiedSeatsMap.get(seatRow);
+                    if (currentRowSeatsTaken.indexOf(seatColumn) !== -1) {
+                        // console.log(seat.classList)
+                        if (seat.classList.contains(freeSeatString)) {
+                            // console.log("contains");
+                            seat.classList.add(occupiedSeatString);
+                            seat.classList.remove(freeSeatString);
+
+                            seat.style.color ="#e6b31e";
+                            seat.style.opacity = "0.5";
+                        }
+                    }
+                }
+            })
         }
     }
 
