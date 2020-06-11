@@ -16,7 +16,6 @@ const TheaterSeat = (props) => {
         }
     }
 
-
     return (
         <div>
             <i className="theater-seat fa fa-square-o" aria-hidden="true"
