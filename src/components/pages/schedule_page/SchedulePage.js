@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
+import { uuid } from 'uuidv4';
 
 import HorizontalLine from "../../movie_detail_page/FirstRow";
 
@@ -21,6 +22,7 @@ const SchedulePage = () => {
       const [movieIds, setMovieIds] = useState([]);
       const [shows, setShows] = useState([]);
       const [startingDates, setStartingDates] = useState([]);
+      // For now is unnecessary, but will be useful if we need calculate with the starting dates.
       const [startingTimes, setStartingTimes] = useState([]);
       const [playedMovies, setPlayedMovies] = useState([])
 
@@ -54,16 +56,16 @@ const SchedulePage = () => {
         let firstRow = [];
         for (let i = 0; i < startingDates.length + 1; i++) {
           if (i === 0) {
-            firstRow.push(<div className="schedule-movie-detail"/>);
+            firstRow.push(<div key={uuid()} className="schedule-movie-detail"/>);
           } else {
-            firstRow.push(<div className="schedule-item schedule-date-item">
+            firstRow.push(<div key={uuid()} className="schedule-item schedule-date-item">
               <div className="schedule-day">{getDayNameFromDate(startingDates[i - 1])}</div>
               <div className="schedule-date">{formatDateWithDecimals(startingDates[i - 1])}</div>
             </div>)
           }
         }
 
-        return (<div className="schedule-row-item schedule-first-row">{firstRow}</div>);
+        return (<div key={uuid()} className="schedule-row-item schedule-first-row">{firstRow}</div>);
 
       };
 
@@ -73,9 +75,8 @@ const SchedulePage = () => {
         })
         // If there is one movie on the same day in two different time - Here we can process it! Map through them instead of display one item.
         if (foundedShows) {
-          console.log(foundedShows);
           return (
-              <div className="schedule-item schedule-show-item">
+              <div key={uuid()} className="schedule-item schedule-show-item">
                 <Link to={`/reserve/${foundedShows["id"]}`}>
                   <div className="schedule-starting-time">
                     {formatTime(foundedShows["startingTime"])}
@@ -92,12 +93,13 @@ const SchedulePage = () => {
         });
         if (foundedMovie) {
           return (
-              <div className="schedule-item schedule-movie-detail">
+              <div key={uuid()} className="schedule-item schedule-movie-detail">
                 <div className="schedule-movie-title">{foundedMovie["title"]}</div>
-                <div className="schedule-movie-year">{`${getYearFromDate(foundedMovie["release_date"])}`}<span className="schedule-movie-runtime">{"   "}{`${foundedMovie["runtime"]} min`}</span></div>
+                <div className="schedule-movie-year">{`${getYearFromDate(foundedMovie["release_date"])}`}<span
+                    className="schedule-movie-runtime">{"   "}{`${foundedMovie["runtime"]} min`}</span></div>
               </div>);
         }
-        return <div/>;
+        return <div key={uuid()}/>;
       };
 
       const schedule = () => {
@@ -115,7 +117,7 @@ const SchedulePage = () => {
               movieRow.push(findShows(shows, movieIds[i], startingDates[j - 1]));
             }
           }
-          rows.push(<div className="schedule-row-item schedule-movie-row">{movieRow}</div>);
+          rows.push(<div key={uuid()} className="schedule-row-item schedule-movie-row">{movieRow}</div>);
         }
 
         return rows;
@@ -134,7 +136,7 @@ const SchedulePage = () => {
                   <div className="col-md-12 cover-container-column">
                     <div className="cover-container">
                       {playedMovies.map((movie) => (
-                          <div className="cover-item">
+                          <div key={uuid()} className="cover-item">
                             <Link to={`/movie/${movie["id"]}`}>
                               <img className="cover-img-top"
                                    src={`${API_URL_PICTURE}${IMAGE_SIZES["poster_sizes"][2]}${movie["poster_path"]}`}
