@@ -3,7 +3,14 @@ import {Link} from "react-router-dom";
 
 import HorizontalLine from "../../movie_detail_page/FirstRow";
 
-import {checkStatus, formatTime, getDayNameFromDate, parseJSON} from "../../../Utils";
+import {
+  checkStatus,
+  formatDateWithDecimals,
+  formatTime,
+  getDayNameFromDate,
+  getYearFromDate,
+  parseJSON
+} from "../../../Utils";
 import {API_KEY, API_SCHEDULE_URL, API_URL_MOVIE, API_URL_PICTURE, IMAGE_SIZES} from "../../../Constants";
 
 import axios from "axios";
@@ -47,9 +54,12 @@ const SchedulePage = () => {
         let firstRow = [];
         for (let i = 0; i < startingDates.length + 1; i++) {
           if (i === 0) {
-            firstRow.push(<div className="schedule-item">Empty element</div>);
+            firstRow.push(<div className="schedule-movie-title"></div>);
           } else {
-            firstRow.push(<div className="schedule-item">{startingDates[i - 1]}</div>)
+            firstRow.push(<div>
+              <div className="schedule-item">{getDayNameFromDate(startingDates[i - 1])}</div>
+              <div className="schedule-item">{formatDateWithDecimals(startingDates[i - 1])}</div>
+            </div>)
           }
         }
 

@@ -73,7 +73,8 @@
 }
 
 .schedule-movie-title {
-
+    text-align: left;
+    width: 300px;
 }
 
 .schedule-starting-time {
