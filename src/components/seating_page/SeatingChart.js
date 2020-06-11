@@ -8,11 +8,15 @@ import TheaterSeat from "./TheaterSeat";
 
 const SeatingChart = (props) => {
 
-    let freeSeatString = "fa-square-o";
-    let occupiedSeatString = "fa-square";
+    let freeSeatClass = "fa-square-o";
+    let occupiedSeatClass = "fa-square";
+    let ownReserveSeatClass = "fa-plus-square";
+
+    let reactorYellow = "#e6b31e";
 
     let [occupiedSeats, setOccupiedSeats] = useState(null);
     let occupiedSeatsMap = new Map(); // key: row; value: column
+    let seats = document.querySelectorAll(".theater-seat");
 
     let columns = [[]];
     for (let i = 0; i < props.columns; i++) {
@@ -24,7 +28,7 @@ const SeatingChart = (props) => {
     }
 
     useEffect(() => {
-        // window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
         axios
             .get(`http://localhost:8080/reserved-seats/show/${props.screeningId}`)
             .then((res) => {
@@ -53,37 +57,32 @@ const SeatingChart = (props) => {
 
     getOccupiedSeats();
 
+    function drawOccupiedSeats(seat) {
+        let seatRow = seat.getAttribute("data-row").toString();
+        let seatColumn = seat.getAttribute("data-column").toString();
+        if (occupiedSeatsMap.get(seatRow) !== undefined) {
+            let currentRowSeatsTaken = occupiedSeatsMap.get(seatRow);
+            if (currentRowSeatsTaken.indexOf(seatColumn) !== -1) {
+                if (seat.classList.contains(freeSeatClass)) {
+                    seat.classList.add(occupiedSeatClass);
+                    seat.classList.remove(freeSeatClass);
+                    seat.style.color = reactorYellow;
+                    seat.style.opacity = "0.5";
+                }
+            }
+        }
+    }
 
     // key: row; value: column
-    const setSeatOccupied = () => {
-        let seats = document.querySelectorAll(".theater-seat");
+    const seatsSetup = () => {
         if (occupiedSeatsMap.size > 0) {
             seats.forEach((seat) => {
-                // console.log(seat)
-                let seatRow = seat.getAttribute("data-row").toString(); // convert to number!!!
-                let seatColumn = seat.getAttribute("data-column").toString(); // convert to number!!!
-
-                // console.log(occupiedSeatsMap)
-
-                if (occupiedSeatsMap.get(seatRow) !== undefined) {
-                    let currentRowSeatsTaken = occupiedSeatsMap.get(seatRow);
-                    if (currentRowSeatsTaken.indexOf(seatColumn) !== -1) {
-                        // console.log(seat.classList)
-                        if (seat.classList.contains(freeSeatString)) {
-                            // console.log("contains");
-                            seat.classList.add(occupiedSeatString);
-                            seat.classList.remove(freeSeatString);
-
-                            seat.style.color ="#e6b31e";
-                            seat.style.opacity = "0.5";
-                        }
-                    }
-                }
+                drawOccupiedSeats(seat);
             })
         }
     }
 
-    setSeatOccupied();
+    seatsSetup();
 
     return (
         <div style={mainCardStyle}
