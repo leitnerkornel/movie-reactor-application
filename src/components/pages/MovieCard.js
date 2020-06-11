@@ -28,7 +28,7 @@ export default function MovieCard(props) {
           setBackdrop(res.data['backdrop_path']);
           setPoster(res.data['poster_path']);
         });
-  });
+  },[currentMovieURL]);
 
   let setFlipCard = (e) => {
     e.preventDefault();
