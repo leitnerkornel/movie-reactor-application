@@ -94,7 +94,9 @@ const SchedulePage = () => {
         if (foundedMovie) {
           return (
               <div key={uuid()} className="schedule-item schedule-movie-detail">
-                <div className="schedule-movie-title">{foundedMovie["title"]}</div>
+                <Link to={`/movie/${foundedMovie["id"]}`}>
+                  <div className="schedule-movie-title">{foundedMovie["title"]}</div>
+                </Link>
                 <div className="schedule-movie-year">{`${getYearFromDate(foundedMovie["release_date"])}`}<span
                     className="schedule-movie-runtime">{"   "}{`${foundedMovie["runtime"]} min`}</span></div>
               </div>);
