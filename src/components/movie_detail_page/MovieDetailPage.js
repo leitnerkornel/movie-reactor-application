@@ -13,7 +13,7 @@ import Overview from "./Overview";
 import LoadingEmptyScreen from "./LoadingEmptyScreen";
 import InvalidIdScreen from "./InvalidIdScreen";
 
-import {API_KEY, API_URL_MOVIE, IMAGE_SIZES} from "../../Constants";
+import {API_KEY, API_SCHEDULED_MOVIES_URL, API_URL_MOVIE, IMAGE_SIZES} from "../../Constants";
 import {getMovieIdFromUrl} from "../../Utils";
 
 const MovieDetailPage = () => {
@@ -24,6 +24,8 @@ const MovieDetailPage = () => {
 
   const [unavailable, setUnavailable] = useState(true);
   const [loaded, setLoaded] = useState(false);
+
+  const [isScheduledMovie, setIsScheduledMovie] = useState(false)
 
   const [movieObject, setMovieObject] = useState({})
   const [backdrop, setBackdrop] = useState(null);
@@ -86,7 +88,14 @@ const MovieDetailPage = () => {
             setLoaded(true);
           }
         });
-  }, [movieUrl, videoUrl]);
+    axios
+        .get(API_SCHEDULED_MOVIES_URL)
+        .then(res => {
+          console.log(typeof res.data.map(movie => movie.id)[0]);
+          console.log(typeof movieId);
+          setIsScheduledMovie(res.data.map(movie => movie.id).includes(parseInt(movieId)));
+        })
+  }, [movieUrl, videoUrl, movieId]);
 
   if (unavailable && loaded) {
     return (
@@ -108,6 +117,7 @@ const MovieDetailPage = () => {
             <FirstRow/>
             <div className="row no-gutters">
               <CoverPicture size={IMAGE_SIZES.backdrop_sizes[3]}
+                            onSchedule={isScheduledMovie}
                             backdrop={backdrop}/>
             </div>
             <div className="row no-gutters" style={{padding: "0"}}>
