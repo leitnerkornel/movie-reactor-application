@@ -13,24 +13,19 @@ import Overview from "./Overview";
 import LoadingEmptyScreen from "./LoadingEmptyScreen";
 import InvalidIdScreen from "./InvalidIdScreen";
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-
-const IMAGE_SIZES = {
-  backdrop_sizes: ["w300", "w780", "w1280", "original"],
-  logo_sizes: ["w45", "w92", "w154", "w185", "w300", "w500", "original"],
-  poster_sizes: ["w92", "w154", "w185", "w342", "w500", "w780", "original"],
-};
+import {API_KEY, API_SCHEDULED_MOVIES_URL, API_URL_MOVIE, IMAGE_SIZES} from "../../Constants";
+import {getMovieIdFromUrl} from "../../Utils";
 
 const MovieDetailPage = () => {
 
-  const getMovieIdFromUrl = () => {
-    let urlFragments = window.location.href.split("/");
-    return urlFragments[urlFragments.length - 1];
-  };
   let movieId = getMovieIdFromUrl();
+  let movieUrl = `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`;
+  let videoUrl = `${API_URL_MOVIE}${movieId}/videos?api_key=${API_KEY}`;
 
   const [unavailable, setUnavailable] = useState(true);
   const [loaded, setLoaded] = useState(false);
+
+  const [isScheduledMovie, setIsScheduledMovie] = useState(false)
 
   const [movieObject, setMovieObject] = useState({})
   const [backdrop, setBackdrop] = useState(null);
@@ -51,9 +46,7 @@ const MovieDetailPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
     axios
-        .get(
-            `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`
-        )
+        .get(videoUrl)
         .then((res) => {
           if (res.data.results.length === 0) {
             setYoutubeTrailer('no-trailer');
@@ -62,7 +55,7 @@ const MovieDetailPage = () => {
           }
         });
     axios
-        .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`)
+        .get(movieUrl)
         .then((res) => {
           setMovieObject(res.data);
           setBackdrop(res.data["backdrop_path"]);
@@ -95,7 +88,14 @@ const MovieDetailPage = () => {
             setLoaded(true);
           }
         });
-  }, [movieId]);
+    axios
+        .get(API_SCHEDULED_MOVIES_URL)
+        .then(res => {
+          console.log(typeof res.data.map(movie => movie.id)[0]);
+          console.log(typeof movieId);
+          setIsScheduledMovie(res.data.map(movie => movie.id).includes(parseInt(movieId)));
+        })
+  }, [movieUrl, videoUrl, movieId]);
 
   if (unavailable && loaded) {
     return (
@@ -103,7 +103,7 @@ const MovieDetailPage = () => {
     );
   } else if (unavailable && !loaded) {
     return (
-      <LoadingEmptyScreen/>
+        <LoadingEmptyScreen/>
     );
   }
 
@@ -117,6 +117,7 @@ const MovieDetailPage = () => {
             <FirstRow/>
             <div className="row no-gutters">
               <CoverPicture size={IMAGE_SIZES.backdrop_sizes[3]}
+                            onSchedule={isScheduledMovie}
                             backdrop={backdrop}/>
             </div>
             <div className="row no-gutters" style={{padding: "0"}}>

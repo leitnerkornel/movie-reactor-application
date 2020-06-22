@@ -1,4 +1,5 @@
 import React from 'react';
+import {API_URL_PICTURE} from "../../Constants";
 
 const PosterPicture = (props) => {
 
@@ -7,7 +8,7 @@ const PosterPicture = (props) => {
     if (props.poster === null) {
         imageSource = "/images/no_poster.png";
     } else {
-        imageSource = `https://image.tmdb.org/t/p/${props.imageSize}${props.poster}`
+        imageSource = `${API_URL_PICTURE}${props.imageSize}${props.poster}`
     }
 
     return (
