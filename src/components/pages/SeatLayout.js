@@ -22,25 +22,11 @@ const SeatLayout = (props) => {
     const [startingDate, setStartingDate] = useState(null);
     const [numberOfRows, setNumberOfRows] = useState(0);
     const [seatsPerNumberOfRows, setSeatsPerNumberOfRows] = useState(0);
-    // const [unavailable, setUnavailable] = useState(true);
-    // const [loaded, setLoaded] = useState(false);
     const [auditorium, setAuditorium] = useState("");
-
-    // const [movieObject, setMovieObject] = useState({})
     const [backdrop, setBackdrop] = useState(null);
-    // const [poster, setPoster] = useState("");
     const [title, setTitle] = useState("");
-    // const [popularity, setPopularity] = useState("");
-    // const [voteAvg, setVoteAvg] = useState("");
     const [releaseDate, setReleaseDate] = useState("");
-    // const [genres, setGenres] = useState([]);
-    // const [homepage, setHomepage] = useState("");
     const [runtime, setRuntime] = useState("");
-    // const [spokenLanguages, setSpokenLanguages] = useState([]);
-    // const [imdbId, setImdbId] = useState("");
-    // const [youtubeTrailer, setYoutubeTrailer] = useState("");
-    // const [overview, setOverview] = useState("");
-    // const [tagline, setTagline] = useState("");
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -61,42 +47,14 @@ const SeatLayout = (props) => {
     useEffect(() => {
         if (movieId) {
             movieUrl = `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`;
-            // let videoUrl = `${API_URL_MOVIE}${movieId}/videos?api_key=${API_KEY}`;
             axios
                 .get(movieUrl)
                 .then((res) => {
-                    // console.log(startingTime);
-                    // setMovieObject(res.data);
                     setBackdrop(res.data["backdrop_path"]);
-                    // setPoster(res.data["poster_path"]);
                     setTitle(res.data["title"]);
-                    // setPopularity(res.data["popularity"]);
-                    // setVoteAvg(res.data["vote_average"]);
                     setReleaseDate(res.data["release_date"]);
-                    // setGenres(
-                    //     res.data["genres"].map((item) => {
-                    //         return item["name"];
-                    //     })
-                    // );
-                    // setHomepage(res.data["homepage"]);
                     setRuntime(res.data["runtime"]);
-                    // setSpokenLanguages(
-                    //     res.data["spoken_languages"].map((item) => {
-                    //         return item["name"];
-                    //     })
-                    // );
-                    // setImdbId(res.data["imdb_id"]);
-                    // setOverview(res.data["overview"]);
-                    // setTagline(res.data["tagline"]);
-                    //
-                    // setUnavailable(false);
                 })
-            // .catch(err => {
-            //     if (err.response.status === 404) {
-            //         setUnavailable(true);
-            //         setLoaded(true);
-            //     }
-            // });
         }
     }, [movieId]);
 
