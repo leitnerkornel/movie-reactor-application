@@ -14,15 +14,16 @@ const SeatingChart = (props) => {
 
     let reactorYellow = "#e6b31e";
 
-    let [occupiedSeats, setOccupiedSeats] = useState(props.reservedSeats);
+    let occupiedSeats = props.reservedSeats;
+    let room = props.room;
     let occupiedSeatsMap = new Map(); // key: row; value: column
-    let seats = props.room.seats;
+    let seats = room.seats;
 
     let columns = [[]];
-    for (let i = 0; i < props.columns; i++) {
+    for (let i = 0; i < room.numberOfRows; i++) {
         let row = []
-        for (let j = 0; j < props.rows; j++) {
-            row.push(<TheaterSeat key={`row-${i}-seat-${j}`} row={j} column={i}/>)
+        for (let j = 0; j < room.numberOfSeatsPerRow; j++) {
+            row.push(<TheaterSeat key={`row-${i}-seat-${j}`} row={i} column={j}/>)
         }
         columns.push(<>{row} <p/></>)
     }
@@ -33,7 +34,7 @@ const SeatingChart = (props) => {
 
     const getOccupiedSeats = () => {
         if (occupiedSeats) {
-            for (let currentOccupied of occupiedSeats[0]) {
+            for (let currentOccupied of occupiedSeats) {
                 let currentSeat = currentOccupied.seat;
                 let currentKey = currentSeat["row"].toString();
                 let currentValue = currentSeat["number"].toString();
