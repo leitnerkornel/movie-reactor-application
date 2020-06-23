@@ -22,8 +22,7 @@ const SeatLayout = (props) => {
     const [startingDate, setStartingDate] = useState(null);
     const [numberOfRows, setNumberOfRows] = useState(0);
     const [seatsPerNumberOfRows, setSeatsPerNumberOfRows] = useState(0);
-    const [roomName, setRoomName] = useState("");
-    const [roomId, setRoomId] = useState(0);
+    const [auditorium, setAuditorium] = useState("");
     const [backdrop, setBackdrop] = useState(null);
     const [title, setTitle] = useState("");
     const [releaseDate, setReleaseDate] = useState("");
@@ -34,15 +33,13 @@ const SeatLayout = (props) => {
         axios // get startdate, starttime, List<reservedSeats by id>
             .get(`http://localhost:8080/show/${screeningId}`)
             .then((res) => {
-                console.log(res.data);
                 setMovieId(res.data.movie.id);
                 setStartingTime(res.data["startingTime"].substring(0,5));
-                setRoomName(res.data["room"]["name"]);
+                setAuditorium(res.data["room"]["name"]);
                 setStartingDate(res.data["startingDate"]);
-                // setSeatsPerNumberOfRows(res.data.room.numberOfSeatsPerRow);
-                // setNumberOfRows(res.data.room.numberOfRows);
-                // needs room id!!!
-                //setRoomId(res.data.room);
+                setSeatsPerNumberOfRows(res.data.room.numberOfSeatsPerRow);
+                setNumberOfRows(res.data.room.numberOfRows);
+
 
             });
     }, [])
@@ -87,12 +84,12 @@ const SeatLayout = (props) => {
                     </div>
                     <div>
                         <h1 style={titleStyle}>{title} <span className="hazy">({releaseDate.substring(0,4)})</span></h1>
-                        <Theater theater={roomName}/>
+                        <Theater theater={auditorium}/>
                         <ShowTime time={startingTime}/>
                         <ShowDate date={startingDate}/>
                         <RuntimeElement runtime={runtime}/>
                         <ScreenLine />
-                        {/*<SeatingChart roomId={roomId} screeningId={screeningId} />*/}
+                        <SeatingChart rows={numberOfRows} columns={seatsPerNumberOfRows} screeningId={screeningId} />
                         <Legends/>
                     </div>
                     <h1>{title}</h1>
