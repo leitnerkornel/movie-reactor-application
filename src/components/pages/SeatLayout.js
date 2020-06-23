@@ -22,28 +22,23 @@ const SeatLayout = (props) => {
     const [startingDate, setStartingDate] = useState(null);
     const [numberOfRows, setNumberOfRows] = useState(0);
     const [seatsPerNumberOfRows, setSeatsPerNumberOfRows] = useState(0);
-    const [roomName, setRoomName] = useState("");
-    const [roomId, setRoomId] = useState(0);
+    const [room, setRoom] = useState(null);
     const [backdrop, setBackdrop] = useState(null);
     const [title, setTitle] = useState("");
     const [releaseDate, setReleaseDate] = useState("");
     const [runtime, setRuntime] = useState("");
+    const [reservedSeats, setReservedSeats] = useState(null);
 
     useEffect(() => {
         window.scrollTo(0, 0);
         axios // get startdate, starttime, List<reservedSeats by id>
             .get(`http://localhost:8080/show/${screeningId}`)
             .then((res) => {
-                console.log(res.data);
                 setMovieId(res.data.movie.id);
-                setStartingTime(res.data["startingTime"].substring(0,5));
-                setRoomName(res.data["room"]["name"]);
-                setStartingDate(res.data["startingDate"]);
-                // setSeatsPerNumberOfRows(res.data.room.numberOfSeatsPerRow);
-                // setNumberOfRows(res.data.room.numberOfRows);
-                // needs room id!!!
-                //setRoomId(res.data.room);
-
+                setStartingTime(res.data.startingTime.substring(0,5));
+                setStartingDate(res.data.startingDate);
+                setRoom(res.data.room);
+                setReservedSeats(res.data.reservedSeats);
             });
     }, [])
 
@@ -87,12 +82,13 @@ const SeatLayout = (props) => {
                     </div>
                     <div>
                         <h1 style={titleStyle}>{title} <span className="hazy">({releaseDate.substring(0,4)})</span></h1>
-                        <Theater theater={roomName}/>
+                        {room? <Theater theater={room.name}/> : <div />}
                         <ShowTime time={startingTime}/>
                         <ShowDate date={startingDate}/>
                         <RuntimeElement runtime={runtime}/>
                         <ScreenLine />
-                        {/*<SeatingChart roomId={roomId} screeningId={screeningId} />*/}
+                        {room ? reservedSeats ?  <SeatingChart room={room} reservedSeats={reservedSeats} /> : <div /> : <div />}
+
                         <Legends/>
                     </div>
                     <h1>{title}</h1>

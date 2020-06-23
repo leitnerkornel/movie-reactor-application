@@ -14,9 +14,9 @@ const SeatingChart = (props) => {
 
     let reactorYellow = "#e6b31e";
 
-    let [occupiedSeats, setOccupiedSeats] = useState(null);
+    let [occupiedSeats, setOccupiedSeats] = useState(props.reservedSeats);
     let occupiedSeatsMap = new Map(); // key: row; value: column
-    let seats = document.querySelectorAll(".theater-seat");
+    let seats = props.room.seats;
 
     let columns = [[]];
     for (let i = 0; i < props.columns; i++) {
@@ -29,11 +29,6 @@ const SeatingChart = (props) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        axios
-            .get(`http://localhost:8080/reserved-seats/show/${props.screeningId}`)
-            .then((res) => {
-                setOccupiedSeats([res.data]);
-            });
     }, [])
 
     const getOccupiedSeats = () => {
@@ -55,7 +50,7 @@ const SeatingChart = (props) => {
         }
     }
 
-    getOccupiedSeats();
+    // getOccupiedSeats();
 
     function drawOccupiedSeats(seat) {
         let seatRow = seat.getAttribute("data-row").toString();
