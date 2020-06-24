@@ -3,7 +3,7 @@ import axios from "axios";
 import {API_URL_MOVIE, API_URL_PICTURE, API_KEY, IMAGE_SIZES} from "../../Constants";
 import {getMovieIdFromUrl} from "../../Utils";
 import SeatingPicture from "../seating_page/SeatingPicture";
-import FirstRow from "../movie_detail_page/FirstRow";
+import FirstRow from "../pages/movie_detail_page/FirstRow";
 import TheaterSeat from "./TheaterSeat";
 
 const SeatingChart = (props) => {

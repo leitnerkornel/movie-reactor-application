@@ -1,5 +1,5 @@
 import React from 'react';
-import {getYearFromDate} from "../../Utils";
+import {getYearFromDate} from "../../../Utils";
 
 const TitleGenreRatingBox = (props) => {
 

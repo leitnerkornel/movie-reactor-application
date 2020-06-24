@@ -13,8 +13,8 @@ import Overview from "./Overview";
 import LoadingEmptyScreen from "./LoadingEmptyScreen";
 import InvalidIdScreen from "./InvalidIdScreen";
 
-import {API_KEY, API_SCHEDULED_MOVIES_URL, API_URL_MOVIE, IMAGE_SIZES} from "../../Constants";
-import {getMovieIdFromUrl} from "../../Utils";
+import {API_KEY, API_SCHEDULED_MOVIES_URL, API_URL_MOVIE, IMAGE_SIZES} from "../../../Constants";
+import {getMovieIdFromUrl} from "../../../Utils";
 
 const MovieDetailPage = () => {
 
@@ -91,9 +91,7 @@ const MovieDetailPage = () => {
     axios
         .get(API_SCHEDULED_MOVIES_URL)
         .then(res => {
-          console.log(typeof res.data.map(movie => movie.id)[0]);
-          console.log(typeof movieId);
-          setIsScheduledMovie(res.data.map(movie => movie.id).includes(parseInt(movieId)));
+          setIsScheduledMovie(res.data.map(movie => movie["movieDbId"]).includes(parseInt(movieId)));
         })
   }, [movieUrl, videoUrl, movieId]);
 

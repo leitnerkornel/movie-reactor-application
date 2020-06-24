@@ -4,7 +4,7 @@ import {ThemeProvider} from "styled-components";
 import Menu from "./components/layout/Menu";
 
 import SelectionPage from "./components/pages/SelectionPage";
-import MovieDetailPage from "./components/movie_detail_page/MovieDetailPage";
+import MovieDetailPage from "./components/pages/movie_detail_page/MovieDetailPage";
 import SchedulePage from "./components/pages/schedule_page/SchedulePage";
 
 import {WatchlistProvider} from "./components/context/WatchlistContext";

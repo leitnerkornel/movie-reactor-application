@@ -3,7 +3,7 @@ import axios from "axios";
 import {API_URL_MOVIE, API_KEY, IMAGE_SIZES} from "../../Constants";
 import {getMovieIdFromUrl} from "../../Utils";
 import SeatingPicture from "../seating_page/SeatingPicture";
-import FirstRow from "../movie_detail_page/FirstRow";
+import FirstRow from "./movie_detail_page/FirstRow";
 import SeatingChart from "../seating_page/SeatingChart";
 import ShowTime from "../seating_page/ShowTime";
 import ShowDate from "../seating_page/ShowDate";
