@@ -1,5 +1,5 @@
 import React from 'react';
-import {API_URL_PICTURE} from "../../Constants";
+import {API_URL_PICTURE} from "../../../Constants";
 import {Link} from "react-router-dom";
 
 const CoverPicture = (props) => {
