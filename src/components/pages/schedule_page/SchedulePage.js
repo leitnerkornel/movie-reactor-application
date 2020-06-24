@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
-import { uuid } from 'uuidv4';
+import {uuid} from 'uuidv4';
 
 import HorizontalLine from "../../movie_detail_page/FirstRow";
 
@@ -31,8 +31,16 @@ const SchedulePage = () => {
         axios
             .get(API_SCHEDULE_URL)
             .then((res) => {
-              setMovieIds([...new Set(res.data.map(item => item["movie"]["id"]))]);
-              setShows([...res.data.map(item => item)]);
+              setMovieIds([...new Set(res.data.map(item => item["movie"]["movieDbId"]))]);
+              res.data.map(show => (
+                  setShows(prevState => [...prevState,
+                    {
+                      showId: show["id"],
+                      startingDate: show["startingDate"],
+                      startingTime: show["startingTime"],
+                      movie: show["movie"]
+                    }])
+              ));
               setStartingDates([...new Set(res.data.map(item => item["startingDate"]))]);
               setStartingTimes([...new Set(res.data.map(item => item["startingTime"]))]);
             })
@@ -64,20 +72,18 @@ const SchedulePage = () => {
             </div>)
           }
         }
-
         return (<div key={uuid()} className="schedule-row-item schedule-first-row">{firstRow}</div>);
-
       };
 
       const findShows = (shows, movieId, startingDate) => {
         const foundedShows = shows.find(show => {
-          return show["movie"]["id"] === movieId && show["startingDate"] === startingDate;
+          return show["movie"]["movieDbId"] === movieId && show["startingDate"] === startingDate;
         })
         // If there is one movie on the same day in two different time - Here we can process it! Map through them instead of display one item.
         if (foundedShows) {
           return (
               <div key={uuid()} className="schedule-item schedule-show-item">
-                <Link to={`/reserve/${foundedShows["id"]}`}>
+                <Link to={`/reserve/${foundedShows["showId"]}`}>
                   <div className="schedule-starting-time">
                     {formatTime(foundedShows["startingTime"])}
                   </div>
