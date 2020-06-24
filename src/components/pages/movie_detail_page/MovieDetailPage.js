@@ -91,9 +91,7 @@ const MovieDetailPage = () => {
     axios
         .get(API_SCHEDULED_MOVIES_URL)
         .then(res => {
-          console.log(typeof res.data.map(movie => movie.id)[0]);
-          console.log(typeof movieId);
-          setIsScheduledMovie(res.data.map(movie => movie.id).includes(parseInt(movieId)));
+          setIsScheduledMovie(res.data.map(movie => movie["movieDbId"]).includes(parseInt(movieId)));
         })
   }, [movieUrl, videoUrl, movieId]);
 
