@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {uuid} from 'uuidv4';
 
-import HorizontalLine from "../../movie_detail_page/FirstRow";
+import HorizontalLine from "../movie_detail_page/FirstRow";
 
 import {
   checkStatus,

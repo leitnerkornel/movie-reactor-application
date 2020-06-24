@@ -13,8 +13,8 @@ import Overview from "./Overview";
 import LoadingEmptyScreen from "./LoadingEmptyScreen";
 import InvalidIdScreen from "./InvalidIdScreen";
 
-import {API_KEY, API_SCHEDULED_MOVIES_URL, API_URL_MOVIE, IMAGE_SIZES} from "../../Constants";
-import {getMovieIdFromUrl} from "../../Utils";
+import {API_KEY, API_SCHEDULED_MOVIES_URL, API_URL_MOVIE, IMAGE_SIZES} from "../../../Constants";
+import {getMovieIdFromUrl} from "../../../Utils";
 
 const MovieDetailPage = () => {
 
