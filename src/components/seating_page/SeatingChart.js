@@ -16,69 +16,65 @@ const SeatingChart = (props) => {
 
     let occupiedSeats = props.reservedSeats;
     let room = props.room;
-    let occupiedSeatsMap = new Map(); // key: row; value: column
     let seats = room.seats;
-
     let columns = [[]];
-    for (let i = 0; i < room.numberOfRows; i++) {
-        let row = []
-        for (let j = 0; j < room.numberOfSeatsPerRow; j++) {
-            row.push(<TheaterSeat key={`row-${i}-seat-${j}`} row={i} column={j}/>)
+
+    function fillSeatsTable() {
+        // create 2D array for seats
+        for (let actualRowNumber = 0; actualRowNumber < room.numberOfRows - 1; actualRowNumber++) {
+            let row = []
+            for (let actualSeatNumber = 0; actualSeatNumber < room.numberOfSeatsPerRow; actualSeatNumber++) {
+                row.push(<div>Seat here</div>)
+            }
+            columns.push(row);
         }
-        columns.push(<>{row} <p/></>)
+
+        // place seats in the array
+        let previousSeat = null;
+        for (let seat of seats) {
+            let currentRowNumber = parseInt(seat.rowNumber);
+            let currentSeatNumber = parseInt(seat.seatNumber);
+            columns[currentRowNumber - 1][currentSeatNumber - 1] = (
+                <TheaterSeat key={`row-${currentRowNumber}-seat-${currentSeatNumber}`}
+                             row={currentRowNumber}
+                             column={currentSeatNumber}
+                             id={seat.id}
+                />);
+            if (previousSeat != null) {
+                if (parseInt(previousSeat.rowNumber) < currentRowNumber + 1) {
+
+                    columns[currentRowNumber - 1][currentSeatNumber] =
+                        <p key={`element-${currentRowNumber}`} className="row no-gutters"/>;
+                }
+            }
+            previousSeat = seat;
+        }
+    }
+
+    function occupySeats() {
+        let occupiedSeatIds = [];
+        for (let occupiedSeat of occupiedSeats) {
+            occupiedSeatIds.push(parseInt(occupiedSeat.seat.id));
+        }
+
+        let allSeats = document.getElementsByClassName("theater-seat");
+
+        for (let seat of allSeats) {
+            if (occupiedSeatIds.includes(parseInt(seat.dataset.id)) && seat.classList.contains(freeSeatClass)) {
+                seat.classList.add(occupiedSeatClass);
+                seat.classList.remove(freeSeatClass);
+                seat.style.color = reactorYellow;
+                seat.style.opacity = "0.5";
+            }
+        }
     }
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [])
 
-    const getOccupiedSeats = () => {
-        if (occupiedSeats) {
-            for (let currentOccupied of occupiedSeats) {
-                let currentSeat = currentOccupied.seat;
-                let currentKey = currentSeat["row"].toString();
-                let currentValue = currentSeat["number"].toString();
-
-                if (occupiedSeatsMap.get(currentKey) !== undefined) {
-                    let valuesToCheck = occupiedSeatsMap.get(currentKey);
-                    if (valuesToCheck !== currentValue) {
-                        occupiedSeatsMap.set(currentKey, [...valuesToCheck, currentValue]);
-                    }
-                } else {
-                    occupiedSeatsMap.set(currentKey, currentValue);
-                }
-            }
-        }
-    }
-
-    // getOccupiedSeats();
-
-    function drawOccupiedSeats(seat) {
-        let seatRow = seat.getAttribute("data-row").toString();
-        let seatColumn = seat.getAttribute("data-column").toString();
-        if (occupiedSeatsMap.get(seatRow) !== undefined) {
-            let currentRowSeatsTaken = occupiedSeatsMap.get(seatRow);
-            if (currentRowSeatsTaken.indexOf(seatColumn) !== -1) {
-                if (seat.classList.contains(freeSeatClass)) {
-                    seat.classList.add(occupiedSeatClass);
-                    seat.classList.remove(freeSeatClass);
-                    seat.style.color = reactorYellow;
-                    seat.style.opacity = "0.5";
-                }
-            }
-        }
-    }
-
-    // key: row; value: column
-    const seatsSetup = () => {
-        if (occupiedSeatsMap.size > 0) {
-            seats.forEach((seat) => {
-                drawOccupiedSeats(seat);
-            })
-        }
-    }
-
-    seatsSetup();
+    fillSeatsTable();
+    occupySeats();
 
     return (
         <div style={mainCardStyle}

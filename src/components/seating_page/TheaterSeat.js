@@ -2,9 +2,6 @@ import React from "react";
 
 const TheaterSeat = (props) => {
 
-    let row = props.row+1;
-    let column = props.column+1
-
     let freeSeatClass = "fa-square-o";
     let occupiedSeatClass = "fa-square";
     let ownReserveSeatClass = "fa-plus-square";
@@ -19,10 +16,11 @@ const TheaterSeat = (props) => {
     return (
         <div>
             <i className="theater-seat fa fa-square-o" aria-hidden="true"
-               data-row={row}
-               data-column={column}
+               data-row={props.row}
+               data-column={props.column}
+               data-id={props.id}
                data-toggle="tooltip"
-               title={`Seat ${column} in row ${row}`}
+               title={`Seat ${props.column} in row ${props.row}`}
                style={seatStyle}
                 onClick={addReserveSeatListener}
             />
