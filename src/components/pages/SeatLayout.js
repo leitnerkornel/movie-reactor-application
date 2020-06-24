@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import {API_URL_MOVIE, API_URL_PICTURE, API_KEY, IMAGE_SIZES} from "../../Constants";
-import {getMovieIdFromUrl} from "../../Utils";
+import {getIdFromUrl} from "../../Utils";
 import SeatingPicture from "../seating_page/SeatingPicture";
 import FirstRow from "./movie_detail_page/FirstRow";
 import SeatingChart from "../seating_page/SeatingChart";
@@ -13,7 +13,7 @@ import ScreenLine from "../seating_page/ScreenLine";
 import Legends from "../seating_page/Legends";
 
 const SeatLayout = (props) => {
-    let screeningId = getMovieIdFromUrl();
+    let screeningId = getIdFromUrl();
     let movieUrl = "";
 
 

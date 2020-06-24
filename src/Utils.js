@@ -1,6 +1,6 @@
 import {DAYS} from "./Constants";
 
-export const getMovieIdFromUrl = () => {
+export const getIdFromUrl = () => {
   let urlFragments = window.location.href.split("/");
   return urlFragments[urlFragments.length - 1];
 };
