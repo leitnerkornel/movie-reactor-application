@@ -162,3 +162,13 @@ button:focus {
 .menu-item:focus {
     outline: 0;
 }
+
+*::-webkit-scrollbar {
+    width: 10px;
+}
+*::-webkit-scrollbar-track {
+    background: #343434;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: #6c757d;
+}

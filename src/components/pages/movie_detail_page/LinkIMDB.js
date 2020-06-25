@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {IMDB_URL} from "../../../Constants";
 
 
 const LinkIMDB = (props) => {
-    const IMDB_URL = "https://www.imdb.com/title/";
 
     return (
         <div className={"imdb-button-container"}>
