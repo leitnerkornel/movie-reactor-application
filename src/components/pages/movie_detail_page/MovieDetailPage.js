@@ -14,11 +14,11 @@ import LoadingEmptyScreen from "./LoadingEmptyScreen";
 import InvalidIdScreen from "./InvalidIdScreen";
 
 import {API_KEY, API_SCHEDULED_MOVIES_URL, API_URL_MOVIE, IMAGE_SIZES} from "../../../Constants";
-import {getMovieIdFromUrl} from "../../../Utils";
+import {getIdFromUrl} from "../../../Utils";
 
 const MovieDetailPage = () => {
 
-  let movieId = getMovieIdFromUrl();
+  let movieId = getIdFromUrl();
   let movieUrl = `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`;
   let videoUrl = `${API_URL_MOVIE}${movieId}/videos?api_key=${API_KEY}`;
 

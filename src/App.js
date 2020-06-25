@@ -12,6 +12,7 @@ import Watchlist from "./components/pages/Watchlist";
 import SeatLayout from "./components/pages/SeatLayout";
 
 import "./App.css";
+import ActorDetailPage from "./components/pages/actor_detail_page/ActorDetailPage";
 
 function App() {
 
@@ -89,6 +90,7 @@ function App() {
                       )}
                   />
                   <Route path="/movie/:id" children={<MovieDetailPage/>}/>
+                  <Route path="/actor/:id" children={<ActorDetailPage/>}/>
                   <Route path="/schedule" children={<SchedulePage/>}/>
                   <Route
                       exact

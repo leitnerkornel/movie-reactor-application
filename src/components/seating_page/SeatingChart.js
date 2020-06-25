@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {API_URL_MOVIE, API_URL_PICTURE, API_KEY, IMAGE_SIZES} from "../../Constants";
-import {getMovieIdFromUrl} from "../../Utils";
+import {getIdFromUrl} from "../../Utils";
 import SeatingPicture from "../seating_page/SeatingPicture";
 import FirstRow from "../pages/movie_detail_page/FirstRow";
 import TheaterSeat from "./TheaterSeat";
