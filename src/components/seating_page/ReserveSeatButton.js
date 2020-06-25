@@ -29,6 +29,7 @@ const ReserveSeatButton = (props) => {
             }
         )
             .then((response) => {
+                console.log(response)
                 setModalMessage(response.data ? successfulPurchaseMessage : failedPurchaseMessage)
                 let seatToModify = document.getElementsByClassName(`theater-seat fa ${ownReservedSeatClass}`);
 
@@ -48,7 +49,7 @@ const ReserveSeatButton = (props) => {
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
-                        <div className="modal-header">
+                        <div className="modal-header" >
                             <h5 className="modal-title" id="exampleModalLabel">
                                 {`Reservation for ${props.movieTitle}`}
                             </h5>

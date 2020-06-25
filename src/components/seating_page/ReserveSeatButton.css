@@ -24,9 +24,57 @@
     filter: blur(0.3px);
 }
 
+.modal {
+    left: 53.8%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+}
+
 .reserve-button:hover {
-    border: 4px solid   #e6b31e;
+    border: 4px solid #e6b31e;
     background-color: #e6b31e;
     color: #343434;
     box-shadow: rgb(230, 179, 30) 0px 0px 3px;
+}
+
+.modal-content {
+    background-color: #343434;
+    color: #e6b31e;
+    border: 1px solid rgb(230, 179, 30);
+    box-shadow: rgb(230, 179, 30) 0px 0px 15px;
+}
+
+.modal-header {
+    background-color: #e6b31e;
+    color: #343434;
+    border-bottom: 1px solid #e6b31e;
+    font-weight: bolder;
+}
+
+.modal-footer {
+    /*background-color: #e6b31e;*/
+    /*color: #343434;*/
+    border-top: 1px solid #343434;
+    min-height: 30px;
+}
+
+.btn {
+    /*border: 4px solid white;*/
+    background-color-color: #2e2e2e;
+    color: #e6b31e;
+    /*background-color: white;*/
+    padding: 5px;
+    border-radius: 2px;
+    font-weight: bold;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background: white;*/
+    /*text-shadow: rgb(230, 179, 30) 0px 0px 3px;*/
+    box-shadow: rgb(230, 179, 30) 0px 0px 3px;
+
+    bottom: 0%;
+    left: 43%;
+    /*transform: translate(-50%);*/
 }
