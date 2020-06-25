@@ -21,6 +21,14 @@ export const limitString = (inputString, titleString) => {
   return outputString;
 }
 
+export const limitNameString = (nameString, limit) => {
+  if (nameString.length > limit) {
+    return `${nameString.substring(0, limit)}...`;
+  } else {
+    return nameString;
+  }
+}
+
 export const checkStatus = (response) => {
   if (response.ok) {
     return Promise.resolve(response);

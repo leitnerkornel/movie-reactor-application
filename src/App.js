@@ -13,6 +13,7 @@ import SeatLayout from "./components/pages/SeatLayout";
 
 import "./App.css";
 import ActorDetailPage from "./components/pages/actor_detail_page/ActorDetailPage";
+// import ActorDetailPage from "./components/pages/actor_detail_page/ActorDetailPage";
 
 function App() {
 

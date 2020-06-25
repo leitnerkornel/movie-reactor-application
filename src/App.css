@@ -163,6 +163,10 @@ button:focus {
     outline: 0;
 }
 
+body {
+    background: #e6b31e;
+}
+
 *::-webkit-scrollbar {
     width: 10px;
 }

@@ -102,13 +102,14 @@ const ActorDetailPage = () => {
         </div>
       </div>
     } else {
+      let birthDayValue = birthDay ? formatDateWithDecimals(birthDay) : "";
       return <div className="actor-birth-death-container">
         <div className="actor-birth-date">
           <div className="actor-birth-date-title">
             <div className="actor-birth-date-title-text">Date of birth</div>
           </div>
           <div className="birth-death-value">
-            {formatDateWithDecimals(birthDay)}
+            {birthDayValue}
           </div>
         </div>
         {displayAge()}
