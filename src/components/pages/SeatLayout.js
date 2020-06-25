@@ -11,6 +11,7 @@ import Theater from "../seating_page/Theater";
 import RuntimeElement from "../seating_page/RuntimeElement";
 import ScreenLine from "../seating_page/ScreenLine";
 import Legends from "../seating_page/Legends";
+import ReserveSeatButton from "../seating_page/ReserveSeatButton";
 
 const SeatLayout = (props) => {
     let screeningId = getIdFromUrl();
@@ -78,6 +79,7 @@ const SeatLayout = (props) => {
                                 : <div>Reservations are loading...</div>
                             : <div>Room is loading...</div>}
                         <Legends/>
+                        <ReserveSeatButton showId={screeningId}/>
                     </div>
                     <h1>{title}</h1>
                 </div>
