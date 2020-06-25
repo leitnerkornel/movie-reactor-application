@@ -193,6 +193,8 @@ const actorsContainer = {
     justifyContent: "flex-start",
     alignItems: "center",
     padding: "15%",
+    paddingTop: "5%",
+    paddingBottom: "-7%",
     // minHeight: "800px"
     height: "1300px"
 }
