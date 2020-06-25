@@ -179,6 +179,7 @@ const mainColumnStyle = {
     display: "flex",
     flexFlow: "row wrap",
     height: "100%",
+    // height: "1500px",
     padding: "0"
 }
 
@@ -189,8 +190,11 @@ const containerStyle = {
 const actorsContainer = {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-between",
-    padding: "8%"
+    justifyContent: "flex-start",
+    alignItems: "center",
+    padding: "15%",
+    // minHeight: "800px"
+    height: "1300px"
 }
 
 export default MovieDetailPage;
