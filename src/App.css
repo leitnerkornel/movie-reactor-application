@@ -166,3 +166,13 @@ button:focus {
 body {
     background: #e6b31e;
 }
+
+*::-webkit-scrollbar {
+    width: 10px;
+}
+*::-webkit-scrollbar-track {
+    background: #343434;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: #6c757d;
+}

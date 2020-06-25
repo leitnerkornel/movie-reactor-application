@@ -1,9 +1,9 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import {API_URL_MOVIE, API_KEY, IMAGE_SIZES} from "../../Constants";
-import {getIdFromUrl} from "../../Utils";
+import {API_URL_MOVIE, API_URL_PICTURE, API_KEY, IMAGE_SIZES} from "../../Constants";
+import {getMovieIdFromUrl} from "../../Utils";
 import SeatingPicture from "../seating_page/SeatingPicture";
-import FirstRow from "./movie_detail_page/FirstRow";
+import FirstRow from "../movie_detail_page/FirstRow";
 import SeatingChart from "../seating_page/SeatingChart";
 import ShowTime from "../seating_page/ShowTime";
 import ShowDate from "../seating_page/ShowDate";
@@ -11,18 +11,18 @@ import Theater from "../seating_page/Theater";
 import RuntimeElement from "../seating_page/RuntimeElement";
 import ScreenLine from "../seating_page/ScreenLine";
 import Legends from "../seating_page/Legends";
-import ReserveSeatButton from "../seating_page/ReserveSeatButton";
 
 const SeatLayout = (props) => {
-    let screeningId = getIdFromUrl();
+    let screeningId = getMovieIdFromUrl();
     let movieUrl = "";
+
 
     const [movieId, setMovieId] = useState(null);
     const [startingTime, setStartingTime] = useState(null);
     const [startingDate, setStartingDate] = useState(null);
-    const [room, setRoom] = useState(null);
-    const [reservedSeats, setReservedSeats] = useState(null);
-
+    const [numberOfRows, setNumberOfRows] = useState(0);
+    const [seatsPerNumberOfRows, setSeatsPerNumberOfRows] = useState(0);
+    const [auditorium, setAuditorium] = useState("");
     const [backdrop, setBackdrop] = useState(null);
     const [title, setTitle] = useState("");
     const [releaseDate, setReleaseDate] = useState("");
@@ -30,14 +30,17 @@ const SeatLayout = (props) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        axios
+        axios // get startdate, starttime, List<reservedSeats by id>
             .get(`http://localhost:8080/show/${screeningId}`)
             .then((res) => {
-                setMovieId(res.data.movie.movieDbId);
-                setStartingTime(res.data.startingTime.substring(0, 5));
-                setStartingDate(res.data.startingDate);
-                setRoom(res.data.room);
-                setReservedSeats(res.data.reservedSeats);
+                setMovieId(res.data.movie.id);
+                setStartingTime(res.data["startingTime"].substring(0,5));
+                setAuditorium(res.data["room"]["name"]);
+                setStartingDate(res.data["startingDate"]);
+                setSeatsPerNumberOfRows(res.data.room.numberOfSeatsPerRow);
+                setNumberOfRows(res.data.room.numberOfRows);
+
+
             });
     }, [])
 
@@ -55,8 +58,21 @@ const SeatLayout = (props) => {
         }
     }, [movieId]);
 
+    function checkStatus(response) {
+        if (response.ok) {
+            return Promise.resolve(response);
+        } else {
+            return Promise.reject(new Error(response.statusText));
+        }
+    }
+
+    function parseJSON(response) {
+        return response.json();
+    }
+
     return (
         <div className="row no-gutters">
+
             <div className="col-2 align-self-start" style={{...mainColumnStyle, ...{backgroundColor: "#e6b31e"}}}>
             </div>
             <div className="col-9 align-self-center" style={{...mainColumnStyle, ...{backgroundColor: "#343434"}}}>
@@ -64,22 +80,17 @@ const SeatLayout = (props) => {
                     <FirstRow/>
                     <div className="row no-gutters">
                         <SeatingPicture size={IMAGE_SIZES.backdrop_sizes[3]}
-                                        backdrop={backdrop}/>
+                                      backdrop={backdrop} />
                     </div>
                     <div>
-                        <h1 style={titleStyle}>{title} <span className="hazy">({releaseDate.substring(0, 4)})</span>
-                        </h1>
-                        {room ? <Theater theater={room.name}/> : <div/>}
+                        <h1 style={titleStyle}>{title} <span className="hazy">({releaseDate.substring(0,4)})</span></h1>
+                        <Theater theater={auditorium}/>
                         <ShowTime time={startingTime}/>
                         <ShowDate date={startingDate}/>
                         <RuntimeElement runtime={runtime}/>
-                        <ScreenLine/>
-                        {room ?
-                            reservedSeats ? <SeatingChart room={room} reservedSeats={reservedSeats}/>
-                                : <div>Reservations are loading...</div>
-                            : <div>Room is loading...</div>}
+                        <ScreenLine />
+                        <SeatingChart rows={numberOfRows} columns={seatsPerNumberOfRows} screeningId={screeningId} />
                         <Legends/>
-                        <ReserveSeatButton showId={screeningId}/>
                     </div>
                     <h1>{title}</h1>
                 </div>
