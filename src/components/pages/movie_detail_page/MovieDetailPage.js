@@ -102,7 +102,7 @@ const MovieDetailPage = () => {
             .then(res => {
                 setIsScheduledMovie(res.data.map(movie => movie["movieDbId"]).includes(parseInt(movieId)));
             })
-    }, [movieUrl, videoUrl, movieId]);
+    }, [movieUrl, videoUrl, movieId, actorUrl]);
 
     if (unavailable && loaded) {
         return (
@@ -113,8 +113,6 @@ const MovieDetailPage = () => {
             <LoadingEmptyScreen/>
         );
     }
-
-    console.log(actors);
 
     return (
         <div className={"media"}>
