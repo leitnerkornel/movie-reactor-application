@@ -79,7 +79,7 @@ const SeatLayout = (props) => {
                                 : <div>Reservations are loading...</div>
                             : <div>Room is loading...</div>}
                         <Legends/>
-                        <ReserveSeatButton/>
+                        <ReserveSeatButton showId={screeningId}/>
                     </div>
                     <h1>{title}</h1>
                 </div>
