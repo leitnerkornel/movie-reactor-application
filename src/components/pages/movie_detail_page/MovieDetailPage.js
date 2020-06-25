@@ -191,7 +191,7 @@ const actorsContainer = {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "flex-start",
-    alignItems: "center",
+    // alignItems: "flex-start",
     padding: "15%",
     paddingTop: "5%",
     paddingBottom: "-7%",
