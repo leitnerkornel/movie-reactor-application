@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {WatchlistContext} from "../context/WatchlistContext";
+import {WatchlistContext} from "../../context/WatchlistContext";
 
 const AddToWatchlistButton = (props) => {
   let movie = props.movieObject;

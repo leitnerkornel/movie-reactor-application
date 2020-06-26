@@ -4,7 +4,7 @@ import {ThemeProvider} from "styled-components";
 import Menu from "./components/layout/Menu";
 
 import SelectionPage from "./components/pages/SelectionPage";
-import MovieDetailPage from "./components/movie_detail_page/MovieDetailPage";
+import MovieDetailPage from "./components/pages/movie_detail_page/MovieDetailPage";
 import SchedulePage from "./components/pages/schedule_page/SchedulePage";
 
 import {WatchlistProvider} from "./components/context/WatchlistContext";
@@ -12,6 +12,8 @@ import Watchlist from "./components/pages/Watchlist";
 import SeatLayout from "./components/pages/SeatLayout";
 
 import "./App.css";
+import ActorDetailPage from "./components/pages/actor_detail_page/ActorDetailPage";
+// import ActorDetailPage from "./components/pages/actor_detail_page/ActorDetailPage";
 
 function App() {
 
@@ -89,6 +91,7 @@ function App() {
                       )}
                   />
                   <Route path="/movie/:id" children={<MovieDetailPage/>}/>
+                  <Route path="/actor/:id" children={<ActorDetailPage/>}/>
                   <Route path="/schedule" children={<SchedulePage/>}/>
                   <Route
                       exact

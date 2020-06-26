@@ -1,6 +1,6 @@
 import {DAYS} from "./Constants";
 
-export const getMovieIdFromUrl = () => {
+export const getIdFromUrl = () => {
   let urlFragments = window.location.href.split("/");
   return urlFragments[urlFragments.length - 1];
 };
@@ -19,6 +19,14 @@ export const limitString = (inputString, titleString) => {
   }
 
   return outputString;
+}
+
+export const limitNameString = (nameString, limit) => {
+  if (nameString.length > limit) {
+    return `${nameString.substring(0, limit)}...`;
+  } else {
+    return nameString;
+  }
 }
 
 export const checkStatus = (response) => {
@@ -55,3 +63,6 @@ export const getYearFromDate = (releaseDate) => {
 export const formatDateWithDecimals = (date) => {
   return date.split("-").join(".");
 };
+
+export const getAgeIfActorAlive = birthDate => Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e+10);
+export const getAgeIfActorDead = (deathDate, birthDate) => Math.floor((new Date(deathDate) - new Date(birthDate).getTime()) / 3.15576e+10);
