@@ -113,7 +113,11 @@ const SchedulePage = () => {
                     className="schedule-movie-runtime">{"   "}{`${foundedMovie["runtime"]} min`}</span></div>
               </div>);
         }
-        return <div key={uuid()}/>;
+        return <div className="schedule-item schedule-movie-detail" key={uuid()}>
+          <div className="schedule-movie-title">
+            {"Sorry, something went wrong! We are unable to load movie details"}
+          </div>
+        </div>;
       };
 
       const schedule = () => {
