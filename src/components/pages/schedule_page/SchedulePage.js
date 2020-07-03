@@ -24,7 +24,7 @@ const SchedulePage = () => {
       const [startingDates, setStartingDates] = useState([]);
       // For now is unnecessary, but will be useful if we need calculate with the starting dates.
       const [startingTimes, setStartingTimes] = useState([]);
-      const [playedMovies, setPlayedMovies] = useState([])
+      const [playedMovies, setPlayedMovies] = useState([]);
 
       useEffect(() => {
         window.scrollTo(0, 0);
@@ -94,9 +94,15 @@ const SchedulePage = () => {
       };
 
       const findMovieDetails = (playedMovies, movieId) => {
-        const foundedMovie = playedMovies.find(movie => {
-          return movie["id"] === movieId;
-        });
+        let foundedMovie;
+        if (playedMovies.includes(undefined)) {
+          foundedMovie = undefined;
+        } else {
+          foundedMovie = playedMovies.find(movie => {
+            return movie["id"] === movieId;
+          });
+        }
+
         if (foundedMovie) {
           return (
               <div key={uuid()} className="schedule-item schedule-movie-detail">
@@ -144,13 +150,18 @@ const SchedulePage = () => {
                   <div className="col-md-12 cover-container-column">
                     <div className="cover-container">
                       {playedMovies.map((movie) => (
-                          <div key={uuid()} className="cover-item">
-                            <Link to={`/movie/${movie["id"]}`}>
-                              <img className="cover-img-top"
-                                   src={`${API_URL_PICTURE}${IMAGE_SIZES["poster_sizes"][2]}${movie["poster_path"]}`}
-                                   alt=""/>
-                            </Link>
-                          </div>
+                          movie !== undefined ?
+                              <div key={uuid()} className="cover-item">
+                                <Link to={`/movie/${movie["id"]}`}>
+                                  <img className="cover-img-top"
+                                       src={`${API_URL_PICTURE}${IMAGE_SIZES["poster_sizes"][2]}${movie["poster_path"]}`}
+                                       alt=""/>
+                                </Link>
+                              </div> : <div key={uuid()} className="cover-item">
+                                <img className="cover-img-top"
+                                     src={"/images/no_poster.png"}
+                                     alt=""/>
+                              </div>
                       ))}
                     </div>
                   </div>
