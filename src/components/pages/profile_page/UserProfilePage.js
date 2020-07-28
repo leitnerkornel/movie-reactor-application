@@ -19,7 +19,6 @@ const UserProfilePage = () => {
           {/* The center container div. There is a grid in it. */}
           <div className="container-fluid" style={{padding: "0"}}>
             <HorizontalLine/>
-            {/*Container for cover pictures*/}
             <div className="row no-gutters" style={{backgroundColor: "green"}}>
               <div className="picture-name-container">
                 <div className="picture-container">
@@ -29,8 +28,14 @@ const UserProfilePage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="name-container">
-                  <div></div>
+                <div className="details-container">
+                  <div className="username-container">
+                    <div className="username-container-div">
+                      <h1 className="user-name-title">Username</h1>
+                    </div>
+                  </div>
+                  {/*Empty div (currently a placeholder) for further user info, like: email, birthday, male, etc...*/}
+                  <div className="user-details-container"/>
                 </div>
               </div>
             </div>
