@@ -4,6 +4,7 @@ export const API_SHOW_URL = "http://localhost:8080/show/";
 export const API_SEAT_ROOM_URL = "http://localhost:8080/seat/room/";
 export const API_RESERVED_SEATS_URL = "http://localhost:8080/reserved-seats/show/";
 export const API_ROOM_URL = "http://localhost:8080/room/";
+export const API_ALL_RESERVATION_URL = "http://localhost:8080/reservation/seats"; // There are GET and POST methods for these.
 
 export const API_URL_MOVIE = "https://api.themoviedb.org/3/movie/"
 export const API_URL_PERSON = "https://api.themoviedb.org/3/person/"
