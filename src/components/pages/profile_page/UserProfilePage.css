@@ -1,0 +1,50 @@
+.picture-name-container {
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.picture-container {
+
+    width: 40%;
+    background-color: #343434;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-picture {
+    height: 80%;
+    width: 40%;
+    margin: auto;
+    top: 50%;
+    background-color: #2e2e2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-picture-frame {
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    top: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.picture {
+    height: 100%;
+    width: 100%;
+}
+
+.name-container {
+    width: 60%;
+    background-color: greenyellow;
+    height: 100%;
+}
+
