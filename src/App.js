@@ -6,7 +6,9 @@ import Menu from "./components/layout/Menu";
 import SelectionPage from "./components/pages/SelectionPage";
 import MovieDetailPage from "./components/pages/movie_detail_page/MovieDetailPage";
 import SchedulePage from "./components/pages/schedule_page/SchedulePage";
+import RegisterPage from "./components/pages/registration/RegisterPage";
 
+import {UserProvider} from "./components/context/UserContext";
 import {WatchlistProvider} from "./components/context/WatchlistContext";
 import Watchlist from "./components/pages/Watchlist";
 import SeatLayout from "./components/pages/SeatLayout";
@@ -23,6 +25,7 @@ function App() {
       <div id="outer-container">
         <Router>
           <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"}/>
+        <UserProvider>
           <WatchlistProvider>
             <main id="page-wrap">
               <ThemeProvider theme={theme}>
@@ -93,6 +96,7 @@ function App() {
                   <Route path="/movie/:id" children={<MovieDetailPage/>}/>
                   <Route path="/actor/:id" children={<ActorDetailPage/>}/>
                   <Route path="/schedule" children={<SchedulePage/>}/>
+                  <Route path="/auth/register" children={<RegisterPage/>}/>
                   <Route
                       exact
                       path="/watchlist"
@@ -107,6 +111,7 @@ function App() {
               </ThemeProvider>
             </main>
           </WatchlistProvider>
+        </UserProvider>
         </Router>
       </div>
   );
