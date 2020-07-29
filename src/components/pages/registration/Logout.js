@@ -1,6 +1,6 @@
 import {useHistory} from "react-router-dom";
 
- const LogOut = () => {
+ const Logout = () => {
 
     const history = useHistory();
 
@@ -17,4 +17,4 @@ import {useHistory} from "react-router-dom";
 
 }
 
-export default LogOut;
+export default Logout;
