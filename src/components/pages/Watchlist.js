@@ -18,6 +18,8 @@ const Watchlist = (props) => {
     return () => window.removeEventListener("resize", updateWidthAndHeight);
   });
 
+  console.log(watchlist);
+
   return (
     <div className="row media">
       <div
@@ -38,9 +40,9 @@ const Watchlist = (props) => {
         }}
       >
         {watchlist.length !== 0 ? (
-          watchlist.map((movie_id) => (
-            <div key={movie_id} className="card-deck ml-5 mr-3 mt-5">
-              <MovieCard movie_id={movie_id} />
+          watchlist.map((movie) => (
+            <div key={movie.id} className="card-deck ml-5 mr-3 mt-5">
+              <MovieCard movie={movie} />
             </div>
           ))
         ) : (

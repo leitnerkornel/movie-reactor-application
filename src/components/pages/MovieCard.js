@@ -14,10 +14,11 @@ import {
 } from "../../Constants";
 
 export default function MovieCard(props) {
-  let movie_id = props.movie_id;
-  let currentMovieURL = `${API_URL_MOVIE}${movie_id}?api_key=${API_KEY}`;
+  let movie = props.movie;
+  let movieId = movie.id;
+  let currentMovieURL = `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`;
 
-  const [isLoading, actualMovie] = Get(currentMovieURL, movie_id);
+  const [isLoading, actualMovie] = Get(currentMovieURL, movie);
   const [isFlipped, setIsFlipped] = useState(false);
 
   const [backdrop, setBackdrop] = useState("");
@@ -42,22 +43,22 @@ export default function MovieCard(props) {
 
   let addToWatchlist = (e) => {
     e.preventDefault();
-    if (!isTheMovieAdded() && !watchlist.includes(movie_id)) {
-      setWatchlist([...watchlist, movie_id]);
+    if (!isTheMovieAdded() && !watchlist.includes(movie)) {
+      setWatchlist([...watchlist, movie]);
     }
   };
 
   let removeFromWatchlist = (e) => {
     e.preventDefault();
     let filteredArray = watchlist.filter(
-      (selectedMovie) => selectedMovie.id !== movie_id
+      (selectedMovie) => selectedMovie.id !== movieId
     );
     setWatchlist(filteredArray);
   };
 
   let isTheMovieAdded = () => {
     for (let selectedMovie of watchlist) {
-      if (selectedMovie.id === movie_id) {
+      if (selectedMovie.id === movieId) {
         return true;
       }
     }
@@ -95,7 +96,7 @@ export default function MovieCard(props) {
           {"list".toUpperCase()}
         </button>
       )}
-      <Link to={`/movie/${movie_id}`} style={buttonStyle}>
+      <Link to={`/movie/${movieId}`} style={buttonStyle}>
         <button
           type="button"
           className="btn btn-secondary"
@@ -110,7 +111,7 @@ export default function MovieCard(props) {
   let mainCard = (
     <>
       <div
-        id={`${movie_id}-front`}
+        id={`${movie.id}-front`}
         className="card border-secondary mt-1 mb-3 clearfix overflow-hidden "
         style={cardStyle}
       >
@@ -177,7 +178,7 @@ export default function MovieCard(props) {
     actualMovie != null ? (
       <>
         <div
-          id={`${movie_id}-back`}
+          id={`${movie.id}-back`}
           className="card border-secondary mt-1 mb-3 clearfix overflow-hidden"
           style={cardStyle}
         >
@@ -221,7 +222,6 @@ export default function MovieCard(props) {
     </ReactCardFlip>
   );
 }
-
 const centerImage = {
   display: "block",
   marginLeft: "auto",
