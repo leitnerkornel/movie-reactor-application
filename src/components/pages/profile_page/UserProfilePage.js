@@ -6,6 +6,7 @@ import axios from "axios";
 import {uuid} from "uuidv4";
 import {API_ALL_RESERVATION_URL, API_KEY, API_URL_MOVIE} from "../../../Constants";
 import {checkStatus, formatDateWithDecimals, formatTime, parseJSON} from "../../../Utils";
+import {Link} from "react-router-dom";
 
 const UserProfilePage = () => {
   let womanPicture = "woman_profile.jpg";
@@ -73,7 +74,7 @@ const UserProfilePage = () => {
         <div className="reservation-data">{reservation["startingTime"]}</div>
         <div className="reservation-data seat-info">{`Row: ${reservation["rowNumber"]}`}</div>
         <div className="reservation-data seat-info">{`Seat: ${reservation["seatNumber"]}`}</div>
-        <div className="reservation-movie-title">{getMovieTitle(playedMovies, reservation["movieDbId"])}</div>
+        <div className="reservation-movie-title"><Link to={`/movie/${reservation["movieDbId"]}`} className="movie-link">{getMovieTitle(playedMovies, reservation["movieDbId"])}</Link></div>
         <div className="reservation-delete-button-container">
           <img className="delete-button-img" src={`/images/delete_button_64.png`} alt="Delete reservation button"/>
         </div>

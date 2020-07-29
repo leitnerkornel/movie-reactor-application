@@ -158,6 +158,10 @@
     text-align: justify;
 }
 
+.movie-link {
+    color: white;
+}
+
 
 .reservation-delete-button-container {
     display: flex;
