@@ -43,17 +43,23 @@ export default function MovieCard(props) {
 
   let addToWatchlist = (e) => {
     e.preventDefault();
-    if (!isTheMovieAdded() && !watchlist.includes(movie)) {
-      setWatchlist([...watchlist, movie]);
-    }
+    // if (!isTheMovieAdded() && !watchlist.includes(movie)) {
+    //   setWatchlist([...watchlist, movie]);
+    // }
+    axios
+      .post(`http://localhost:8080/save/${movie.id}`)
+      .then((response) => console.log(response.data));
   };
 
   let removeFromWatchlist = (e) => {
     e.preventDefault();
-    let filteredArray = watchlist.filter(
-      (selectedMovie) => selectedMovie.id !== movieId
-    );
-    setWatchlist(filteredArray);
+    axios
+      .delete(`http://localhost:8080/delete/${movie.id}`)
+      .then((response) => console.log(response.data));
+    // let filteredArray = watchlist.filter(
+    //   (selectedMovie) => selectedMovie.id !== movieId
+    // );
+    // setWatchlist(filteredArray);
   };
 
   let isTheMovieAdded = () => {
