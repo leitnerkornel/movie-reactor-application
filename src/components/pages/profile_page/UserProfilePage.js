@@ -4,10 +4,8 @@ import "./UserProfilePage.css";
 import axios from "axios";
 
 import {uuid} from "uuidv4";
-import {Link} from "react-router-dom";
-import {API_ALL_RESERVATION_URL, API_KEY, API_URL_MOVIE, API_URL_PICTURE, IMAGE_SIZES} from "../../../Constants";
-import {checkStatus, parseJSON} from "../../../Utils";
-
+import {API_ALL_RESERVATION_URL, API_KEY, API_URL_MOVIE} from "../../../Constants";
+import {checkStatus, formatDateWithDecimals, formatTime, parseJSON} from "../../../Utils";
 
 const UserProfilePage = () => {
   let womanPicture = "woman_profile.jpg";
@@ -18,17 +16,11 @@ const UserProfilePage = () => {
   const [movieDbIds, setMovieDbIds] = useState([]);
   const [playedMovies, setPlayedMovies] = useState([]);
 
-  console.log(reservations);
-  console.log(movieDbIds);
-  console.log(playedMovies);
-
-
   useEffect(() => {
     window.scrollTo(0, 0);
     axios
         .get(`${API_ALL_RESERVATION_URL}`)
         .then(res => {
-          console.log(res.data);
           setMovieDbIds([...new Set(res.data.map(item => item["movieDbId"]))]);
           setReservations(res.data);
         })
@@ -45,26 +37,49 @@ const UserProfilePage = () => {
             .catch(error => console.log('There was a problem!', error))
     ))
         .then(data => {
-          data.map((movie) => (
-              setPlayedMovies(prevState => [...prevState,
-                {
-                  movieDbId: movie["id"],
-                  movieTitle: movie["title"]
-                }])
-          ))
+          data.map((movie) => {
+            let movieObj = {};
+            movieObj[movie["id"]] = movie["title"];
+            setPlayedMovies(prevState => [...prevState,
+              movieObj])
+          })
+        })
+        .then(() => {
+          reservations.map((reservation) => {
+            reservation.push("Title");
+          })
         })
   }, [movieDbIds]);
+
+  const getMovieTitle = (movies, searchedId) => {
+    for (const movie of movies) {
+      for (const [key, value] of Object.entries(movie)) {
+        if (parseInt(key) === searchedId) {
+          return value;
+        }
+      }
+    }
+  }
 
   function displayReservations() {
     let reservationContainer = [];
     for (let reservation of reservations) {
-      reservationContainer.push(<div className="reservation-item-container">
-        <div>{reservation["startingDate"]}</div>
-        <div>{reservation["startingTime"]}</div>
-        <div>{reservation["movieDbId"]}</div>
+      reservationContainer.push(<div key={uuid()} className="reservation-item-container">
+        <div title={`Seat Id: ${reservation.id}\nShow Id: ${reservation.showId}`}
+             className="reservation-seat-picture-container">
+          <img className="reservation-seat-img" src={`/images/movie_seat_64.png`} alt="Movie seat"/>
+        </div>
+        <div className="reservation-data">{formatDateWithDecimals(reservation["startingDate"])}</div>
+        <div className="reservation-data">{reservation["startingTime"]}</div>
+        <div className="reservation-data seat-info">{`Row: ${reservation["rowNumber"]}`}</div>
+        <div className="reservation-data seat-info">{`Seat: ${reservation["seatNumber"]}`}</div>
+        <div className="reservation-movie-title">{getMovieTitle(playedMovies, reservation["movieDbId"])}</div>
+        <div className="reservation-delete-button-container">
+          <img className="delete-button-img" src={`/images/delete_button_64.png`} alt="Delete reservation button"/>
+        </div>
       </div>)
     }
-    return <div>{reservationContainer}</div>
+    return <div className="reservations-rows-container">{reservationContainer}</div>
   }
 
   return (
@@ -111,7 +126,6 @@ const UserProfilePage = () => {
                 <div className="reservations-container">
                   {displayReservations()}
                   <div className="reservations-rows-container">
-
                   </div>
                 </div>
               </div>
