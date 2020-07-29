@@ -35,10 +35,13 @@ const AddToWatchlistButton = (props) => {
 
   const removeFromWatchlist = (e) => {
     e.preventDefault();
-    let filteredArray = watchlist.filter(
-      (selectedMovie) => selectedMovie.id !== movieId
-    );
-    setWatchlist(filteredArray);
+    axios
+      .delete(`http://localhost:8080/delete/${movie.id}`)
+      .then((response) => console.log(response.data));
+    // let filteredArray = watchlist.filter(
+    //   (selectedMovie) => selectedMovie.id !== movieId
+    // );
+    // setWatchlist(filteredArray);
   };
 
   if (isTheMovieAdded()) {
