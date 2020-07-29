@@ -1,11 +1,9 @@
-import React, {useContext, useState} from "react";
-import {UserContext} from "../../context/UserContext";
+import React, {useState} from "react";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 
 const RegisterPage = () => {
 
-    const { user, setUser } = useContext(UserContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [firstname, setFirstname] = useState("");
@@ -17,7 +15,6 @@ const RegisterPage = () => {
 
     const checkResponse = (response) => {
         if (response.data.correct) {
-            setUser(response.data);
             localStorage.setItem("token", response.data.token)
             redirect();
         } else {
@@ -38,15 +35,15 @@ const RegisterPage = () => {
     return (
         <div style={login}>
             <form style={form} onSubmit={sendRequest}>
-                { (message !== "") ?
-                    <div style={message}>{message}</div> : <div> </div>}
-                    <input style={input} type="text" placeholder="firstname" onChange={event => setFirstname(event.target.value)}/>
-                    <input style={input} type="text" placeholder="lastname" onChange={event => setLastname(event.target.value)}/>
-                    <input style={input} type="text" placeholder="gender" onChange={event => setGender(event.target.value)}/>
-                    <input style={input} type="text" placeholder="email" onChange={event => setEmail(event.target.value)}/>
-                    <input style={input} type="text" placeholder="username" onChange={event => setUsername(event.target.value)}/>
-                    <input style={input} type="password" placeholder="password" onChange={event => setPassword(event.target.value)}/>
+                    <input style={input} type="text" placeholder="firstname" onChange={event => setFirstname(event.target.value)} required/>
+                    <input style={input} type="text" placeholder="lastname" onChange={event => setLastname(event.target.value)} required/>
+                    <input style={input} type="text" placeholder="gender" onChange={event => setGender(event.target.value)} required/>
+                    <input style={input} type="text" placeholder="email" onChange={event => setEmail(event.target.value)} required/>
+                    <input style={input} type="text" placeholder="username" onChange={event => setUsername(event.target.value)} required/>
+                    <input style={input} type="password" placeholder="password" onChange={event => setPassword(event.target.value)} required/>
                     <input type="submit" value="Register" style={button}/>
+                { (message !== "") ?
+                    <div className="errorMessage" style={{messageStyle}}>{message}</div> : <div className="errorMessage" style={{messageStyle}}> </div>}
             </form>
         </div>
     )
@@ -70,8 +67,8 @@ const form = {
     boxShadow: "0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24)"
 }
 
-const message = {
-    color: "#e6b31e",
+const messageStyle = {
+    color: "white",
     fontFamily: "\"Roboto\", sans-serif"
 }
 
