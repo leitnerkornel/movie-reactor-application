@@ -1,6 +1,6 @@
 import React from "react";
-import {BrowserRouter as Router, Route} from "react-router-dom";
-import {ThemeProvider} from "styled-components";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 import Menu from "./components/layout/Menu";
 
 import SelectionPage from "./components/pages/SelectionPage";
@@ -9,7 +9,7 @@ import SchedulePage from "./components/pages/schedule_page/SchedulePage";
 import RegisterPage from "./components/pages/registration/RegisterPage";
 import LoginPage from "./components/pages/registration/LoginPage";
 
-import {WatchlistProvider} from "./components/context/WatchlistContext";
+import { WatchlistProvider } from "./components/context/WatchlistContext";
 import Watchlist from "./components/pages/Watchlist";
 import SeatLayout from "./components/pages/SeatLayout";
 
@@ -19,8 +19,6 @@ import Logout from "./components/pages/registration/Logout";
 // import ActorDetailPage from "./components/pages/actor_detail_page/ActorDetailPage";
 
 function App() {
-
-
   document.title = "Movie Reactor";
   return (
       <div id="outer-container">
