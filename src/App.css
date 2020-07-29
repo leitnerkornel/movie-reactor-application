@@ -111,7 +111,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     padding-left: 5px;
     width: 100%;
     border: none;
-    border-bottom: 2px solid #343434;
+    border-bottom: 5px solid #343434;
     text-transform: uppercase;
     font-weight: bolder;
     text-align: left;
@@ -123,8 +123,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
     padding-left: 5px;
     width: 100%;
     border: none;
-    border-bottom: 2px solid #343434;
-    border-left: 1px solid #343434;
+    /*border-bottom: 20px solid #343434;*/
+    border-bottom: 5px solid #2e2e2e;
+    /*border-left: 2px solid #343434;*/
+    /*border-left: 5px solid #2e2e2e;*/
     text-transform: uppercase;
     font-weight: bolder;
     text-align: left;

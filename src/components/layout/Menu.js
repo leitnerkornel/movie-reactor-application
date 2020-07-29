@@ -41,7 +41,76 @@ export default class Menu extends Component {
                 isOpen={this.state.menuOpen}
                 onStateChange={(state) => this.handleStateChange(state)}
                 disableAutoFocus
+                // style={{top: 100 + (window.innerHeight / 1000) * window.pageYOffset}} // TODO: try to move menu position
+                // style={{marginTop: 100 + window.pageYOffset}}
             >
+                {localStorage.getItem("user") ? // TODO: check item name!
+                    (<Collapsible trigger={`WELCOME ${localStorage.getItem("user-name")}`}
+                                  className="menu-collapsible"
+                                  openedClassName="menu-collapsible-open"
+                                  overflowWhenOpen="initial"
+                    >
+                        <Link
+                            id="reservations"
+                            key="reservations"
+                            className="menu-item"
+                            to="/reservation" // TODO: check endpoint!
+                            style={{color: "red", textDecoration: "none"}}
+                            onClick={() => this.closeMenu()}
+                        >
+                            <div className="menu-button">Reservations</div>
+                        </Link>
+                        <Link
+                            id="watchlist"
+                            key="watchlist"
+                            className="menu-item"
+                            to="/watchlist"
+                            style={{color: "red", textDecoration: "none"}}
+                            onClick={() => this.closeMenu()}
+                        >
+                            <div className="menu-button">Watchlist</div>
+                        </Link>
+                        <Link
+                            id="logout"
+                            key="logout"
+                            className="menu-item"
+                            to="/logout"
+                            style={{color: "red", textDecoration: "none"}}
+                            onClick={() => this.closeMenu()}
+                        >
+                            <div className="menu-button">Watchlist</div>
+                        </Link>
+                    </Collapsible>)
+                    :
+                    (<Collapsible
+                        trigger="ACCOUNT"
+
+                        className="menu-collapsible"
+                        openedClassName="menu-collapsible-open"
+                        overflowWhenOpen="initial"
+                    >
+                        <Link
+                            id="login"
+                            key="register"
+                            className="menu-item"
+                            to="/login"
+                            style={{color: "red", textDecoration: "none"}}
+                            onClick={() => this.closeMenu()}
+                        >
+                            <div className="menu-button">Login</div>
+                        </Link>
+                        <Link
+                            id="register"
+                            key="register"
+                            className="menu-item"
+                            to="/register"
+                            style={{color: "red", textDecoration: "none"}}
+                            onClick={() => this.closeMenu()}
+                        >
+                            <div className="menu-button">Register</div>
+                        </Link>
+                    </Collapsible>)
+                }
                 <Collapsible trigger="RECOMMENDED MOVIES"
                              className="menu-collapsible"
                              openedClassName="menu-collapsible-open"
@@ -83,21 +152,6 @@ export default class Menu extends Component {
                         onClick={() => this.closeMenu()}
                     >
                         <div className="menu-button">Upcoming</div>
-                    </Link>
-                </Collapsible>
-                <Collapsible trigger="USER"
-                             className="menu-collapsible"
-                             openedClassName="menu-collapsible-open"
-                             overflowWhenOpen="initial"
-                >
-                    <Link
-                        id="watchlist"
-                        className="menu-item"
-                        to="/watchlist"
-                        style={{color: "red", textDecoration: "none"}}
-                        onClick={() => this.closeMenu()}
-                    >
-                        <div className="menu-button">Watchlist</div>
                     </Link>
                 </Collapsible>
                 <Collapsible trigger="THEATER"
