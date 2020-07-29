@@ -5,9 +5,15 @@ export const WatchlistContext = createContext([]);
 
 export const WatchlistProvider = (props) => {
   const [watchlist, setWatchlist] = useState([]);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      username: `${localStorage.getItem("username")}`,
+    },
+  };
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/user`)
+      .get(`http://localhost:8080/user`, config)
       .then((response) => setWatchlist(response.data));
   }, []);
 
