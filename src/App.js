@@ -8,7 +8,6 @@ import MovieDetailPage from "./components/pages/movie_detail_page/MovieDetailPag
 import SchedulePage from "./components/pages/schedule_page/SchedulePage";
 import RegisterPage from "./components/pages/registration/RegisterPage";
 
-import {UserProvider} from "./components/context/UserContext";
 import {WatchlistProvider} from "./components/context/WatchlistContext";
 import Watchlist from "./components/pages/Watchlist";
 import SeatLayout from "./components/pages/SeatLayout";
@@ -25,7 +24,6 @@ function App() {
       <div id="outer-container">
         <Router>
           <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"}/>
-        <UserProvider>
           <WatchlistProvider>
             <main id="page-wrap">
               <ThemeProvider theme={theme}>
@@ -111,7 +109,6 @@ function App() {
               </ThemeProvider>
             </main>
           </WatchlistProvider>
-        </UserProvider>
         </Router>
       </div>
   );
