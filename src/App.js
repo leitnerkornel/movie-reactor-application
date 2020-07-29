@@ -15,6 +15,7 @@ import SeatLayout from "./components/pages/SeatLayout";
 
 import "./App.css";
 import ActorDetailPage from "./components/pages/actor_detail_page/ActorDetailPage";
+import Logout from "./components/pages/registration/Logout";
 // import ActorDetailPage from "./components/pages/actor_detail_page/ActorDetailPage";
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
                   <Route path="/schedule" children={<SchedulePage/>}/>
                   <Route path="/auth/register" children={<RegisterPage/>}/>
                   <Route path="/auth/login" children={<LoginPage/>}/>
+                  <Route path="/auth/logout" children={<Logout/>}/>
                   <Route
                       exact
                       path="/watchlist"
