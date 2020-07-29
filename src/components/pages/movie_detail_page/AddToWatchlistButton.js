@@ -24,13 +24,15 @@ const AddToWatchlistButton = (props) => {
 
   const addToWatchList = (e) => {
     e.preventDefault();
-    //if (!isTheMovieAdded() && !watchlist.includes(movie)) {
-    //?
-    //setWatchlist([...watchlist, movie]);
-    axios
-      .post(`http://localhost:8080/save/${movie.id}`)
-      .then((response) => console.log(response.data));
-    //}
+    if (!isTheMovieAdded() && !watchlist.includes(movie)) {
+      axios
+        .post(`http://localhost:8080/save/${movie.id}`)
+        .then((response) => console.log(response.data));
+
+      axios
+        .get(`http://localhost:8080/user`)
+        .then((response) => setWatchlist(response.data));
+    }
   };
 
   const removeFromWatchlist = (e) => {
@@ -38,10 +40,9 @@ const AddToWatchlistButton = (props) => {
     axios
       .delete(`http://localhost:8080/delete/${movie.id}`)
       .then((response) => console.log(response.data));
-    // let filteredArray = watchlist.filter(
-    //   (selectedMovie) => selectedMovie.id !== movieId
-    // );
-    // setWatchlist(filteredArray);
+    axios
+      .get(`http://localhost:8080/user`)
+      .then((response) => setWatchlist(response.data));
   };
 
   if (isTheMovieAdded()) {

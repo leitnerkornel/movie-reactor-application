@@ -18,8 +18,6 @@ const Watchlist = (props) => {
     return () => window.removeEventListener("resize", updateWidthAndHeight);
   });
 
-  console.log(watchlist);
-
   return (
     <div className="row media">
       <div
