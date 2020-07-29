@@ -23,7 +23,7 @@ const RegisterPage = () => {
     };
 
     const redirect = () => {
-        history.push("/");
+        history.push("/auth/login");
     };
 
     const sendRequest = (event) => {
