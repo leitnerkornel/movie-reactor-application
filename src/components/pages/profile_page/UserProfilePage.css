@@ -162,7 +162,6 @@
     color: white;
 }
 
-
 .reservation-delete-button-container {
     display: flex;
     align-items: center;
@@ -173,4 +172,28 @@
 .delete-button-img {
     width: 32px;
     height: 32px;
+}
+
+.delete-button-img:hover {
+    cursor: pointer;
+    height: 38px;
+    width: 38px;
+}
+
+.successful-delete {
+    background-color: #28c63a;
+    color: white;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.unsuccessful-delete {
+    background-color: #DF3A39;
+    color: white;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
