@@ -44,8 +44,8 @@ export default class Menu extends Component {
                 // style={{top: 100 + (window.innerHeight / 1000) * window.pageYOffset}} // TODO: try to move menu position
                 // style={{marginTop: 100 + window.pageYOffset}}
             >
-                {localStorage.getItem("user") ? // TODO: check item name!
-                    (<Collapsible trigger={`WELCOME ${localStorage.getItem("user-name")}`}
+                {localStorage.getItem("user") ?
+                    (<Collapsible trigger={`WELCOME ${localStorage.getItem("username")}`}
                                   className="menu-collapsible"
                                   openedClassName="menu-collapsible-open"
                                   overflowWhenOpen="initial"
@@ -74,11 +74,11 @@ export default class Menu extends Component {
                             id="logout"
                             key="logout"
                             className="menu-item"
-                            to="/logout"
+                            to="/auth/logout"
                             style={{color: "red", textDecoration: "none"}}
                             onClick={() => this.closeMenu()}
                         >
-                            <div className="menu-button">Watchlist</div>
+                            <div className="menu-button">Logout</div>
                         </Link>
                     </Collapsible>)
                     :
@@ -91,7 +91,7 @@ export default class Menu extends Component {
                     >
                         <Link
                             id="login"
-                            key="register"
+                            key="login"
                             className="menu-item"
                             to="/auth/login"
                             style={{color: "red", textDecoration: "none"}}
