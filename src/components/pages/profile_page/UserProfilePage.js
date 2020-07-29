@@ -62,7 +62,36 @@ const UserProfilePage = () => {
     }
   }
 
-  function displayReservations() {
+  const deleteReservedSeat = (event, showId, seatId) => {
+    let currentItem = event.target.parentElement.parentElement;
+    let seatsForDelete = {};
+    seatsForDelete.id = parseInt(showId);
+    seatsForDelete.seats = [parseInt(seatId)];
+    axios
+        .delete(`http://localhost:8080/reservation/delete`, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: seatsForDelete
+        })
+        .then(response => {
+          if (response.data === true) {
+            deleteIndicator(currentItem, "");
+          } else {
+            deleteIndicator(currentItem, "un")
+          }
+        });
+  }
+
+  const deleteIndicator = (element, status) => {
+    element.innerHTML = `<div class=${status+"successful-delete"}>
+            <strong>Reservation ${status}successfully deleted!</strong></div>`;
+    setTimeout(() => {
+      element.style.display = "none";
+    }, 3000)
+  };
+
+  const displayReservations = () => {
     let reservationContainer = [];
     for (let reservation of reservations) {
       reservationContainer.push(<div key={uuid()} className="reservation-item-container">
@@ -74,9 +103,13 @@ const UserProfilePage = () => {
         <div className="reservation-data">{reservation["startingTime"]}</div>
         <div className="reservation-data seat-info">{`Row: ${reservation["rowNumber"]}`}</div>
         <div className="reservation-data seat-info">{`Seat: ${reservation["seatNumber"]}`}</div>
-        <div className="reservation-movie-title"><Link to={`/movie/${reservation["movieDbId"]}`} className="movie-link">{getMovieTitle(playedMovies, reservation["movieDbId"])}</Link></div>
+        <div className="reservation-movie-title"><Link to={`/movie/${reservation["movieDbId"]}`}
+                                                       className="movie-link">{getMovieTitle(playedMovies, reservation["movieDbId"])}</Link>
+        </div>
         <div className="reservation-delete-button-container">
-          <img className="delete-button-img" src={`/images/delete_button_64.png`} alt="Delete reservation button"/>
+          <img className="delete-button-img" onClick={(event) => {
+            deleteReservedSeat(event, reservation["showId"], reservation["id"])
+          }} src={`/images/delete_button_64.png`} alt="Delete reservation button"/>
         </div>
       </div>)
     }
@@ -96,7 +129,7 @@ const UserProfilePage = () => {
                 <div className="picture-container">
                   <div className="profile-picture">
                     <div className="profile-picture-frame">
-                      <img className="picture" src={`/images/${adminPicture}`} alt="Profile"/>
+                      <img className="picture" src={`/images/${manPicture}`} alt="Profile"/>
                     </div>
                   </div>
                 </div>
