@@ -20,6 +20,7 @@ export default function MovieCard(props) {
 
   const [isLoading, actualMovie] = Get(currentMovieURL, movie);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isRefreshed, setIsRefreshed] = useState(false);
 
   const [backdrop, setBackdrop] = useState("");
   const [poster, setPoster] = useState("");
@@ -44,24 +45,22 @@ export default function MovieCard(props) {
   let addToWatchlist = (e) => {
     e.preventDefault();
     if (!isTheMovieAdded() && !watchlist.includes(movie)) {
-      axios
-        .post(`http://localhost:8080/save/${movie.id}`)
-        .then((response) => console.log(response.data));
-
-      axios
-        .get(`http://localhost:8080/user`)
-        .then((response) => setWatchlist(response.data));
+      axios.post(`http://localhost:8080/save/${movie.id}`).then((response) =>
+        axios.get(`http://localhost:8080/user`).then((response) => {
+          setWatchlist(response.data);
+        })
+      );
     }
   };
 
   let removeFromWatchlist = (e) => {
     e.preventDefault();
-    axios
-      .delete(`http://localhost:8080/delete/${movie.id}`)
-      .then((response) => console.log(response.data));
-    axios
-      .get(`http://localhost:8080/user`)
-      .then((response) => setWatchlist(response.data));
+    axios.delete(`http://localhost:8080/delete/${movie.id}`).then((response) =>
+      axios.get(`http://localhost:8080/user`).then((response) => {
+        console.log(typeof response.data);
+        setWatchlist(response.data);
+      })
+    );
   };
 
   let isTheMovieAdded = () => {

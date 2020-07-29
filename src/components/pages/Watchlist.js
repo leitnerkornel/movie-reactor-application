@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { WatchlistContext } from "../context/WatchlistContext";
 import MovieCard from "./MovieCard";
+import axios from "axios";
 
 const Watchlist = (props) => {
   const [width, setWidth] = useState(window.innerWidth);

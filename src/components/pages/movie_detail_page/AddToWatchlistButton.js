@@ -6,12 +6,12 @@ const AddToWatchlistButton = (props) => {
   let movie = props.movieObject;
   let movieId = movie.id;
 
-  const [watchlist, setWatchlist] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/user`)
-      .then((response) => setWatchlist(response.data));
-  }, []);
+  const [watchlist, setWatchlist] = useContext(WatchlistContext);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:8080/user`)
+  //     .then((response) => setWatchlist(response.data));
+  // }, []);
 
   let isTheMovieAdded = () => {
     for (let selectedMovie of watchlist) {
@@ -27,11 +27,11 @@ const AddToWatchlistButton = (props) => {
     if (!isTheMovieAdded() && !watchlist.includes(movie)) {
       axios
         .post(`http://localhost:8080/save/${movie.id}`)
-        .then((response) => console.log(response.data));
-
-      axios
-        .get(`http://localhost:8080/user`)
-        .then((response) => setWatchlist(response.data));
+        .then((response) =>
+          axios
+            .get(`http://localhost:8080/user`)
+            .then((response) => setWatchlist(response.data))
+        );
     }
   };
 
@@ -39,10 +39,11 @@ const AddToWatchlistButton = (props) => {
     e.preventDefault();
     axios
       .delete(`http://localhost:8080/delete/${movie.id}`)
-      .then((response) => console.log(response.data));
-    axios
-      .get(`http://localhost:8080/user`)
-      .then((response) => setWatchlist(response.data));
+      .then((response) =>
+        axios
+          .get(`http://localhost:8080/user`)
+          .then((response) => setWatchlist(response.data))
+      );
   };
 
   if (isTheMovieAdded()) {
