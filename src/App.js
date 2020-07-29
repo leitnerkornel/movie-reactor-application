@@ -7,6 +7,7 @@ import SelectionPage from "./components/pages/SelectionPage";
 import MovieDetailPage from "./components/pages/movie_detail_page/MovieDetailPage";
 import SchedulePage from "./components/pages/schedule_page/SchedulePage";
 import RegisterPage from "./components/pages/registration/RegisterPage";
+import LoginPage from "./components/pages/registration/LoginPage";
 
 import {WatchlistProvider} from "./components/context/WatchlistContext";
 import Watchlist from "./components/pages/Watchlist";
@@ -95,6 +96,7 @@ function App() {
                   <Route path="/actor/:id" children={<ActorDetailPage/>}/>
                   <Route path="/schedule" children={<SchedulePage/>}/>
                   <Route path="/auth/register" children={<RegisterPage/>}/>
+                  <Route path="/auth/login" children={<LoginPage/>}/>
                   <Route
                       exact
                       path="/watchlist"
