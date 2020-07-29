@@ -11,6 +11,8 @@ const LoginPage = () => {
 
     const checkResponse = (response) => {
         if (response.data.correct) {
+            localStorage.setItem("user", response.data)
+            localStorage.setItem("username", response.data.username)
             localStorage.setItem("token", response.data.token)
             redirect();
         } else {
