@@ -187,8 +187,18 @@ body {
 }
 
 .errorMessage {
-    color: white;
+    color: #e6b31e;
     margin-top: 5%;
+}
+
+.registerLink {
+    color: white;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.registerLink:hover {
+    color: gray;
 }
 
 .dropdown {
