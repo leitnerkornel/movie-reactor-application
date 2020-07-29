@@ -93,7 +93,7 @@ export default class Menu extends Component {
                             id="login"
                             key="register"
                             className="menu-item"
-                            to="/login"
+                            to="/auth/login"
                             style={{color: "red", textDecoration: "none"}}
                             onClick={() => this.closeMenu()}
                         >
@@ -103,7 +103,7 @@ export default class Menu extends Component {
                             id="register"
                             key="register"
                             className="menu-item"
-                            to="/register"
+                            to="/auth/register"
                             style={{color: "red", textDecoration: "none"}}
                             onClick={() => this.closeMenu()}
                         >
