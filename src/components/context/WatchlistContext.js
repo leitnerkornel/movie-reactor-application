@@ -9,7 +9,6 @@ export const WatchlistProvider = (props) => {
     axios
       .get(`http://localhost:8080/user`)
       .then((response) => setWatchlist(response.data));
-    //console.log(topRatedMovies);
   }, []);
 
   return (
