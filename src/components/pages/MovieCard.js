@@ -68,11 +68,11 @@ export default function MovieCard(props) {
       redirect();
     } else if (!isTheMovieAdded() && !watchlist.includes(movie)) {
       axios
-        .post(`http://localhost:8080/save/${movie.id}`, "", {
+        .post(`http://localhost:8080/watchlist/save/${movie.id}`, "", {
           headers: postConfig,
         })
         .then((response) =>
-          axios.get(`http://localhost:8080/user`, config).then((response) => {
+          axios.get(`http://localhost:8080/watchlist`, config).then((response) => {
             setWatchlist(response.data);
           })
         );
@@ -82,11 +82,11 @@ export default function MovieCard(props) {
   let removeFromWatchlist = (e) => {
     e.preventDefault();
     axios
-      .delete(`http://localhost:8080/delete/${movie.id}`, {
+      .delete(`http://localhost:8080/watchlist/delete/${movie.id}`, {
         headers: postConfig,
       })
       .then((response) =>
-        axios.get(`http://localhost:8080/user`, config).then((response) => {
+        axios.get(`http://localhost:8080/watchlist`, config).then((response) => {
           console.log(typeof response.data);
           setWatchlist(response.data);
         })
