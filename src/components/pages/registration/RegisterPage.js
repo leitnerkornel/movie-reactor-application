@@ -9,7 +9,6 @@ const RegisterPage = () => {
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
-    const [gender, setGender] = useState("");
     const [message, setMessage] = useState("");
     const history = useHistory();
 
@@ -28,6 +27,8 @@ const RegisterPage = () => {
 
     const sendRequest = (event) => {
         event.preventDefault();
+        let dropdown = document.querySelector(".dropdown");
+        let gender = dropdown.value;
         let params = {"username": username, "password": password, "firstname": firstname, "lastname": lastname, "email": email, "gender":gender};
         axios.post("http://localhost:8080/auth/register", params).then(response => checkResponse(response))
     };
@@ -37,7 +38,11 @@ const RegisterPage = () => {
             <form style={form} onSubmit={sendRequest}>
                     <input style={input} type="text" placeholder="firstname" onChange={event => setFirstname(event.target.value)} required/>
                     <input style={input} type="text" placeholder="lastname" onChange={event => setLastname(event.target.value)} required/>
-                    <input style={input} type="text" placeholder="gender" onChange={event => setGender(event.target.value)} required/>
+                    <select className="dropdown" defaultValue="MAN" name="gender" id="gender">
+                        <option value="MAN">MAN</option>
+                        <option value="WOMAN">WOMAN</option>
+                        <option value="GENERAL">GENERAL</option>
+                    </select>
                     <input style={input} type="text" placeholder="email" onChange={event => setEmail(event.target.value)} required/>
                     <input style={input} type="text" placeholder="username" onChange={event => setUsername(event.target.value)} required/>
                     <input style={input} type="password" placeholder="password" onChange={event => setPassword(event.target.value)} required/>

@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 const LoginPage = () => {
 
@@ -11,7 +12,6 @@ const LoginPage = () => {
 
     const checkResponse = (response) => {
         if (response.data.correct) {
-            localStorage.setItem("user", response.data)
             localStorage.setItem("username", response.data.username)
             localStorage.setItem("token", response.data.token)
             redirect();
@@ -36,6 +36,9 @@ const LoginPage = () => {
                 <input style={input} type="text" placeholder="username" onChange={event => setUsername(event.target.value)} required/>
                 <input style={input} type="password" placeholder="password" onChange={event => setPassword(event.target.value)} required/>
                 <input type="submit" value="Login" style={button}/>
+                <div className="registerLink" >
+                    <RouterLink className="registerLink" to="/auth/register">Not registered yet? Register</RouterLink>
+                </div>
                 { (message !== "") ?
                     <div className="errorMessage" style={{messageStyle}}>{message}</div> : <div className="errorMessage" style={{messageStyle}}> </div>}
             </form>

@@ -44,7 +44,7 @@ export default class Menu extends Component {
                 // style={{top: 100 + (window.innerHeight / 1000) * window.pageYOffset}} // TODO: try to move menu position
                 // style={{marginTop: 100 + window.pageYOffset}}
             >
-                {localStorage.getItem("user") ?
+                {localStorage.getItem("username") ?
                     (<Collapsible trigger={`WELCOME ${localStorage.getItem("username")}`}
                                   className="menu-collapsible"
                                   openedClassName="menu-collapsible-open"
