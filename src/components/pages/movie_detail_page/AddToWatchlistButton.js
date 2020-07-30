@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { WatchlistContext } from "../../context/WatchlistContext";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import {GET_CONFIG, POST_CONFIG} from "../../../Constants";
 
 const AddToWatchlistButton = (props) => {
   let movie = props.movieObject;
@@ -12,19 +13,6 @@ const AddToWatchlistButton = (props) => {
   const redirect = () => {
     history.push("/auth/login");
     window.location.reload();
-  };
-
-  const config = {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      username: `${localStorage.getItem("username")}`,
-    },
-  };
-
-  const postConfig = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-    username: `${localStorage.getItem("username")}`,
   };
 
   const [watchlist, setWatchlist] = useContext(WatchlistContext);
@@ -44,12 +32,12 @@ const AddToWatchlistButton = (props) => {
       redirect();
     } else if (!isTheMovieAdded() && !watchlist.includes(movie)) {
       axios
-        .post(`http://localhost:8080/save/${movie.id}`, "", {
-          headers: postConfig,
+        .post(`http://localhost:8080/watchlist/save/${movie.id}`, "", {
+          headers: POST_CONFIG,
         })
         .then((response) =>
           axios
-            .get(`http://localhost:8080/user`, config)
+            .get(`http://localhost:8080/watchlist/user`, GET_CONFIG)
             .then((response) => setWatchlist(response.data))
         );
     }
@@ -58,12 +46,12 @@ const AddToWatchlistButton = (props) => {
   const removeFromWatchlist = (e) => {
     e.preventDefault();
     axios
-      .delete(`http://localhost:8080/delete/${movie.id}`, {
-        headers: postConfig,
+      .delete(`http://localhost:8080/watchlist/delete/${movie.id}`, {
+        headers: POST_CONFIG,
       })
       .then((response) =>
         axios
-          .get(`http://localhost:8080/user`, config)
+          .get(`http://localhost:8080/watchlist/user`, GET_CONFIG)
           .then((response) => setWatchlist(response.data))
       );
   };

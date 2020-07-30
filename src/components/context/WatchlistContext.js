@@ -9,7 +9,7 @@ export const WatchlistProvider = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/user`, GET_CONFIG)
+      .get(`http://localhost:8080/watchlist/user`, GET_CONFIG)
       .then((response) => setWatchlist(response.data));
   }, []);
 
