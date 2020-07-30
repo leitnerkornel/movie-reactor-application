@@ -4,6 +4,7 @@ import axios from "axios";
 import Get from "../hook/FetchGet";
 import { Link } from "react-router-dom";
 import { WatchlistContext } from "../context/WatchlistContext";
+import { useHistory } from "react-router-dom";
 
 import { limitString } from "../../Utils";
 import {
@@ -25,6 +26,13 @@ export default function MovieCard(props) {
   const [backdrop, setBackdrop] = useState("");
   const [poster, setPoster] = useState("");
   const [watchlist, setWatchlist] = useContext(WatchlistContext);
+
+  const history = useHistory();
+
+  const redirect = () => {
+    history.push("/auth/login");
+    window.location.reload();
+  };
 
   const config = {
     headers: {
@@ -56,7 +64,9 @@ export default function MovieCard(props) {
 
   let addToWatchlist = (e) => {
     e.preventDefault();
-    if (!isTheMovieAdded() && !watchlist.includes(movie)) {
+    if (localStorage.getItem("token") === null) {
+      redirect();
+    } else if (!isTheMovieAdded() && !watchlist.includes(movie)) {
       axios
         .post(`http://localhost:8080/save/${movie.id}`, "", {
           headers: postConfig,
