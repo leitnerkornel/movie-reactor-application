@@ -1,19 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import { WatchlistContext } from "../../context/WatchlistContext";
+import React, {useContext} from "react";
+import {WatchlistContext} from "../../context/WatchlistContext";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import {GET_CONFIG, POST_CONFIG} from "../../../Constants";
 
 const AddToWatchlistButton = (props) => {
   let movie = props.movieObject;
   let movieId = movie.id;
-
-  const history = useHistory();
-
-  const redirect = () => {
-    history.push("/auth/login");
-    window.location.reload();
-  };
 
   const [watchlist, setWatchlist] = useContext(WatchlistContext);
 
@@ -26,67 +18,77 @@ const AddToWatchlistButton = (props) => {
     return false;
   };
 
+  const loginWarning = () => {
+    let button = document.querySelector(".add-to-watchlist-detail-page");
+    button.style.color = "white";
+    button.innerHTML = `${"Please register or login".toUpperCase()}`;
+    setTimeout(() => {
+      button.style.color = "black";
+      button.innerHTML = `${"Add to Watchlist".toUpperCase()}`;
+    }, 3000);
+  };
+
   const addToWatchList = (e) => {
     e.preventDefault();
     if (localStorage.getItem("token") === null) {
-      redirect();
+      loginWarning();
     } else if (!isTheMovieAdded() && !watchlist.includes(movie)) {
       axios
-        .post(`http://localhost:8080/watchlist/save/${movie.id}`, "", {
-          headers: POST_CONFIG,
-        })
-        .then((response) =>
-          axios
-            .get(`http://localhost:8080/watchlist`, GET_CONFIG)
-            .then((response) => setWatchlist(response.data))
-        );
+          .post(`http://localhost:8080/watchlist/save/${movie.id}`, "", {
+            headers: POST_CONFIG,
+          })
+          .then((response) =>
+              axios
+                  .get(`http://localhost:8080/watchlist`, GET_CONFIG)
+                  .then((response) => setWatchlist(response.data))
+          );
     }
   };
 
   const removeFromWatchlist = (e) => {
     e.preventDefault();
     axios
-      .delete(`http://localhost:8080/watchlist/delete/${movie.id}`, {
-        headers: POST_CONFIG,
-      })
-      .then((response) =>
-        axios
-          .get(`http://localhost:8080/watchlist`, GET_CONFIG)
-          .then((response) => setWatchlist(response.data))
-      );
+        .delete(`http://localhost:8080/watchlist/delete/${movie.id}`, {
+          headers: POST_CONFIG,
+        })
+        .then((response) =>
+            axios
+                .get(`http://localhost:8080/watchlist`, GET_CONFIG)
+                .then((response) => setWatchlist(response.data))
+        );
   };
 
   if (isTheMovieAdded()) {
     return (
-      <div
-        className="col-md-12 d-flex justify-content-center"
-        style={columnStyle}
-      >
-        <button
-          type="button"
-          className="btn btn-danger"
-          style={buttonStyle}
-          onClick={removeFromWatchlist}
+        <div
+            className="col-md-12 d-flex justify-content-center"
+            style={columnStyle}
         >
-          {"Remove from Watchlist".toUpperCase()}
-        </button>
-      </div>
+          <button
+              type="button"
+              className="btn btn-danger"
+              style={buttonStyle}
+              onClick={removeFromWatchlist}
+          >
+            {"Remove from Watchlist".toUpperCase()}
+          </button>
+        </div>
     );
   } else {
     return (
-      <div
-        className="col-md-12 d-flex justify-content-center"
-        style={columnStyle}
-      >
-        <button
-          type="button"
-          className="btn btn-warning"
-          style={buttonStyle}
-          onClick={addToWatchList}
+        <div
+            className="col-md-12 d-flex justify-content-center"
+            style={columnStyle}
         >
-          {"Add to Watchlist".toUpperCase()}
-        </button>
-      </div>
+          <button
+              type="button"
+              className="btn btn-warning add-to-watchlist-detail-page"
+              style={buttonStyle}
+              onClick={addToWatchList}
+          >
+            {"Add to Watchlist".toUpperCase()}
+          </button>
+        </div>
     );
   }
 };
