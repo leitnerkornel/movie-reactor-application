@@ -30,3 +30,10 @@ export const GET_CONFIG = {
     username: `${localStorage.getItem("username")}`,
   },
 };
+
+export const POST_CONFIG = {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin" : "*",
+  Authorization: `Bearer ${localStorage.getItem("token")}`,
+  username: `${localStorage.getItem("username")}`,
+};
