@@ -13,6 +13,11 @@ const UserProfilePage = () => {
   let manPicture = "man_profile.png";
   let adminPicture = "admin_profile.png";
 
+  const userProfilePictures = {};
+  userProfilePictures["MAN"] = manPicture;
+  userProfilePictures["WOMAN"] = womanPicture;
+  userProfilePictures["GENERAL"] = adminPicture;
+
   const [reservations, setReservations] = useState([]);
   const [movieDbIds, setMovieDbIds] = useState([]);
   const [playedMovies, setPlayedMovies] = useState([]);
@@ -129,14 +134,14 @@ const UserProfilePage = () => {
                 <div className="picture-container">
                   <div className="profile-picture">
                     <div className="profile-picture-frame">
-                      <img className="picture" src={`/images/${manPicture}`} alt="Profile"/>
+                      <img className="picture" src={`/images/${userProfilePictures[localStorage.getItem("gender")]}`} alt="Profile"/>
                     </div>
                   </div>
                 </div>
                 <div className="details-container">
                   <div className="username-container">
                     <div className="username-container-div">
-                      <h1 className="user-name-title">Username</h1>
+                      <h1 className="user-name-title">{localStorage.getItem("username")}</h1>
                     </div>
                   </div>
                   {/*Empty div (currently a placeholder) for further user info, like: email, birthday, male, etc...*/}
