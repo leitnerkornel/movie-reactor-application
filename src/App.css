@@ -189,6 +189,7 @@ body {
 .errorMessage {
     color: #DF3A39;
     margin-top: 5%;
+    font-family: "Roboto", sans-serif;
 }
 
 .registerLink {
