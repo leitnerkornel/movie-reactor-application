@@ -6,12 +6,20 @@ const AddToWatchlistButton = (props) => {
   let movie = props.movieObject;
   let movieId = movie.id;
 
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      username: `${localStorage.getItem("username")}`,
+    },
+  };
+
+  const postConfig = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+    username: `${localStorage.getItem("username")}`,
+  };
+
   const [watchlist, setWatchlist] = useContext(WatchlistContext);
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:8080/user`)
-  //     .then((response) => setWatchlist(response.data));
-  // }, []);
 
   let isTheMovieAdded = () => {
     for (let selectedMovie of watchlist) {
@@ -26,10 +34,12 @@ const AddToWatchlistButton = (props) => {
     e.preventDefault();
     if (!isTheMovieAdded() && !watchlist.includes(movie)) {
       axios
-        .post(`http://localhost:8080/save/${movie.id}`)
+        .post(`http://localhost:8080/save/${movie.id}`, "", {
+          headers: postConfig,
+        })
         .then((response) =>
           axios
-            .get(`http://localhost:8080/user`)
+            .get(`http://localhost:8080/user`, config)
             .then((response) => setWatchlist(response.data))
         );
     }
@@ -38,10 +48,12 @@ const AddToWatchlistButton = (props) => {
   const removeFromWatchlist = (e) => {
     e.preventDefault();
     axios
-      .delete(`http://localhost:8080/delete/${movie.id}`)
+      .delete(`http://localhost:8080/delete/${movie.id}`, {
+        headers: postConfig,
+      })
       .then((response) =>
         axios
-          .get(`http://localhost:8080/user`)
+          .get(`http://localhost:8080/user`, config)
           .then((response) => setWatchlist(response.data))
       );
   };

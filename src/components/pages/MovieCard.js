@@ -26,6 +26,18 @@ export default function MovieCard(props) {
   const [poster, setPoster] = useState("");
   const [watchlist, setWatchlist] = useContext(WatchlistContext);
 
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      username: `${localStorage.getItem("username")}`,
+    },
+  };
+  const postConfig = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+    username: `${localStorage.getItem("username")}`,
+  };
+
   useEffect(() => {
     axios.get(currentMovieURL).then((res) => {
       setBackdrop(res.data["backdrop_path"]);
@@ -45,22 +57,30 @@ export default function MovieCard(props) {
   let addToWatchlist = (e) => {
     e.preventDefault();
     if (!isTheMovieAdded() && !watchlist.includes(movie)) {
-      axios.post(`http://localhost:8080/save/${movie.id}`).then((response) =>
-        axios.get(`http://localhost:8080/user`).then((response) => {
-          setWatchlist(response.data);
+      axios
+        .post(`http://localhost:8080/save/${movie.id}`, "", {
+          headers: postConfig,
         })
-      );
+        .then((response) =>
+          axios.get(`http://localhost:8080/user`, config).then((response) => {
+            setWatchlist(response.data);
+          })
+        );
     }
   };
 
   let removeFromWatchlist = (e) => {
     e.preventDefault();
-    axios.delete(`http://localhost:8080/delete/${movie.id}`).then((response) =>
-      axios.get(`http://localhost:8080/user`).then((response) => {
-        console.log(typeof response.data);
-        setWatchlist(response.data);
+    axios
+      .delete(`http://localhost:8080/delete/${movie.id}`, {
+        headers: postConfig,
       })
-    );
+      .then((response) =>
+        axios.get(`http://localhost:8080/user`, config).then((response) => {
+          console.log(typeof response.data);
+          setWatchlist(response.data);
+        })
+      );
   };
 
   let isTheMovieAdded = () => {
