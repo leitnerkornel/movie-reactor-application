@@ -54,11 +54,11 @@ export default class Menu extends Component {
                             id="reservations"
                             key="reservations"
                             className="menu-item"
-                            to="/reservation" // TODO: check endpoint!
+                            to="/profile"
                             style={{color: "red", textDecoration: "none"}}
                             onClick={() => this.closeMenu()}
                         >
-                            <div className="menu-button">Reservations</div>
+                            <div className="menu-button">Profile</div>
                         </Link>
                         <Link
                             id="watchlist"
