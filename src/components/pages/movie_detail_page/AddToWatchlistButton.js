@@ -37,7 +37,7 @@ const AddToWatchlistButton = (props) => {
         })
         .then((response) =>
           axios
-            .get(`http://localhost:8080/watchlist/user`, GET_CONFIG)
+            .get(`http://localhost:8080/watchlist`, GET_CONFIG)
             .then((response) => setWatchlist(response.data))
         );
     }
@@ -51,7 +51,7 @@ const AddToWatchlistButton = (props) => {
       })
       .then((response) =>
         axios
-          .get(`http://localhost:8080/watchlist/user`, GET_CONFIG)
+          .get(`http://localhost:8080/watchlist`, GET_CONFIG)
           .then((response) => setWatchlist(response.data))
       );
   };
