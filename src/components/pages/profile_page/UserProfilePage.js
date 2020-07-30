@@ -4,7 +4,7 @@ import "./UserProfilePage.css";
 import axios from "axios";
 
 import {uuid} from "uuidv4";
-import {API_ALL_RESERVATION_URL, API_KEY, API_URL_MOVIE} from "../../../Constants";
+import {API_ALL_RESERVATION_URL, API_KEY, API_URL_MOVIE, GET_CONFIG, POST_CONFIG} from "../../../Constants";
 import {checkStatus, formatDateWithDecimals, formatTime, parseJSON} from "../../../Utils";
 import {Link} from "react-router-dom";
 
@@ -25,7 +25,7 @@ const UserProfilePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     axios
-        .get(`${API_ALL_RESERVATION_URL}`)
+        .get(`${API_ALL_RESERVATION_URL}`, GET_CONFIG)
         .then(res => {
           setMovieDbIds([...new Set(res.data.map(item => item["movieDbId"]))]);
           setReservations(res.data);
@@ -74,9 +74,7 @@ const UserProfilePage = () => {
     seatsForDelete.seats = [parseInt(seatId)];
     axios
         .delete(`http://localhost:8080/reservation/delete`, {
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: POST_CONFIG,
           data: seatsForDelete
         })
         .then(response => {
