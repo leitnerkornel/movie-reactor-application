@@ -33,7 +33,6 @@ export const GET_CONFIG = {
 
 export const POST_CONFIG = {
   "Content-Type": "application/json",
-  "Access-Control-Allow-Origin" : "*",
   Authorization: `Bearer ${localStorage.getItem("token")}`,
   username: `${localStorage.getItem("username")}`,
 };
