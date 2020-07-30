@@ -23,7 +23,7 @@ const LoginPage = () => {
 
     const redirect = () => {
         history.push("/");
-        window.location.reload();
+        // window.location.reload();
     };
 
     const sendRequest = (event) => {
