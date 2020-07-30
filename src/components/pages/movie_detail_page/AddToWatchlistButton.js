@@ -1,11 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { WatchlistContext } from "../../context/WatchlistContext";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import {GET_CONFIG, POST_CONFIG} from "../../../Constants";
 
 const AddToWatchlistButton = (props) => {
   let movie = props.movieObject;
   let movieId = movie.id;
+
+  const history = useHistory();
+
+  const redirect = () => {
+    history.push("/auth/login");
+    window.location.reload();
+  };
 
   const [watchlist, setWatchlist] = useContext(WatchlistContext);
 
@@ -20,7 +28,9 @@ const AddToWatchlistButton = (props) => {
 
   const addToWatchList = (e) => {
     e.preventDefault();
-    if (!isTheMovieAdded() && !watchlist.includes(movie)) {
+    if (localStorage.getItem("token") === null) {
+      redirect();
+    } else if (!isTheMovieAdded() && !watchlist.includes(movie)) {
       axios
         .post(`http://localhost:8080/watchlist/save/${movie.id}`, "", {
           headers: POST_CONFIG,
