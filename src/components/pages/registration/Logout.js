@@ -1,8 +1,7 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 
- const Logout = () => {
-
+const Logout = () => {
     const history = useHistory();
 
     const logout = () => {
@@ -12,10 +11,10 @@ import {useHistory} from "react-router-dom";
 
     const redirect = () => {
         history.push("/");
+        window.location.reload();
     };
 
     return (<React.Fragment>{logout()}</React.Fragment>);
-
 }
 
 export default Logout;
