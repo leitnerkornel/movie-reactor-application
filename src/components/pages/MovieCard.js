@@ -10,7 +10,7 @@ import {
   API_URL_MOVIE,
   API_URL_PICTURE,
   API_KEY,
-  IMAGE_SIZES,
+  IMAGE_SIZES, GET_CONFIG, POST_CONFIG,
 } from "../../Constants";
 
 export default function MovieCard(props) {
@@ -37,18 +37,6 @@ export default function MovieCard(props) {
     }, 3000);
   };
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      username: `${localStorage.getItem("username")}`,
-    },
-  };
-  const postConfig = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-    username: `${localStorage.getItem("username")}`,
-  };
-
   useEffect(() => {
     axios.get(currentMovieURL).then((res) => {
       setBackdrop(res.data["backdrop_path"]);
@@ -72,10 +60,10 @@ export default function MovieCard(props) {
     } else if (!isTheMovieAdded() && !watchlist.includes(movie)) {
       axios
           .post(`http://localhost:8080/watchlist/save/${movie.id}`, "", {
-            headers: postConfig,
+            headers: POST_CONFIG,
           })
           .then((response) =>
-              axios.get(`http://localhost:8080/watchlist`, config).then((response) => {
+              axios.get(`http://localhost:8080/watchlist`, GET_CONFIG).then((response) => {
                 setWatchlist(response.data);
               })
           );
@@ -86,10 +74,10 @@ export default function MovieCard(props) {
     e.preventDefault();
     axios
         .delete(`http://localhost:8080/watchlist/delete/${movie.id}`, {
-          headers: postConfig,
+          headers: POST_CONFIG,
         })
         .then((response) =>
-            axios.get(`http://localhost:8080/watchlist`, config).then((response) => {
+            axios.get(`http://localhost:8080/watchlist`, GET_CONFIG).then((response) => {
               setWatchlist(response.data);
             })
         );
