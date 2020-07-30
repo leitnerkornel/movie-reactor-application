@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
@@ -12,8 +12,8 @@ const LoginPage = () => {
 
     const checkResponse = (response) => {
         if (response.data.correct) {
-            localStorage.setItem("username", response.data.username)
-            localStorage.setItem("token", response.data.token)
+            localStorage.setItem("username", response.data.username);
+            localStorage.setItem("token", response.data.token);
             redirect();
         } else {
             setMessage(response.data.msg);
@@ -22,6 +22,7 @@ const LoginPage = () => {
 
     const redirect = () => {
         history.push("/");
+        window.location.reload();
     };
 
     const sendRequest = (event) => {
@@ -44,7 +45,6 @@ const LoginPage = () => {
             </form>
         </div>
     )
-
 }
 
 const login = {
