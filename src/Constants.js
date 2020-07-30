@@ -23,3 +23,10 @@ export const IMAGE_SIZES = {
 };
 
 export const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+export const GET_CONFIG = {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+    username: `${localStorage.getItem("username")}`,
+  },
+};
