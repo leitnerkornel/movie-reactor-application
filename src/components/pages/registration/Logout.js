@@ -11,7 +11,7 @@ const Logout = () => {
 
     const redirect = () => {
         history.push("/");
-        // window.location.reload();
+        window.location.reload();
     };
 
     return (<React.Fragment>{logout()}</React.Fragment>);
