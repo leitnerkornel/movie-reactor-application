@@ -25,7 +25,7 @@ const UserProfilePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     axios
-        .get(`${API_ALL_RESERVATION_URL}`, GET_CONFIG)
+        .get(`${API_ALL_RESERVATION_URL}`, GET_CONFIG) // TODO: check endpoint
         .then(res => {
           setMovieDbIds([...new Set(res.data.map(item => item["movieDbId"]))]);
           setReservations(res.data);
@@ -73,7 +73,7 @@ const UserProfilePage = () => {
     seatsForDelete.id = parseInt(showId);
     seatsForDelete.seats = [parseInt(seatId)];
     axios
-        .delete(`http://localhost:8080/reservation/delete`, {
+        .delete(`http://localhost:8080/reservation/delete`, { // TODO: check endpoint
           headers: POST_CONFIG,
           data: seatsForDelete
         })

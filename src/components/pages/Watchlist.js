@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { WatchlistContext } from "../context/WatchlistContext";
 import MovieCard from "./MovieCard";
-import axios from "axios";
 
 const Watchlist = (props) => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -40,8 +39,8 @@ const Watchlist = (props) => {
       >
         {watchlist.length !== 0 ? (
           watchlist.map((movie) => (
-            <div key={movie.id} className="card-deck ml-5 mr-3 mt-5">
-              <MovieCard movie={movie} />
+            <div key={movie} className="card-deck ml-5 mr-3 mt-5">
+              <MovieCard movie={movie}/>
             </div>
           ))
         ) : (

@@ -10,15 +10,15 @@ import {
   API_URL_MOVIE,
   API_URL_PICTURE,
   API_KEY,
+  API_WATCHLIST,
   IMAGE_SIZES, GET_CONFIG, POST_CONFIG,
 } from "../../Constants";
 
 export default function MovieCard(props) {
-  let movie = props.movie;
-  let movieId = movie.id;
+  let movieId = props.movie;
   let currentMovieURL = `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`;
 
-  const [isLoading, actualMovie] = Get(currentMovieURL, movie);
+  const [isLoading, actualMovie] = Get(currentMovieURL, movieId);
   const [isFlipped, setIsFlipped] = useState(false);
 
   const [backdrop, setBackdrop] = useState("");
@@ -57,14 +57,14 @@ export default function MovieCard(props) {
     e.preventDefault();
     if (localStorage.getItem("token") === null) {
       loginWarningMovieCard(e);
-    } else if (!isTheMovieAdded() && !watchlist.includes(movie)) {
+    } else if (!isTheMovieAdded() && !watchlist.includes(movieId)) {
       axios
-          .post(`http://localhost:8080/watchlist/save/${movie.id}`, "", {
+          .post(`${API_WATCHLIST}/${movieId}`, "", { // TODO: check endpoint, get rid of config
             headers: POST_CONFIG,
           })
           .then((response) =>
-              axios.get(`http://localhost:8080/watchlist`, GET_CONFIG).then((response) => {
-                setWatchlist(response.data);
+              axios.get(API_WATCHLIST, GET_CONFIG).then((response) => { // TODO: check endpoint, get rid of config
+                setWatchlist(response.data.watchlist);
               })
           );
     }
@@ -73,19 +73,19 @@ export default function MovieCard(props) {
   let removeFromWatchlist = (e) => {
     e.preventDefault();
     axios
-        .delete(`http://localhost:8080/watchlist/delete/${movie.id}`, {
+        .delete(`${API_WATCHLIST}/${movieId}`, { // TODO: check endpoint, get rid of config
           headers: POST_CONFIG,
         })
         .then((response) =>
-            axios.get(`http://localhost:8080/watchlist`, GET_CONFIG).then((response) => {
-              setWatchlist(response.data);
+            axios.get(API_WATCHLIST, GET_CONFIG).then((response) => { // TODO: check endpoint, get rid of config
+              setWatchlist(response.data.watchlist);
             })
         );
   };
 
   let isTheMovieAdded = () => {
     for (let selectedMovie of watchlist) {
-      if (selectedMovie.id === movieId) {
+      if (selectedMovie === movieId) {
         return true;
       }
     }
@@ -136,7 +136,7 @@ export default function MovieCard(props) {
   let mainCard = (
       <>
         <div
-            id={`${movie.id}-front`}
+            id={`${movieId}-front`}
             className="card border-secondary mt-1 mb-3 clearfix overflow-hidden "
             style={cardStyle}
         >
@@ -203,7 +203,7 @@ export default function MovieCard(props) {
       actualMovie != null ? (
           <>
             <div
-                id={`${movie.id}-back`}
+                id={`${movieId}-back`}
                 className="card border-secondary mt-1 mb-3 clearfix overflow-hidden"
                 style={cardStyle}
             >

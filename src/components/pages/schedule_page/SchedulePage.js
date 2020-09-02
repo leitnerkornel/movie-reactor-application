@@ -28,11 +28,12 @@ const SchedulePage = () => {
 
       useEffect(() => {
         window.scrollTo(0, 0);
-        axios
-            .get(API_SCHEDULE_URL)
+        console.log("I'm here");
+
+        axios.get(API_SCHEDULE_URL)
             .then((res) => {
-              setMovieIds([...new Set(res.data.map(item => item["movie"]["movieDbId"]))]);
-              res.data.map(show => (
+              setMovieIds([...new Set(res.data.shows.map(item => item["movie"]))]); // rewrite to get movieDb Id from other service
+              res.data.shows.map(show => (
                   setShows(prevState => [...prevState,
                     {
                       showId: show["id"],
@@ -41,9 +42,9 @@ const SchedulePage = () => {
                       movie: show["movie"]
                     }])
               ));
-              setStartingDates([...new Set(res.data.map(item => item["startingDate"]))]);
-              setStartingTimes([...new Set(res.data.map(item => item["startingTime"]))]);
-            })
+              setStartingDates([...new Set(res.data.shows.map(item => item["startingDate"]))]);
+              setStartingTimes([...new Set(res.data.shows.map(item => item["startingTime"]))]);
+            });
       }, []);
 
       useEffect(() => {
@@ -77,7 +78,7 @@ const SchedulePage = () => {
 
       const findShows = (shows, movieId, startingDate) => {
         const foundedShows = shows.find(show => {
-          return show["movie"]["movieDbId"] === movieId && show["startingDate"] === startingDate;
+          return show["movie"]["movieDbId"] === movieId && show["startingDate"] === startingDate; // rewrite to get movieDb Id from other service
         })
         // If there is one movie on the same day in two different time - Here we can process it! Map through them instead of display one item.
         if (foundedShows) {

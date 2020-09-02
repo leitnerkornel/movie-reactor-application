@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {WatchlistContext} from "../../context/WatchlistContext";
 import axios from "axios";
-import {GET_CONFIG, POST_CONFIG} from "../../../Constants";
+import {GET_CONFIG, POST_CONFIG, API_WATCHLIST} from "../../../Constants";
 
 const AddToWatchlistButton = (props) => {
   let movie = props.movieObject;
@@ -11,7 +11,8 @@ const AddToWatchlistButton = (props) => {
 
   let isTheMovieAdded = () => {
     for (let selectedMovie of watchlist) {
-      if (selectedMovie.id === movieId) {
+      // if (selectedMovie.id === movieId) { // TODO: remove reference to ".id"; backend turned to use Int list instead of Map
+      if (selectedMovie === movieId) {
         return true;
       }
     }
@@ -34,13 +35,13 @@ const AddToWatchlistButton = (props) => {
       loginWarning();
     } else if (!isTheMovieAdded() && !watchlist.includes(movie)) {
       axios
-          .post(`http://localhost:8080/watchlist/save/${movie.id}`, "", {
+          .post(`${API_WATCHLIST}/${movie.id}`, "", { // TODO: check endpoint, del config
             headers: POST_CONFIG,
           })
           .then((response) =>
               axios
-                  .get(`http://localhost:8080/watchlist`, GET_CONFIG)
-                  .then((response) => setWatchlist(response.data))
+                  .get(API_WATCHLIST, GET_CONFIG) // TODO: check endpoint, delete config
+                  .then((response) => setWatchlist(response.data.watchlist))
           );
     }
   };
@@ -48,13 +49,13 @@ const AddToWatchlistButton = (props) => {
   const removeFromWatchlist = (e) => {
     e.preventDefault();
     axios
-        .delete(`http://localhost:8080/watchlist/delete/${movie.id}`, {
+        .delete(`${API_WATCHLIST}/${movie.id}`, { // TODO: check endpoint
           headers: POST_CONFIG,
         })
         .then((response) =>
             axios
-                .get(`http://localhost:8080/watchlist`, GET_CONFIG)
-                .then((response) => setWatchlist(response.data))
+                .get(API_WATCHLIST, GET_CONFIG) // TODO: check endpoint
+                .then((response) => setWatchlist(response.data.watchlist))
         );
   };
 

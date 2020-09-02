@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useState} from "react";
 import "./ReserveSeatButton.css";
 import axios from "axios";
-import {POST_CONFIG} from "../../Constants";
+import {POST_CONFIG, API_BOOKING} from "../../Constants";
 
 const ReserveSeatButton = (props) => {
   let freeSeatClass = "fa-square-o";
@@ -21,10 +21,10 @@ const ReserveSeatButton = (props) => {
       seats.push(parseInt(reservedSeats.item(i).dataset.id))
     }
 
-    axios.post(`http://localhost:8080/reservation/seats`,
+    axios.post(API_BOOKING, // TODO: check endpoint
         {id: parseInt(id), seats: seats},
         {
-          headers: POST_CONFIG
+          headers: POST_CONFIG // TODO: get rid of header config
         }
     )
         .then((response) => {

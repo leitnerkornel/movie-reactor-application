@@ -31,13 +31,13 @@ const SeatLayout = (props) => {
     useEffect(() => {
         window.scrollTo(0, 0);
         axios
-            .get(`http://localhost:8080/show/${screeningId}`)
+            .get(`http://localhost:8762/moviecatalog/show/${screeningId}`) // TODO: check endpoint
             .then((res) => {
-                setMovieId(res.data.movie.movieDbId);
-                setStartingTime(res.data.startingTime.substring(0, 5));
+                setMovieId(res.data.movie.movieDbId); // TODO: get from movie register!
+                setStartingTime(res.data.startingTime.substring(0, 5)); // TODO: check if this is working at all
                 setStartingDate(res.data.startingDate);
                 setRoom(res.data.room);
-                setReservedSeats(res.data.reservedSeats);
+                setReservedSeats(res.data.reservedSeats); // TODO: get seats from seat reserved!!!
             });
     }, [])
 
@@ -92,7 +92,6 @@ const SeatLayout = (props) => {
 export default SeatLayout;
 
 const mainColumnStyle = {
-    // display: "flex",
     flexFlow: "row wrap",
     height: "1500px",
     padding: "0"

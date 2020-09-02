@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import "./Authentication.css";
+import { API_AUTHENTICATION } from "../../../Constants";
 
 const RegisterPage = () => {
 
@@ -23,7 +24,7 @@ const RegisterPage = () => {
     };
 
     const redirect = () => {
-        history.push("/auth/login");
+        history.push("/auth/login"); // TODO: check endpoint
     };
 
     const sendRequest = (event) => {
@@ -31,7 +32,7 @@ const RegisterPage = () => {
         let dropdown = document.querySelector(".dropdown");
         let gender = dropdown.value;
         let params = {"username": username, "password": password, "firstname": firstname, "lastname": lastname, "email": email, "gender":gender};
-        axios.post("http://localhost:8080/auth/register", params).then(response => checkResponse(response))
+        axios.post(`${API_AUTHENTICATION}/register`, params).then(response => checkResponse(response)) // TODO: check endpoint
     };
 
     return (

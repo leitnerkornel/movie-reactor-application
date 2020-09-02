@@ -1,10 +1,16 @@
-export const API_SCHEDULE_URL = "http://localhost:8080/schedule";
-export const API_SCHEDULED_MOVIES_URL = "http://localhost:8080/scheduled-movies";
-export const API_SHOW_URL = "http://localhost:8080/show/";
-export const API_SEAT_ROOM_URL = "http://localhost:8080/seat/room/";
-export const API_RESERVED_SEATS_URL = "http://localhost:8080/reserved-seats/show/";
-export const API_ROOM_URL = "http://localhost:8080/room/";
-export const API_ALL_RESERVATION_URL = "http://localhost:8080/reservation/seats"; // There are GET and POST methods for these.
+// TODO: revise endpoints
+export const API_SCHEDULE_URL = "http://localhost:8762/moviecatalog/schedule";
+// export const API_SCHEDULED_MOVIES_URL = "http://localhost:8762/scheduled-movies";
+export const API_SCHEDULED_MOVIES_URL = "http://localhost:8762/moviecatalog/show/movie";
+export const API_SHOW_URL = "http://localhost:8762/show/";
+export const API_SEAT_ROOM_URL = "http://localhost:8762/seat/room/";
+export const API_RESERVED_SEATS_URL = "http://localhost:8762/reserved-seats/show/";
+export const API_ROOM_URL = "http://localhost:8762/room/";
+export const API_ALL_RESERVATION_URL = "http://localhost:8762/reservation/seats"; // There are GET and POST methods for these.
+export const API_WATCHLIST = "http://localhost:8762/watchlist";
+export const API_BOOKING = "http://localhost:8762/booking/reservation";
+export const API_AUTHENTICATION = "http://localhost:8762/auth";
+export const API_MOVIE = "http://localhost:8762/movieservice/movie";
 
 export const API_URL_MOVIE = "https://api.themoviedb.org/3/movie/"
 export const API_URL_PERSON = "https://api.themoviedb.org/3/person/"
