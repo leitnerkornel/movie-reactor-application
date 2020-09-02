@@ -33,7 +33,7 @@ const SeatLayout = (props) => {
         axios
             .get(`http://localhost:8762/moviecatalog/show/${screeningId}`) // TODO: check endpoint
             .then((res) => {
-                setMovieId(res.data.movie.movieDbId); // TODO: get from movie register!
+                setMovieId(res.data.movieDbId); // TODO: get from movie register!
                 setStartingTime(res.data.startingTime.substring(0, 5)); // TODO: check if this is working at all
                 setStartingDate(res.data.startingDate);
                 setRoom(res.data.room);
