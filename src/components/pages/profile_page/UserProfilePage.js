@@ -35,6 +35,7 @@ const UserProfilePage = () => {
         .get(API_ALL_RESERVATION_URL)
         .then(res => {
           let bookings = res.data.bookings;
+          console.log(bookings);
           setMovieDbIds([...new Set(bookings.map(item => item["movieId"]))]);
           setReservations(bookings);
         })
@@ -75,31 +76,44 @@ const UserProfilePage = () => {
   }
 
   // TODO: sync with back-end: information is not enough to delete reservation
-  const deleteReservedSeat = (event, showId, seatId) => {
+  const deleteReservedSeat = (event, showId, seatId, visitorId) => {
     let currentItem = event.target.parentElement.parentElement;
     let seatsForDelete = {};
     seatsForDelete.id = parseInt(showId);
     seatsForDelete.seats = [parseInt(seatId)];
+    seatsForDelete.visitorId = parseInt(visitorId);
     axios
         .delete( API_ALL_RESERVATION_URL, {
           data: seatsForDelete
         })
         .then(response => {
           if (response.data === true) {
-            deleteIndicator(currentItem, "");
+            successfulDeleteIndicator(currentItem);
           } else {
-            deleteIndicator(currentItem, "un")
+            unsuccessfulDeleteIndicator(currentItem);
           }
         });
   }
 
-  const deleteIndicator = (element, status) => {
-    element.innerHTML = `<div class=${status+"successful-delete"}>
-            <strong>Reservation ${status}successfully deleted!</strong></div>`;
+  const successfulDeleteIndicator = (element) => {
+    element.innerHTML = `<div class=${"successful-delete"}>
+            <strong>Reservation successfully deleted!</strong></div>`;
     setTimeout(() => {
       element.style.display = "none";
     }, 3000)
   };
+
+  // TODO: rewrite code to either re-display full element OR modify it, showing that it has errors
+  // TODO: rework back- and front-end to get the type of error
+  const unsuccessfulDeleteIndicator = (element) => {
+    let content = element.innerHTML;
+    element.innerHTML = `<div class=${"unsuccessful-delete"}>
+            <strong>Reservation not deleted! Try again later.</strong></div>`;
+    setTimeout(() => {
+      element.innerHTML = content;
+    }, 3000)
+  };
+
 
   const displayReservations = () => {
     let reservationContainer = [];
@@ -118,7 +132,7 @@ const UserProfilePage = () => {
         </div>
         <div className="reservation-delete-button-container">
           <img className="delete-button-img" onClick={(event) => {
-            deleteReservedSeat(event, reservation["show"]["id"], reservation["id"])
+            deleteReservedSeat(event, reservation["show"]["id"], reservation["seat"]["id"], reservation["visitor"]["id"])
           }} src={`/images/delete_button_64.png`} alt="Delete reservation button"/>
         </div>
       </div>)
@@ -139,7 +153,7 @@ const UserProfilePage = () => {
                 <div className="picture-container">
                   <div className="profile-picture">
                     <div className="profile-picture-frame">
-                      <img className="picture" src={`/images/${userProfilePictures["WOMAN"]}`} alt="Profile"/>
+                      <img className="picture" src={`/images/${userProfilePictures["GENERAL"]}`} alt="Profile"/>
                     </div>
                   </div>
                 </div>
