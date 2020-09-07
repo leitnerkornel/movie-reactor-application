@@ -35,7 +35,6 @@ const UserProfilePage = () => {
         .get(API_ALL_RESERVATION_URL)
         .then(res => {
           let bookings = res.data.bookings;
-          console.log(bookings);
           setMovieDbIds([...new Set(bookings.map(item => item["movieId"]))]);
           setReservations(bookings);
         })
@@ -118,24 +117,26 @@ const UserProfilePage = () => {
   const displayReservations = () => {
     let reservationContainer = [];
     for (let reservation of reservations) {
-      reservationContainer.push(<div key={uuid()} className="reservation-item-container">
-        <div title={`Seat Id: ${reservation.id}\nShow Id: ${reservation.showId}`}
-             className="reservation-seat-picture-container">
-          <img className="reservation-seat-img" src={`/images/movie_seat_64.png`} alt="Movie seat"/>
+      reservationContainer.push(
+        <div key={uuid()} className="reservation-item-container">
+          <div title={`Seat Id: ${reservation.id}\nShow Id: ${reservation.showId}`}
+               className="reservation-seat-picture-container">
+            <img className="reservation-seat-img" src={`/images/movie_seat_64.png`} alt="Movie seat"/>
+          </div>
+          {/*<div className="reservation-data">{formatDateWithDecimals(reservation["startingDate"])}</div>*/}
+          <div className="reservation-data">{reservation["show"]["startingTime"]}</div>
+          <div className="reservation-data seat-info">{`Row: ${reservation["seat"]["rowNumber"]}`}</div>
+          <div className="reservation-data seat-info">{`Seat: ${reservation["seat"]["seatNumber"]}`}</div>
+          <div className="reservation-movie-title"><Link to={`/movie/${reservation["movieId"]}`}
+                                                         className="movie-link">{getMovieTitle(playedMovies, reservation["movieId"])}</Link>
+          </div>
+          <div className="reservation-delete-button-container">
+            <img className="delete-button-img" onClick={(event) => {
+              deleteReservedSeat(event, reservation["show"]["id"], reservation["seat"]["id"], reservation["visitor"]["id"])
+            }} src={`/images/delete_button_64.png`} alt="Delete reservation button"/>
+          </div>
         </div>
-        {/*<div className="reservation-data">{formatDateWithDecimals(reservation["startingDate"])}</div>*/}
-        <div className="reservation-data">{reservation["show"]["startingTime"]}</div>
-        <div className="reservation-data seat-info">{`Row: ${reservation["seat"]["rowNumber"]}`}</div>
-        <div className="reservation-data seat-info">{`Seat: ${reservation["seat"]["seatNumber"]}`}</div>
-        <div className="reservation-movie-title"><Link to={`/movie/${reservation["movieId"]}`}
-                                                       className="movie-link">{getMovieTitle(playedMovies, reservation["movieId"])}</Link>
-        </div>
-        <div className="reservation-delete-button-container">
-          <img className="delete-button-img" onClick={(event) => {
-            deleteReservedSeat(event, reservation["show"]["id"], reservation["seat"]["id"], reservation["visitor"]["id"])
-          }} src={`/images/delete_button_64.png`} alt="Delete reservation button"/>
-        </div>
-      </div>)
+      )
     }
     return <div className="reservations-rows-container">{reservationContainer}</div>
   }
@@ -182,7 +183,15 @@ const UserProfilePage = () => {
               </div>
               <div className="col-md-12 reservations-container-column">
                 <div className="reservations-container">
-                  {displayReservations()}
+                  {playedMovies.length > 0 ? displayReservations() :
+                      reservations.length > 0 ?
+                          <div className="reservation-rows-container">
+                            <div className="reservation-item-container">Reservations loading, please wait.</div>
+                          </div> :
+                          <div className="reservation-item-container">
+                            <div className="reservation-item-container">{localStorage.getItem("username")} has no reservations.</div>
+                          </div>
+                  }
                   <div className="reservations-rows-container">
                   </div>
                 </div>
