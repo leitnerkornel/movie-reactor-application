@@ -2,11 +2,11 @@
 export const API_SCHEDULE_URL = "http://localhost:8762/moviecatalog/schedule";
 // export const API_SCHEDULED_MOVIES_URL = "http://localhost:8762/scheduled-movies";
 export const API_SCHEDULED_MOVIES_URL = "http://localhost:8762/moviecatalog/show/movie";
-export const API_SHOW_URL = "http://localhost:8762/show/";
+export const API_SHOW_URL = "http://localhost:8762/moviecatalog/show";
 export const API_SEAT_ROOM_URL = "http://localhost:8762/seat/room/";
 export const API_RESERVED_SEATS_URL = "http://localhost:8762/reserved-seats/show/";
 export const API_ROOM_URL = "http://localhost:8762/room/";
-export const API_ALL_RESERVATION_URL = "http://localhost:8762/reservation/seats"; // There are GET and POST methods for these.
+export const API_ALL_RESERVATION_URL = "http://localhost:8762/booking/reservation";
 export const API_WATCHLIST = "http://localhost:8762/watchlist";
 export const API_BOOKING = "http://localhost:8762/booking/reservation";
 export const API_AUTHENTICATION = "http://localhost:8762/auth";
@@ -33,12 +33,12 @@ export const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Fr
 export const GET_CONFIG = {
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`,
-    username: `${localStorage.getItem("username")}`,
+    // username: `${localStorage.getItem("username")}`,
   },
 };
 
 export const POST_CONFIG = {
   "Content-Type": "application/json",
   Authorization: `Bearer ${localStorage.getItem("token")}`,
-  username: `${localStorage.getItem("username")}`,
+  // username: `${localStorage.getItem("username")}`,
 };

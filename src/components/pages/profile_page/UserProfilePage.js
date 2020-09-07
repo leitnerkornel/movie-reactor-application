@@ -4,7 +4,14 @@ import "./UserProfilePage.css";
 import axios from "axios";
 
 import {uuid} from "uuidv4";
-import {API_ALL_RESERVATION_URL, API_KEY, API_URL_MOVIE, GET_CONFIG, POST_CONFIG} from "../../../Constants";
+import {
+  API_ALL_RESERVATION_URL,
+  API_KEY,
+  API_SHOW_URL,
+  API_URL_MOVIE,
+  GET_CONFIG,
+  POST_CONFIG
+} from "../../../Constants";
 import {checkStatus, formatDateWithDecimals, formatTime, parseJSON} from "../../../Utils";
 import {Link} from "react-router-dom";
 
@@ -27,8 +34,10 @@ const UserProfilePage = () => {
     axios
         .get(`${API_ALL_RESERVATION_URL}`, GET_CONFIG) // TODO: check endpoint
         .then(res => {
-          setMovieDbIds([...new Set(res.data.map(item => item["movieDbId"]))]);
-          setReservations(res.data);
+          console.log(res.data.bookings);
+          setMovieDbIds([...new Set(res.data.bookings.map(item => item["movieId"]))]);
+          setReservations(res.data.bookings);
+          console.log(movieDbIds)
         })
 
   }, [])
@@ -36,19 +45,22 @@ const UserProfilePage = () => {
   useEffect(() => {
     const urls = movieDbIds.map(movieId => `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`);
 
-    Promise.all(urls.map(url =>
+    Promise.all(urls.map(url => {
+      console.log(url);
         fetch(url)
             .then(checkStatus)
             .then(parseJSON)
             .catch(error => console.log('There was a problem!', error))
+        }
     ))
         .then(data => {
-          data.map((movie) => {
-            let movieObj = {};
-            movieObj[movie["id"]] = movie["title"];
-            setPlayedMovies(prevState => [...prevState,
-              movieObj])
-          })
+          console.log(data);
+          // data.map((movie) => {
+          //   let movieObj = {};
+          //   movieObj[movie["id"]] = movie["title"];
+          //   setPlayedMovies(prevState => [...prevState,
+          //     movieObj])
+          // })
         })
         .then(() => {
           reservations.map((reservation) => {
@@ -102,7 +114,7 @@ const UserProfilePage = () => {
              className="reservation-seat-picture-container">
           <img className="reservation-seat-img" src={`/images/movie_seat_64.png`} alt="Movie seat"/>
         </div>
-        <div className="reservation-data">{formatDateWithDecimals(reservation["startingDate"])}</div>
+        {/*<div className="reservation-data">{formatDateWithDecimals(reservation["startingDate"])}</div>*/}
         <div className="reservation-data">{reservation["startingTime"]}</div>
         <div className="reservation-data seat-info">{`Row: ${reservation["rowNumber"]}`}</div>
         <div className="reservation-data seat-info">{`Seat: ${reservation["seatNumber"]}`}</div>
