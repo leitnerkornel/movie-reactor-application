@@ -6,7 +6,7 @@ import axios from "axios";
 import {uuid} from "uuidv4";
 import {
   API_ALL_RESERVATION_URL,
-  API_KEY,
+  API_KEY, API_RESERVED_SEATS_URL,
   API_SHOW_URL,
   API_URL_MOVIE,
   GET_CONFIG,
@@ -32,41 +32,36 @@ const UserProfilePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     axios
-        .get(`${API_ALL_RESERVATION_URL}`, GET_CONFIG) // TODO: check endpoint
+        .get(API_ALL_RESERVATION_URL)
         .then(res => {
-          console.log(res.data.bookings);
-          setMovieDbIds([...new Set(res.data.bookings.map(item => item["movieId"]))]);
-          setReservations(res.data.bookings);
-          console.log(movieDbIds)
+          let bookings = res.data.bookings;
+          setMovieDbIds([...new Set(bookings.map(item => item["movieId"]))]);
+          setReservations(bookings);
         })
 
   }, [])
 
   useEffect(() => {
     const urls = movieDbIds.map(movieId => `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`);
-
-    Promise.all(urls.map(url => {
-      console.log(url);
+    Promise.all(urls.map(url =>
         fetch(url)
             .then(checkStatus)
             .then(parseJSON)
             .catch(error => console.log('There was a problem!', error))
-        }
     ))
         .then(data => {
-          console.log(data);
-          // data.map((movie) => {
-          //   let movieObj = {};
-          //   movieObj[movie["id"]] = movie["title"];
-          //   setPlayedMovies(prevState => [...prevState,
-          //     movieObj])
-          // })
-        })
-        .then(() => {
-          reservations.map((reservation) => {
-            reservation.push("Title");
+          data.map((movie) => {
+            let movieObj = {};
+            movieObj[movie["id"]] = movie["title"];
+            setPlayedMovies(prevState => [...prevState, movieObj]);
           })
         })
+    // TODO: check if this code is needed at all; gets error log on push()
+        // .then(() => {
+        //   reservations.map((reservation) => {
+        //     reservation.push("Title");
+        //   })
+        // })
   }, [movieDbIds]);
 
   const getMovieTitle = (movies, searchedId) => {
@@ -79,14 +74,14 @@ const UserProfilePage = () => {
     }
   }
 
+  // TODO: sync with back-end: information is not enough to delete reservation
   const deleteReservedSeat = (event, showId, seatId) => {
     let currentItem = event.target.parentElement.parentElement;
     let seatsForDelete = {};
     seatsForDelete.id = parseInt(showId);
     seatsForDelete.seats = [parseInt(seatId)];
     axios
-        .delete(`http://localhost:8080/reservation/delete`, { // TODO: check endpoint
-          headers: POST_CONFIG,
+        .delete( API_ALL_RESERVATION_URL, {
           data: seatsForDelete
         })
         .then(response => {
@@ -115,15 +110,15 @@ const UserProfilePage = () => {
           <img className="reservation-seat-img" src={`/images/movie_seat_64.png`} alt="Movie seat"/>
         </div>
         {/*<div className="reservation-data">{formatDateWithDecimals(reservation["startingDate"])}</div>*/}
-        <div className="reservation-data">{reservation["startingTime"]}</div>
-        <div className="reservation-data seat-info">{`Row: ${reservation["rowNumber"]}`}</div>
-        <div className="reservation-data seat-info">{`Seat: ${reservation["seatNumber"]}`}</div>
-        <div className="reservation-movie-title"><Link to={`/movie/${reservation["movieDbId"]}`}
-                                                       className="movie-link">{getMovieTitle(playedMovies, reservation["movieDbId"])}</Link>
+        <div className="reservation-data">{reservation["show"]["startingTime"]}</div>
+        <div className="reservation-data seat-info">{`Row: ${reservation["seat"]["rowNumber"]}`}</div>
+        <div className="reservation-data seat-info">{`Seat: ${reservation["seat"]["seatNumber"]}`}</div>
+        <div className="reservation-movie-title"><Link to={`/movie/${reservation["movieId"]}`}
+                                                       className="movie-link">{getMovieTitle(playedMovies, reservation["movieId"])}</Link>
         </div>
         <div className="reservation-delete-button-container">
           <img className="delete-button-img" onClick={(event) => {
-            deleteReservedSeat(event, reservation["showId"], reservation["id"])
+            deleteReservedSeat(event, reservation["show"]["id"], reservation["id"])
           }} src={`/images/delete_button_64.png`} alt="Delete reservation button"/>
         </div>
       </div>)
@@ -144,7 +139,7 @@ const UserProfilePage = () => {
                 <div className="picture-container">
                   <div className="profile-picture">
                     <div className="profile-picture-frame">
-                      <img className="picture" src={`/images/${userProfilePictures[localStorage.getItem("gender")]}`} alt="Profile"/>
+                      <img className="picture" src={`/images/${userProfilePictures["WOMAN"]}`} alt="Profile"/>
                     </div>
                   </div>
                 </div>
