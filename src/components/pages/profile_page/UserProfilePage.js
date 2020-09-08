@@ -5,7 +5,7 @@ import axios from "axios";
 
 import {uuid} from "uuidv4";
 import {
-  API_ALL_RESERVATION_URL,
+  API_RESERVATION_URL,
   API_KEY,
   API_URL_MOVIE,
 } from "../../../Constants";
@@ -29,7 +29,7 @@ const UserProfilePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     axios
-        .get(API_ALL_RESERVATION_URL)
+        .get(API_RESERVATION_URL)
         .then(res => {
           let bookings = res.data.bookings;
           setMovieDbIds([...new Set(bookings.map(item => item["movieId"]))]);
@@ -79,7 +79,7 @@ const UserProfilePage = () => {
     seatsForDelete.seats = [parseInt(seatId)];
     seatsForDelete.visitorId = parseInt(visitorId);
     axios
-        .delete( API_ALL_RESERVATION_URL, {
+        .delete( API_RESERVATION_URL, {
           data: seatsForDelete
         })
         .then(response => {
