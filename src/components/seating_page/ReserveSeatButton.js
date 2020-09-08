@@ -1,13 +1,9 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useState} from "react";
 import "./ReserveSeatButton.css";
 import axios from "axios";
-import {POST_CONFIG} from "../../Constants";
+import {API_RESERVATION_URL, OCCUPIED_SEAT_CLASS, OWN_RESERVED_SEAT_CLASS, REACTOR_YELLOW} from "../../Constants";
 
 const ReserveSeatButton = (props) => {
-  let freeSeatClass = "fa-square-o";
-  let occupiedSeatClass = "fa-square";
-  let ownReservedSeatClass = "fa-plus-square";
-  let reactorYellow = "#e6b31e";
   let id = props.showId;
   let [modalMessage, setModalMessage] = useState("");
   let successfulPurchaseMessage = `Thank you for reserving seats for '${props.movieTitle}'! 
@@ -15,28 +11,24 @@ const ReserveSeatButton = (props) => {
   let failedPurchaseMessage = `Sorry, we can't fulfill your reservation for '${props.movieTitle}' at the moment.`;
 
   function reserveSeat(event) {
-    let reservedSeats = document.getElementsByClassName(`theater-seat fa ${ownReservedSeatClass}`);
+    let reservedSeats = document.getElementsByClassName(`theater-seat fa ${OWN_RESERVED_SEAT_CLASS}`);
     let seats = [];
     for (let i = 0; i < reservedSeats.length; i++) {
       seats.push(parseInt(reservedSeats.item(i).dataset.id))
     }
 
-    axios.post(`http://localhost:8080/reservation/seats`,
+    axios.post(API_RESERVATION_URL,
         {id: parseInt(id), seats: seats},
-        {
-          headers: POST_CONFIG
-        }
     )
         .then((response) => {
-          console.log(response)
           setModalMessage(response.data ? successfulPurchaseMessage : failedPurchaseMessage)
-          let seatToModify = document.getElementsByClassName(`theater-seat fa ${ownReservedSeatClass}`);
+          let seatToModify = document.getElementsByClassName(`theater-seat fa ${OWN_RESERVED_SEAT_CLASS}`);
 
           for (let i = seatToModify.length - 1; i > -1; i--) {
             let seat = reservedSeats.item(i);
-            seat.classList.remove(ownReservedSeatClass);
-            seat.classList.add(occupiedSeatClass);
-            seat.style.color = reactorYellow;
+            seat.classList.remove(OWN_RESERVED_SEAT_CLASS);
+            seat.classList.add(OCCUPIED_SEAT_CLASS);
+            seat.style.color = REACTOR_YELLOW;
             seat.style.opacity = "0.5";
           }
         });

@@ -4,7 +4,11 @@ import "./UserProfilePage.css";
 import axios from "axios";
 
 import {uuid} from "uuidv4";
-import {API_ALL_RESERVATION_URL, API_KEY, API_URL_MOVIE, GET_CONFIG, POST_CONFIG} from "../../../Constants";
+import {
+  API_RESERVATION_URL,
+  API_KEY,
+  API_URL_MOVIE,
+} from "../../../Constants";
 import {checkStatus, formatDateWithDecimals, formatTime, parseJSON} from "../../../Utils";
 import {Link} from "react-router-dom";
 
@@ -25,17 +29,17 @@ const UserProfilePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     axios
-        .get(`${API_ALL_RESERVATION_URL}`, GET_CONFIG)
+        .get(API_RESERVATION_URL)
         .then(res => {
-          setMovieDbIds([...new Set(res.data.map(item => item["movieDbId"]))]);
-          setReservations(res.data);
+          let bookings = res.data.bookings;
+          setMovieDbIds([...new Set(bookings.map(item => item["movieId"]))]);
+          setReservations(bookings);
         })
 
   }, [])
 
   useEffect(() => {
     const urls = movieDbIds.map(movieId => `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`);
-
     Promise.all(urls.map(url =>
         fetch(url)
             .then(checkStatus)
@@ -46,15 +50,15 @@ const UserProfilePage = () => {
           data.map((movie) => {
             let movieObj = {};
             movieObj[movie["id"]] = movie["title"];
-            setPlayedMovies(prevState => [...prevState,
-              movieObj])
+            setPlayedMovies(prevState => [...prevState, movieObj]);
           })
         })
-        .then(() => {
-          reservations.map((reservation) => {
-            reservation.push("Title");
-          })
-        })
+    // TODO: check if this code is needed at all; gets error log on push()
+        // .then(() => {
+        //   reservations.map((reservation) => {
+        //     reservation.push("Title");
+        //   })
+        // })
   }, [movieDbIds]);
 
   const getMovieTitle = (movies, searchedId) => {
@@ -67,54 +71,69 @@ const UserProfilePage = () => {
     }
   }
 
-  const deleteReservedSeat = (event, showId, seatId) => {
+  // TODO: sync with back-end: information is not enough to delete reservation
+  const deleteReservedSeat = (event, showId, seatId, visitorId) => {
     let currentItem = event.target.parentElement.parentElement;
     let seatsForDelete = {};
     seatsForDelete.id = parseInt(showId);
     seatsForDelete.seats = [parseInt(seatId)];
+    seatsForDelete.visitorId = parseInt(visitorId);
     axios
-        .delete(`http://localhost:8080/reservation/delete`, {
-          headers: POST_CONFIG,
+        .delete( API_RESERVATION_URL, {
           data: seatsForDelete
         })
         .then(response => {
           if (response.data === true) {
-            deleteIndicator(currentItem, "");
+            successfulDeleteIndicator(currentItem);
           } else {
-            deleteIndicator(currentItem, "un")
+            unsuccessfulDeleteIndicator(currentItem);
           }
         });
   }
 
-  const deleteIndicator = (element, status) => {
-    element.innerHTML = `<div class=${status+"successful-delete"}>
-            <strong>Reservation ${status}successfully deleted!</strong></div>`;
+  const successfulDeleteIndicator = (element) => {
+    element.innerHTML = `<div class=${"successful-delete"}>
+            <strong>Reservation successfully deleted!</strong></div>`;
     setTimeout(() => {
       element.style.display = "none";
     }, 3000)
   };
 
+  // TODO: rewrite code to either re-display full element OR modify it, showing that it has errors
+  // TODO: rework back- and front-end to get the type of error
+  const unsuccessfulDeleteIndicator = (element) => {
+    let content = element.innerHTML;
+    element.innerHTML = `<div class=${"unsuccessful-delete"}>
+            <strong>Reservation not deleted! Try again later.</strong></div>`;
+    setTimeout(() => {
+      element.innerHTML = content;
+    }, 3000)
+  };
+
+
   const displayReservations = () => {
     let reservationContainer = [];
     for (let reservation of reservations) {
-      reservationContainer.push(<div key={uuid()} className="reservation-item-container">
-        <div title={`Seat Id: ${reservation.id}\nShow Id: ${reservation.showId}`}
-             className="reservation-seat-picture-container">
-          <img className="reservation-seat-img" src={`/images/movie_seat_64.png`} alt="Movie seat"/>
+      reservationContainer.push(
+        <div key={uuid()} className="reservation-item-container">
+          <div title={`Seat Id: ${reservation.id}\nShow Id: ${reservation.showId}`}
+               className="reservation-seat-picture-container">
+            <img className="reservation-seat-img" src={`/images/movie_seat_64.png`} alt="Movie seat"/>
+          </div>
+          {/*<div className="reservation-data">{formatDateWithDecimals(reservation["startingDate"])}</div>*/}
+          <div className="reservation-data">{reservation["show"]["startingTime"]}</div>
+          <div className="reservation-data seat-info">{`Row: ${reservation["seat"]["rowNumber"]}`}</div>
+          <div className="reservation-data seat-info">{`Seat: ${reservation["seat"]["seatNumber"]}`}</div>
+          <div className="reservation-movie-title"><Link to={`/movie/${reservation["movieId"]}`}
+                                                         className="movie-link">{getMovieTitle(playedMovies, reservation["movieId"])}</Link>
+          </div>
+          <div className="reservation-delete-button-container">
+            <img className="delete-button-img" onClick={(event) => {
+              deleteReservedSeat(event, reservation["show"]["id"], reservation["seat"]["id"], reservation["visitor"]["id"])
+            }} src={`/images/delete_button_64.png`} alt="Delete reservation button"/>
+          </div>
         </div>
-        <div className="reservation-data">{formatDateWithDecimals(reservation["startingDate"])}</div>
-        <div className="reservation-data">{reservation["startingTime"]}</div>
-        <div className="reservation-data seat-info">{`Row: ${reservation["rowNumber"]}`}</div>
-        <div className="reservation-data seat-info">{`Seat: ${reservation["seatNumber"]}`}</div>
-        <div className="reservation-movie-title"><Link to={`/movie/${reservation["movieDbId"]}`}
-                                                       className="movie-link">{getMovieTitle(playedMovies, reservation["movieDbId"])}</Link>
-        </div>
-        <div className="reservation-delete-button-container">
-          <img className="delete-button-img" onClick={(event) => {
-            deleteReservedSeat(event, reservation["showId"], reservation["id"])
-          }} src={`/images/delete_button_64.png`} alt="Delete reservation button"/>
-        </div>
-      </div>)
+      )
     }
     return <div className="reservations-rows-container">{reservationContainer}</div>
   }
@@ -132,7 +151,7 @@ const UserProfilePage = () => {
                 <div className="picture-container">
                   <div className="profile-picture">
                     <div className="profile-picture-frame">
-                      <img className="picture" src={`/images/${userProfilePictures[localStorage.getItem("gender")]}`} alt="Profile"/>
+                      <img className="picture" src={`/images/${userProfilePictures["GENERAL"]}`} alt="Profile"/>
                     </div>
                   </div>
                 </div>
@@ -161,7 +180,15 @@ const UserProfilePage = () => {
               </div>
               <div className="col-md-12 reservations-container-column">
                 <div className="reservations-container">
-                  {displayReservations()}
+                  {playedMovies.length > 0 ? displayReservations() :
+                      reservations.length > 0 ?
+                          <div className="reservation-rows-container">
+                            <div className="reservation-item-container">Reservations loading, please wait.</div>
+                          </div> :
+                          <div className="reservation-item-container">
+                            <div className="reservation-item-container">{localStorage.getItem("username")} has no reservations.</div>
+                          </div>
+                  }
                   <div className="reservations-rows-container">
                   </div>
                 </div>

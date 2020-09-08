@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
+import {API_AUTHENTICATION} from "../../../Constants";
 import "./Authentication.css";
 
 const LoginPage = () => {
@@ -29,8 +30,8 @@ const LoginPage = () => {
 
     const sendRequest = (event) => {
         event.preventDefault();
-        let params = {"username": username, "password": password};
-        axios.post("http://localhost:8080/auth/login", params).then(response => checkResponse(response))
+        let params = {"username": username, "password": password}; // TODO: check how to prevent this information from being intercepted?
+        axios.post(`${API_AUTHENTICATION}/login`, params).then(response => checkResponse(response)) // TODO: check endpoint
     };
 
     return (
