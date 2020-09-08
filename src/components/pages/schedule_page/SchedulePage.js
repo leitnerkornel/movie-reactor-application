@@ -31,7 +31,6 @@ const SchedulePage = () => {
 
         axios.get(API_SCHEDULE_URL)
             .then((res) => {
-                console.log(res.data.shows)
               setMovieIds([...new Set(res.data.shows.map(item => item["movieDbId"]))]); // rewrite to get movieDb Id from other service
               //
                 res.data.shows.map(show => (
