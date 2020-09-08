@@ -6,11 +6,8 @@ import axios from "axios";
 import {uuid} from "uuidv4";
 import {
   API_ALL_RESERVATION_URL,
-  API_KEY, API_RESERVED_SEATS_URL,
-  API_SHOW_URL,
+  API_KEY,
   API_URL_MOVIE,
-  GET_CONFIG,
-  POST_CONFIG
 } from "../../../Constants";
 import {checkStatus, formatDateWithDecimals, formatTime, parseJSON} from "../../../Utils";
 import {Link} from "react-router-dom";
