@@ -6,9 +6,8 @@ export const API_SHOW_URL = "http://localhost:8762/moviecatalog/show";
 export const API_SEAT_ROOM_URL = "http://localhost:8762/seat/room";
 export const API_RESERVED_SEATS_URL = "http://localhost:8762/reserved-seats/show";
 export const API_ROOM_URL = "http://localhost:8762/cinema/room";
-export const API_ALL_RESERVATION_URL = "http://localhost:8762/booking/reservation";
+export const API_RESERVATION_URL = "http://localhost:8762/booking/reservation";
 export const API_WATCHLIST = "http://localhost:8762/watchlist";
-export const API_BOOKING = "http://localhost:8762/booking/reservation";
 export const API_AUTHENTICATION = "http://localhost:8762/auth";
 export const API_MOVIE = "http://localhost:8762/movieservice/movie";
 
@@ -33,6 +32,8 @@ export const IMAGE_SIZES = {
 };
 
 export const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+export const REACTOR_YELLOW = "#e6b31e";
 
 export const GET_CONFIG = {
   headers: {

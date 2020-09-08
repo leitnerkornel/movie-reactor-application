@@ -1,8 +1,7 @@
 import React, {useEffect} from "react";
 import TheaterSeat from "./TheaterSeat";
-import {FREE_SEAT_CLASS, OCCUPIED_SEAT_CLASS} from "../../Constants";
+import {FREE_SEAT_CLASS, OCCUPIED_SEAT_CLASS, REACTOR_YELLOW} from "../../Constants";
 const SeatingChart = (props) => {
-    let reactorYellow = "#e6b31e";
     let occupiedSeats = props.reservedSeats;
     let room = props.room;
     let seats = room.seats;
@@ -33,7 +32,7 @@ const SeatingChart = (props) => {
         for (let seat of seats) {
             let isSeatOccupied = occupiedSeatIds.includes(parseInt(seat.id));
             let seatStyleClass = isSeatOccupied ? OCCUPIED_SEAT_CLASS : FREE_SEAT_CLASS;
-            let seatColor = isSeatOccupied ? reactorYellow : "white";
+            let seatColor = isSeatOccupied ? REACTOR_YELLOW : "white";
             let seatOpacity = isSeatOccupied ? "0.5" : "1";
             let currentRowNumber = parseInt(seat.rowNumber);
             let currentSeatNumber = parseInt(seat.seatNumber);
