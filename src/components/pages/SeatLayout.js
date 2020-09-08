@@ -1,6 +1,13 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {API_URL_MOVIE, API_KEY, IMAGE_SIZES, API_SHOW_URL, API_ROOM_URL, API_BOOKING} from "../../Constants";
+import {
+    API_URL_MOVIE,
+    API_KEY,
+    IMAGE_SIZES,
+    API_SHOW_URL,
+    API_ROOM_URL,
+    API_RESERVATION_URL
+} from "../../Constants";
 import {getIdFromUrl} from "../../Utils";
 import SeatingPicture from "../seating_page/SeatingPicture";
 import FirstRow from "./movie_detail_page/FirstRow";
@@ -58,7 +65,7 @@ const SeatLayout = (props) => {
     useEffect(() => {
         if (showId != null) {
             axios
-                .get(`${API_BOOKING}/show/${showId}`)
+                .get(`${API_RESERVATION_URL}/show/${showId}`)
                 .then(res => {
                     setReservedSeats(res.data.bookings);
                 })
