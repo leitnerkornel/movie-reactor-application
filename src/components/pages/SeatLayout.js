@@ -1,6 +1,6 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {API_URL_MOVIE, API_KEY, IMAGE_SIZES} from "../../Constants";
+import {API_URL_MOVIE, API_KEY, IMAGE_SIZES, API_SHOW_URL, API_ROOM_URL, API_BOOKING} from "../../Constants";
 import {getIdFromUrl} from "../../Utils";
 import SeatingPicture from "../seating_page/SeatingPicture";
 import FirstRow from "./movie_detail_page/FirstRow";
@@ -17,9 +17,12 @@ const SeatLayout = (props) => {
     let screeningId = getIdFromUrl();
     let movieUrl = "";
 
+    const [showId, setShowId] = useState(null);
+    const [movieDbId, setMovieDbId] = useState(null);
     const [movieId, setMovieId] = useState(null);
     const [startingTime, setStartingTime] = useState(null);
     const [startingDate, setStartingDate] = useState(null);
+    const [roomId, setRoomId] = useState(null);
     const [room, setRoom] = useState(null);
     const [reservedSeats, setReservedSeats] = useState(null);
 
@@ -31,19 +34,40 @@ const SeatLayout = (props) => {
     useEffect(() => {
         window.scrollTo(0, 0);
         axios
-            .get(`http://localhost:8762/moviecatalog/show/${screeningId}`) // TODO: check endpoint
+            .get(`${API_SHOW_URL}/${screeningId}`)
             .then((res) => {
-                setMovieId(res.data.movieDbId); // TODO: get from movie register!
-                setStartingTime(res.data.startingTime.substring(0, 5)); // TODO: check if this is working at all
+                setShowId(res.data.id);
+                setMovieDbId(res.data.movieDbId);
+                setMovieId(res.data.movieId);
+                setStartingTime(res.data.startingTime.substring(0, 5));
                 setStartingDate(res.data.startingDate);
-                setRoom(res.data.room);
-                setReservedSeats(res.data.reservedSeats); // TODO: get seats from seat reserved!!!
+                setRoomId(res.data.roomId);
             });
-    }, [])
+    }, [screeningId])
 
     useEffect(() => {
-        if (movieId) {
-            movieUrl = `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`;
+        if (roomId != null){
+            axios
+                .get(`${API_ROOM_URL}/${roomId}`)
+                .then(res => {
+                    setRoom(res.data);
+                })
+        }
+    }, [roomId])
+
+    useEffect(() => {
+        if (showId != null) {
+            axios
+                .get(`${API_BOOKING}/show/${showId}`)
+                .then(res => {
+                    setReservedSeats(res.data.bookings);
+                })
+        }
+    }, [showId])
+
+    useEffect(() => {
+        if (movieDbId) {
+            movieUrl = `${API_URL_MOVIE}${movieDbId}?api_key=${API_KEY}`;
             axios
                 .get(movieUrl)
                 .then((res) => {
@@ -53,7 +77,7 @@ const SeatLayout = (props) => {
                     setRuntime(res.data["runtime"]);
                 })
         }
-    }, [movieId]);
+    }, [movieDbId]);
 
     return (
         <div className="row no-gutters">
