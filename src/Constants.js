@@ -1,10 +1,11 @@
 // TODO: revise endpoints
-export const API_SCHEDULE_URL = "http://localhost:8762/moviecatalog/schedule";
-export const API_SHOW_URL = "http://localhost:8762/moviecatalog/show";
-export const API_ROOM_URL = "http://localhost:8762/cinema/room";
-export const API_RESERVATION_URL = "http://localhost:8762/booking/reservation";
-export const API_WATCHLIST = "http://localhost:8762/watchlist";
-export const API_AUTHENTICATION = "http://localhost:8762/auth";
+const SERVER_URL = "http://localhost:8762";
+export const API_SCHEDULE_URL = `${SERVER_URL}/moviecatalog/schedule`;
+export const API_SHOW_URL = `${SERVER_URL}/moviecatalog/show`;
+export const API_ROOM_URL = `${SERVER_URL}/cinema/room`;
+export const API_RESERVATION_URL = `${SERVER_URL}/booking/reservation"`;
+export const API_WATCHLIST = `${SERVER_URL}/watchlist`;
+export const API_AUTHENTICATION = `${SERVER_URL}/auth`;
 
 export const API_URL_MOVIE = "https://api.themoviedb.org/3/movie/"
 export const API_URL_PERSON = "https://api.themoviedb.org/3/person/"
