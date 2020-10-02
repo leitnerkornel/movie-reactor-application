@@ -120,7 +120,7 @@ const UserProfilePage = () => {
                className="reservation-seat-picture-container">
             <img className="reservation-seat-img" src={`/images/movie_seat_64.png`} alt="Movie seat"/>
           </div>
-          {/*<div className="reservation-data">{formatDateWithDecimals(reservation["startingDate"])}</div>*/}
+          <div className="reservation-data">{formatDateWithDecimals(reservation["show"]["startingDate"])}</div>
           <div className="reservation-data">{reservation["show"]["startingTime"]}</div>
           <div className="reservation-data seat-info">{`Row: ${reservation["seat"]["rowNumber"]}`}</div>
           <div className="reservation-data seat-info">{`Seat: ${reservation["seat"]["seatNumber"]}`}</div>
