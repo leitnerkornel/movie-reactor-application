@@ -49,7 +49,8 @@ const SchedulePage = () => {
       }, []);
 
       useEffect(() => {
-        const urls = movieIds.map(movieId => `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`);
+        // const urls = movieIds.map(movieId => `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`);
+        const urls = movieIds.map(movieId => `${API_URL_MOVIE}${movieId}`);
 
         Promise.all(urls.map(url =>
             fetch(url)

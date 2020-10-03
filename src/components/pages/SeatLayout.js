@@ -74,7 +74,8 @@ const SeatLayout = (props) => {
 
     useEffect(() => {
         if (movieDbId) {
-            movieUrl = `${API_URL_MOVIE}${movieDbId}?api_key=${API_KEY}`;
+            movieUrl = `${API_URL_MOVIE}${movieDbId}`;
+            // movieUrl = `${API_URL_MOVIE}${movieDbId}?api_key=${API_KEY}`;
             axios
                 .get(movieUrl)
                 .then((res) => {

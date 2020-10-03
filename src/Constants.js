@@ -7,8 +7,8 @@ export const API_RESERVATION_URL = `${SERVER_URL}/booking/reservation`;
 export const API_WATCHLIST = `${SERVER_URL}/watchlist`;
 export const API_AUTHENTICATION = `${SERVER_URL}/auth`;
 
-export const API_URL_MOVIE = "https://api.themoviedb.org/3/movie/"
-export const API_URL_PERSON = "https://api.themoviedb.org/3/person/"
+export const API_URL_MOVIE = `${SERVER_URL}/movieservice/moviedb/movie/`
+export const API_URL_PERSON = `${SERVER_URL}/movieservice/moviedb/person/`
 
 export const API_URL_PICTURE = "https://image.tmdb.org/t/p/"
 
@@ -33,13 +33,11 @@ export const REACTOR_YELLOW = "#e6b31e";
 
 export const GET_CONFIG = {
   headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-    // username: `${localStorage.getItem("username")}`,
+    Authorization: `Bearer ${localStorage.getItem("token")}`
   },
 };
 
 export const POST_CONFIG = {
   "Content-Type": "application/json",
-  Authorization: `Bearer ${localStorage.getItem("token")}`,
-  // username: `${localStorage.getItem("username")}`,
+  Authorization: `Bearer ${localStorage.getItem("token")}`
 };
