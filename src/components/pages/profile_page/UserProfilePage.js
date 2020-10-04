@@ -39,7 +39,8 @@ const UserProfilePage = () => {
   }, [])
 
   useEffect(() => {
-    const urls = movieDbIds.map(movieId => `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`);
+    // const urls = movieDbIds.map(movieId => `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`);
+    const urls = movieDbIds.map(movieId => `${API_URL_MOVIE}${movieId}`);
     Promise.all(urls.map(url =>
         fetch(url)
             .then(checkStatus)
@@ -155,7 +156,7 @@ const UserProfilePage = () => {
                 <div className="picture-container">
                   <div className="profile-picture">
                     <div className="profile-picture-frame">
-                      <img className="picture" src={`/images/${userProfilePictures["GENERAL"]}`} alt="Profile"/>
+                      <img className="picture" src={`/images/${userProfilePictures[localStorage.getItem("gender")]}`} alt="Profile"/>
                     </div>
                   </div>
                 </div>

@@ -16,7 +16,8 @@ import {
 
 export default function MovieCard(props) {
   let movieId = props.movie;
-  let currentMovieURL = `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`;
+  // let currentMovieURL = `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`;
+  let currentMovieURL = `${API_URL_MOVIE}${movieId}`;
 
   const [isLoading, actualMovie] = Get(currentMovieURL, movieId);
   const [isFlipped, setIsFlipped] = useState(false);
