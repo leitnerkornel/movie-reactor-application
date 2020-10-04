@@ -4,7 +4,8 @@ import MovieCard from "./MovieCard";
 import {API_URL_MOVIE, API_KEY} from "../../Constants";
 
 const SelectionPage = (props) => {
-  let url = `${API_URL_MOVIE}${props.selection}?api_key=${API_KEY}`;
+  // let url = `${API_URL_MOVIE}${props.selection}?api_key=${API_KEY}`;
+  let url = `${API_URL_MOVIE}${props.selection}`;
 
   const [isLoading, data] = Get(url);
   const [barStyle, setBarStyle] = useState(36);

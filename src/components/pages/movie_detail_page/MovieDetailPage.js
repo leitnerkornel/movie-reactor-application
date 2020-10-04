@@ -20,9 +20,12 @@ import MovieActors from "./MovieActors";
 const MovieDetailPage = () => {
 
     let movieId = getIdFromUrl();
-    let movieUrl = `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`;
-    let videoUrl = `${API_URL_MOVIE}${movieId}/videos?api_key=${API_KEY}`;
-    let actorUrl = `${API_URL_MOVIE}${movieId}/credits?api_key=${API_KEY}`;
+    // let movieUrl = `${API_URL_MOVIE}${movieId}?api_key=${API_KEY}`;
+    // let videoUrl = `${API_URL_MOVIE}${movieId}/videos?api_key=${API_KEY}`;
+    // let actorUrl = `${API_URL_MOVIE}${movieId}/credits?api_key=${API_KEY}`;
+    let movieUrl = `${API_URL_MOVIE}${movieId}`;
+    let videoUrl = `${API_URL_MOVIE}${movieId}/videos`;
+    let actorUrl = `${API_URL_MOVIE}${movieId}/credits`;
 
     const [unavailable, setUnavailable] = useState(true);
     const [loaded, setLoaded] = useState(false);
