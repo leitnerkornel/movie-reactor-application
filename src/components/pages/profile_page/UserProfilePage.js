@@ -102,11 +102,13 @@ const UserProfilePage = () => {
   // TODO: rewrite code to either re-display full element OR modify it, showing that it has errors
   // TODO: rework back- and front-end to get the type of error
   const unsuccessfulDeleteIndicator = (element) => {
+    console.log(element);
     let content = element.innerHTML;
     element.innerHTML = `<div class=${"unsuccessful-delete"}>
             <strong>Reservation not deleted! Try again later.</strong></div>`;
     setTimeout(() => {
       element.innerHTML = content;
+      // TODO: Add eventlistener before added.
     }, 3000)
   };
 
