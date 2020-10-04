@@ -86,7 +86,7 @@ const UserProfilePage = () => {
           if (response.data === true) {
             successfulDeleteIndicator(currentItem);
           } else {
-            unsuccessfulDeleteIndicator(currentItem);
+            unsuccessfulDeleteIndicator(currentItem, showId, seatId, visitorId);
           }
         });
   }
@@ -101,14 +101,16 @@ const UserProfilePage = () => {
 
   // TODO: rewrite code to either re-display full element OR modify it, showing that it has errors
   // TODO: rework back- and front-end to get the type of error
-  const unsuccessfulDeleteIndicator = (element) => {
-    console.log(element);
+  const unsuccessfulDeleteIndicator = (element, showId, seatId, visitorId) => {
     let content = element.innerHTML;
     element.innerHTML = `<div class=${"unsuccessful-delete"}>
             <strong>Reservation not deleted! Try again later.</strong></div>`;
     setTimeout(() => {
       element.innerHTML = content;
-      // TODO: Add eventlistener before added.
+      let image = element.querySelector(".delete-button-img");
+      image.addEventListener('click', (event) => {
+        deleteReservedSeat(event, showId, seatId, visitorId)
+      } )
     }, 3000)
   };
 
@@ -122,8 +124,8 @@ const UserProfilePage = () => {
                className="reservation-seat-picture-container">
             <img className="reservation-seat-img" src={`/images/movie_seat_64.png`} alt="Movie seat"/>
           </div>
-          {/*<div className="reservation-data">{formatDateWithDecimals(reservation["startingDate"])}</div>*/}
-          <div className="reservation-data">{reservation["show"]["startingTime"]}</div>
+          <div className="reservation-data">{formatDateWithDecimals(reservation["show"]["startingDate"])}</div>
+          <div className="reservation-data">{formatTime(reservation["show"]["startingTime"])}</div>
           <div className="reservation-data seat-info">{`Row: ${reservation["seat"]["rowNumber"]}`}</div>
           <div className="reservation-data seat-info">{`Seat: ${reservation["seat"]["seatNumber"]}`}</div>
           <div className="reservation-movie-title"><Link to={`/movie/${reservation["movieId"]}`}
